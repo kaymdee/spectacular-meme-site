@@ -24,14 +24,14 @@ class MainPage(webapp2.RequestHandler):
             signoutHtml = jinja2.Markup('<a href="%s">Sign out</a>' % (
                 users.create_logout_url('/')))
             #user object exists already in data base
-            #if user:
-            signInOrProfileHtml = jinja2.Markup('<a id="profile.html" href="profile.html">Profile</a>')
+            if user:
+                signInOrProfileHtml = jinja2.Markup('<a id="profile.html" href="profile.html">Profile</a>')
             #User has not been to our site
-            # else:
-            #     signInOrProfileHtml =
+            else:
+                signInOrProfileHtml = jinja2.Markup('<a id="createNewProfile.html" href="createNewProfile.html">Sign Up</a>')
         else: #user isnt logged in and we need to log them in
             signoutHtml = ""
-            signInOrProfileHtml = jinja2.Markup('<a href="%s">Sign in</a>' % (users.create_login_url('/')))
+            signInOrProfileHtml = jinja2.Markup('<a href="%s">Sign In with Google</a>' % (users.create_login_url('/')))
 
         self.response.headers['Content-Type'] = 'html' #change this to write html!
         template = jinja_env.get_template('templates/index.html')
@@ -42,13 +42,23 @@ class MainPage(webapp2.RequestHandler):
         }
 
         self.response.write(template.render(dict))
+
+
+class CreateNewProfileHandler(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_env.get_template('templates/createNewProfile.html')
+        self.response.write(template.render())
     def post(self):
+        #create new user from the form
         gUser = users.get_current_user()
-        if not user:
+        if not gUser:
             webapp2.redirect("/index.html")
-        user = User(firstName="fill me in later", lastName="fill me in last", id=gUser.user_id())
+        firstName = self.request.get("firstName")
+        lastName = self.request.get("lastName")
+        user = models.User(email = gUser.nickname(),firstName=firstName, lastName=lastName, id=gUser.user_id())
         user.put()
         webapp2.redirect("/index.html")
+
 
 
 class LogInHandler(webapp2.RequestHandler):#TODO NEEDS FIXING
@@ -121,7 +131,7 @@ class ShowPostPage(webapp2.RequestHandler):
         postAuthor = self.request.get("post-author")
         postContent = self.request.get("post-content")
         postDate = str(time.asctime(time.localtime(time.time())))
-        newBlogPostKey = models.BlogPost(postTitle=postTitle, postAuthor=postAuthor,postContent=postContent).put()
+        newBlogPostKey = models.Post(postTitle=postTitle, postAuthor=postAuthor,postContent=postContent).put()
         postDict = {#DASHES IN JINJA ARE FOR WHITESPACE CONTROL. NOT ALLOWED FOR JINJA VARIABLES
             "postTitle" : postTitle,
             "postAuthor" : postAuthor,
@@ -153,5 +163,6 @@ app = webapp2.WSGIApplication([
     ("/showPost.*",ShowPostPage),
     ("/viewPosts.*", ViewPostsPage),
     ("/login.*", LogInHandler),
+    ("/createNewProfile.*", CreateNewProfileHandler),
     ('.*', PageNotFoundHandler),
 ], debug=True)
