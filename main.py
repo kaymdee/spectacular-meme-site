@@ -21,17 +21,34 @@ class MainPage(webapp2.RequestHandler):
         if gUser:
             emailAddress = gUser.nickname()
             user = models.User.get_by_id(gUser.user_id())
-            signoutLinkHtml = '<a href="%s">sign out</a>' % (
-                users.create_logout_url('/'))
+            signoutHtml = jinja2.Markup('<a href="%s">Sign out</a>' % (
+                users.create_logout_url('/')))
             #user object exists already in data base
-            if user:
-                #Stuff
+            #if user:
+            signInOrProfileHtml = jinja2.Markup('<a id="profile.html" href="profile.html">Profile</a>')
             #User has not been to our site
-            else:
+            # else:
+            #     signInOrProfileHtml =
+        else: #user isnt logged in and we need to log them in
+            signoutHtml = ""
+            signInOrProfileHtml = jinja2.Markup('<a href="%s">Sign in</a>' % (users.create_login_url('/')))
 
-        self.response.headers['Content-Type'] = 'text/html' #change this to write html!
+        self.response.headers['Content-Type'] = 'html' #change this to write html!
         template = jinja_env.get_template('templates/index.html')
-        self.response.write(template.render())
+        dict = {
+            "signoutHtml" : signoutHtml,
+            "signInOrProfileHtml" : signInOrProfileHtml
+
+        }
+
+        self.response.write(template.render(dict))
+    def post(self):
+        gUser = users.get_current_user()
+        if not user:
+            webapp2.redirect("/index.html")
+        user = User(firstName="fill me in later", lastName="fill me in last", id=gUser.user_id())
+        user.put()
+        webapp2.redirect("/index.html")
 
 
 class LogInHandler(webapp2.RequestHandler):#TODO NEEDS FIXING
