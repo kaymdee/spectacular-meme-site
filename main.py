@@ -24,6 +24,7 @@ class MainPage(webapp2.RequestHandler):
             signoutHtml = jinja2.Markup('<a href="%s">Sign out</a>' % (
                 users.create_logout_url('/')))
             #user object exists already in data base
+<<<<<<< HEAD
             #if user:
             signInOrProfileHtml = jinja2.Markup('<a id="profile.html" href="profile.html">Profile</a>')
             #User has not been to our site
@@ -32,6 +33,12 @@ class MainPage(webapp2.RequestHandler):
         else: #user isnt logged in and we need to log them in
             signoutHtml = ""
             signInOrProfileHtml = jinja2.Markup('<a href="%s">Sign in</a>' % (users.create_login_url('/')))
+=======
+            # if user:
+            #     #Stuff
+            # #User has not been to our site
+            # else:
+>>>>>>> e87fccb8bdbf104a132ce32d4f2c731499e1698f
 
         self.response.headers['Content-Type'] = 'html' #change this to write html!
         template = jinja_env.get_template('templates/index.html')
