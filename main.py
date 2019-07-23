@@ -55,7 +55,7 @@ class ShowPostPage(webapp2.RequestHandler):
 
 class ViewPostsPage(webapp2.RequestHandler):
     def get(self):
-        blogPosts = models.BlogPost.query().order(models.BlogPost.postTime).fetch()
+        blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
         template = the_jinja_env.get_template("templates/viewPosts.html")
         self.response.write(template.render({"blogPosts":blogPosts}))
 
