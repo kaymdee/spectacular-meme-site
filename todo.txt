@@ -1,4 +1,5 @@
 Finish Mocks of pages - DONE
+Need to upload mocks
 Figure out google auth - WIP
 Make all the pages and handlers
 Figure out how to data store pictures
