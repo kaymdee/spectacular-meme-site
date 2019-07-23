@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> Bloggin Penguin RPS </title>
+  <link rel="stylesheet" href="../static/styles/newPost.css"/>
+  <link rel="stylesheet" href="../static/styles/topnav.css"/>
+  {% include "templates/head.html" %}
+
+</head>
+
+<body>
+  {% include "templates/topnav.html" %}
+  <div id="home" class="main">
+    <h1 id="mainTitle"> The Bloggin Penguin</h1>
+    <section id="topButtonContainers" class="rowFlexBox">
+      <button id="likeButton"> Like!</button>
+      <button id="subscribeButton"> Subscribe! </button>
+    </section>
+
+    <h2> Post Something! </h2>
+    <form id="mainForm" method="post" action="/showPost">
+      <h4> Post Title </h4>
+      <input class="inputs" type="text" name="post-title" value="Post Title">
+      <br>
+      <h4> Your Name </h4>
+      <input class="inputs"type="text" name="post-author" value="Post Author">
+      <br>
+      <h4> Post Content </h4>
+      <input class="inputs"type="text" name="post-content" value="">
+      <br>
+      <input id="btnPost"type="submit" value="Post!!">
+    </form>
+
+
+
+
+
+</div id ="main">
+
+
+
+<script src="../static/scripts/newPost.js"> </script>
+<!-- link at the bottom to reduce load time -->
+<!--<script>
+includeHTML();
+</script>
+-->
+</body>
+</html>

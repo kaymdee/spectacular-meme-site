@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> Bloggin Penguin RPS </title>
+  <link rel="stylesheet" href="../static/styles/RPS.css"/>
+  <link rel="stylesheet" href="../static/styles/topnav.css"/>
+  {% include "templates/head.html" %}
+
+</head>
+
+<body>
+  {% include "templates/topnav.html" %}
+
+  <div id="home" class="main">
+    <h1 id="mainTitle"> The Bloggin Penguin</h1>
+    <section id="topButtonContainers" class="rowFlexBox">
+      <button id="likeButton"> Like!</button>
+      <button id="subscribeButton"> Subscribe! </button>
+    </section>
+
+    <h2> Live Rock, Paper, Scissors! </h2>
+    <h2> Please excuse the page. This page is a work in progress! </h2>
+      <div id="gameBoard">
+<embed width="550" height="400" base="https://external.kongregate-games.com/gamez/0000/6057/live/" src="https://external.kongregate-games.com/gamez/0000/6057/live/embeddable_6057.swf" type="application/x-shockwave-flash"></embed><br/>Play free games at <a href="https://www.kongregate.com/">Kongregate</a>
+      </div>
+
+
+
+
+</div id ="main">
+
+
+
+<script src="../static/scripts/RPS.js"> </script>
+<!-- link at the bottom to reduce load time -->
+<!--<script>
+includeHTML();
+</script>
+-->
+</body>
+</html>

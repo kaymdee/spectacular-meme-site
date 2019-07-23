@@ -1,0 +1,96 @@
+*{
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/With_Antarctica%27s_Mount_Erebus_in_the_Background%2C_An_Ad%C3%A9lie_Waddles_Towards_Secretary_Kerry_and_his_Traveling_Party_in_Antarctica_%2830913579475%29.jpg/1599px-With_Antarctica%27s_Mount_Erebus_in_the_Background%2C_An_Ad%C3%A9lie_Waddles_Towards_Secretary_Kerry_and_his_Traveling_Party_in_Antarctica_%2830913579475%29.jpg");
+
+  /* Full height */
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+h1{
+  font-size: 3.5em;
+}
+
+hr {
+    display: block;
+    margin-before: 0.5em;
+    margin-after: 0.5em;
+    margin-start: auto;
+    margin-end: auto;
+    overflow: hidden;
+    border-style: inset;
+    border-width: 1px;
+}
+
+/* Add a black background color to the top navigation */
+.topnav{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  left:0;
+  overflow: hidden;
+  background-color: #333;
+  display:flex;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+
+.main{
+  display:flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  background-color: rgba(255,255,255,.2);
+  margin: 50px;
+  border-radius: 30px;
+  padding: 20px 70px;
+  background-clip: border-box;
+}
+
+.rowFlexbox{
+  display: flex;
+  flex-direction: row;
+  align-items: space-around;
+}
+
+#logoBox{
+  padding: 0;
+  height: 48px;
+}
+#logo{
+  -webkit-filter: invert(1);
+   filter: invert(1);
+   width: 67.9px;
+   height: 48px;
+}

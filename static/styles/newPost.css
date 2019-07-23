@@ -1,0 +1,19 @@
+#mainForm {
+  font-size: 24px;
+  padding: 10px;
+}
+#mainForm .inputs{
+  font-size: 16px;
+  width: 360px;
+}
+#btnCreateMeme{
+  width: 200px;
+  height:50px;
+  margin: 30px 0px;
+  background-color: lightblue;
+  border-radius: 5px;
+}
+#mainForm h4{
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+}
