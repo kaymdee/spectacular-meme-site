@@ -11,6 +11,12 @@
   </a>
   <a id="index.html" href="index.html#home">Home</a>
   <!-- Change id's and href's based on future links-->
-  <a id="RPS.html" href="RPS.html">Profile</a>
-  <a id="pong.html" href="pong.html">Create</a>
+
+  <a id="newPost.html" href="newPost.html">Make Post</a>
+  {% if signedIn %}
+    <a id="profile.html" href="profile.html">Profile</a>
+  {% else %}
+    <a id="signIn">Sign in with Google</a>
+  {% endif %}
+
 </div id="topnav">
