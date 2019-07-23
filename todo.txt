@@ -1,6 +1,7 @@
-Finish Mocks of pages
-Figure out google auth
+Finish Mocks of pages - DONE
+Figure out google auth - WIP
 Make all the pages and handlers
 Figure out how to data store pictures
 How to upload pictures
+Fix view post page for new models.
 idk

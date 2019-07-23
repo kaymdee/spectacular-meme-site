@@ -28,17 +28,7 @@ class FroggerPage(webapp2.RequestHandler):
         story_template = the_jinja_env.get_template('templates/frogger.html')
         self.response.write(story_template.render())
 
-class PongPage(webapp2.RequestHandler):
-    def get(self): #for a get request
-        self.response.headers['Content-Type'] = 'text/html' #change this to write html!
-        story_template = the_jinja_env.get_template('templates/pong.html')
-        self.response.write(story_template.render())
 
-class RPSPage(webapp2.RequestHandler):
-    def get(self): #for a get request
-        self.response.headers['Content-Type'] = 'text/html' #change this to write html!
-        story_template = the_jinja_env.get_template('templates/RPS.html')
-        self.response.write(story_template.render())
 class NewPostPage(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
@@ -65,7 +55,7 @@ class ShowPostPage(webapp2.RequestHandler):
 
 class ViewPostsPage(webapp2.RequestHandler):
     def get(self):
-        blogPosts = models.BlogPost.query().order(models.BlogPost.postTime).fetch()
+        blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
         template = the_jinja_env.get_template("templates/viewPosts.html")
         self.response.write(template.render({"blogPosts":blogPosts}))
 
@@ -80,8 +70,6 @@ app = webapp2.WSGIApplication([
     ("/", MainPage),
     ('/index.*', MainPage), #this maps the root url to the Main Page Handler
     ('/frogger.*', FroggerPage),
-    ('/pong.*', PongPage),
-    ('/RPS.*', RPSPage),
     ("/newPost.*", NewPostPage),
     ("/showPost.*",ShowPostPage),
     ("/viewPosts.*", ViewPostsPage),

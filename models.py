@@ -6,9 +6,9 @@ class User(ndb.Model):
     firstName = ndb.StringProperty(required=True)
     lastName = ndb.StringProperty(required=True)
     email = ndb.StringProperty(required=True)
-    friends = ndb.KeyProperty(required=True, repeated = True)
-    likedPosts = ndb.KeyProperty(required=False, repeated=True)
-    userPosts = ndb.KeyProperty(required=False, repeated=True)
+    friends = ndb.KeyProperty(repeated = True)
+    likedPosts = ndb.KeyProperty(repeated=True)
+    userPosts = ndb.KeyProperty(repeated=True)
 
 class Post(ndb.Model):
     postTime = ndb.TimeProperty(required=True, default=time.time())
@@ -17,8 +17,8 @@ class Post(ndb.Model):
     postContent = ndb.StringProperty(required=True)
     postDesc = ndb.StringProperty(required=True)
     #how to do image
-    comments = ndbKeyProperty(required=False, repeated=True)
-    likes = ndbIntegerProperty(required=False, default=0)
+    comments = ndb.KeyProperty(repeated=True)
+    likes = ndb.IntegerProperty(required=False, default=0)
 
 class Comment(Post):
     parentPost = ndb.KeyProperty(required=True)
