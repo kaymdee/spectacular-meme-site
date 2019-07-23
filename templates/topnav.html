@@ -1,10 +1,16 @@
 
-<link rel="stylesheet" href="../static/styles/topnav.css"/>
+<link rel="stylesheet" href="../static/styles/topnav.css"/> -->
+<!-- <link rel = "stylesheet" href = "../static/styles/newPost.css"/> -->
+
 <div id="topnav" class = "topnav" w3-include-html="topnav.html" >
   <a id="logoBox" href= "index.html#home">
     <img
       id ="logo"
+<<<<<<< HEAD
+      src= "https://i.imgflip.com/22modp.jpg"
+=======
       src= "https://www.stickpng.com/assets/images/58406746657b0e0e08612e45.png"
+>>>>>>> fbe0e6e50f82ac5fe91f6c3ec8cbcfe87a66f13a
       alt = "Logo"
 
     />
@@ -13,10 +19,7 @@
   <!-- Change id's and href's based on future links-->
 
   <a id="newPost.html" href="newPost.html">Make Post</a>
-  {% if signedIn %}
-    <a id="profile.html" href="profile.html">Profile</a>
-  {% else %}
-    <a id="signIn">Sign in with Google</a>
-  {% endif %}
+  {{signInOrProfileHtml}}
+  {{signoutHtml}}
 
 </div id="topnav">
