@@ -24,10 +24,10 @@ class MainPage(webapp2.RequestHandler):
             signoutLinkHtml = '<a href="%s">sign out</a>' % (
                 users.create_logout_url('/'))
             #user object exists already in data base
-            if user:
-                #Stuff
-            #User has not been to our site
-            else:
+            # if user:
+            #     #Stuff
+            # #User has not been to our site
+            # else:
 
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
         template = jinja_env.get_template('templates/index.html')
