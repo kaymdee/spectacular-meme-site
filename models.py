@@ -1,8 +1,9 @@
 
 from google.appengine.ext import ndb
-import datetime
-class BlogPost(ndb.Model):
-    postTime = ndb.DateTimeProperty(required=True, default=datetime.datetime.now())
+import time
+    
+class Post(ndb.Model):
+    postTime = ndb.TimeProperty(required=True, default=time.time())
     postTitle =  ndb.StringProperty(required=True)
     postAuthor =  ndb.StringProperty(required=True)
     postContent = ndb.StringProperty(required=True)
