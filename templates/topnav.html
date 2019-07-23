@@ -17,10 +17,7 @@
   <!-- Change id's and href's based on future links-->
 
   <a id="newPost.html" href="newPost.html">Make Post</a>
-  {% if signedIn %}
-    <a id="profile.html" href="profile.html">Profile</a>
-  {% else %}
-    <a id="signIn">Sign in with Google</a>
-  {% endif %}
+  {{signInOrProfileHtml}}
+  {{signoutHtml}}
 
 </div id="topnav">
