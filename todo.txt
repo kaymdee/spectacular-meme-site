@@ -1,2 +1,4 @@
 Finish Mocks of pages
 Figure out google auth
+Make all the pages and handlers
+idk
