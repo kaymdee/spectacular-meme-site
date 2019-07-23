@@ -9,9 +9,6 @@ brick wall w/mic: https://wallpaperplay.com/walls/full/5/5/8/282500.jpg
 curtins w/ spotlight: https://i.pinimg.com/originals/c9/ab/b6/c9abb656a6189a18187c2d2b0dcd1e01.jpg
 white brick: https://previews.123rf.com/images/jes2ufoto/jes2ufoto1708/jes2ufoto170800109/83814232-old-white-brick-wall-texture-design-empty-white-brick-background-for-presentations-and-web-design-a-.jpg
 
-
-
-
 */
 
 
@@ -61,7 +58,7 @@ hr {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 25px;
 }
 
 /* Change the color of links on hover */
@@ -99,15 +96,15 @@ hr {
   height: 48px;
 }
 #logo{
-<<<<<<< HEAD
+
   /* -webkit-filter: invert(1); */
    /* filter: invert(1); */
-   width: 67.9px;
-   height: 48px;
-=======
+   /* width: 67.9px;
+   height: 48px; */
+
   /* -webkit-filter: invert(1); */
    /* filter: invert(1); */
    width: 60px;
-   height: 45px;
->>>>>>> fbe0e6e50f82ac5fe91f6c3ec8cbcfe87a66f13a
+   height: 60px;
+
 }

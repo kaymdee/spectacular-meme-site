@@ -8,16 +8,14 @@ body
   background-size: 500px;
 }
 
-#logo
-{
-  width: 100px;
-  height: 100px;
-}
-
 #mainForm
 {
   font-size: 24px;
   padding: 10px;
+  opacity: .5;
+  font-weight: bold;
+  color: white;
+  background-color: black;
 }
 
 #mainForm .inputs
