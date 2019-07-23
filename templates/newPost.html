@@ -19,18 +19,23 @@
       <button id="subscribeButton"> Subscribe! </button>
     </section>
 
-    <h2> Post Something! </h2>
+    <h2> How Do You Meme? </h2>
     <form id="mainForm" method="post" action="/showPost">
       <h4> Post Title </h4>
       <input class="inputs" type="text" name="post-title" value="Post Title">
       <br>
-      <h4> Your Name </h4>
+      <h4> Author Name </h4>
       <input class="inputs"type="text" name="post-author" value="Post Author">
       <br>
-      <h4> Post Content </h4>
-      <input class="inputs"type="text" name="post-content" value="">
+      <h4> Meme </h4>
+      <form action="/action_page.php">
+        <input type="file" name="pic" accept="image/*">
+        <input type="submit">
+      </form>
       <br>
-      <input id="btnPost"type="submit" value="Post!!">
+      <h4> Description </h4>
+      <input class = "inputs" type = "text" value = "Post Description">
+      <input id="btnPost"type="submit" value="Meme Away!!!">
     </form>
 
 
