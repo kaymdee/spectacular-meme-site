@@ -1,4 +1,6 @@
 Finish Mocks of pages
 Figure out google auth
 Make all the pages and handlers
+Figure out how to data store pictures
+How to upload pictures
 idk
