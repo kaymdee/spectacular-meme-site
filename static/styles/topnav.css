@@ -89,8 +89,8 @@ hr {
   height: 48px;
 }
 #logo{
-  -webkit-filter: invert(1);
-   filter: invert(1);
+  /* -webkit-filter: invert(1); */
+   /* filter: invert(1); */
    width: 67.9px;
    height: 48px;
 }

@@ -1,25 +1,25 @@
-
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title> Bloggin Penguin RPS </title>
-  <link rel="stylesheet" href="../static/styles/newPost.css"/>
-  <link rel="stylesheet" href="../static/styles/topnav.css"/>
+  <title> New Meme Post </title>
   {% include "templates/head.html" %}
+  {% include "templates/topnav.html" %}
+  <link rel = "stylesheet" href = "../static/styles/newPost.css"/> --> -->
+  <!-- <link rel="stylesheet" href="../static/styles/newPost.css"/> -->
+  <!-- <link rel="stylesheet" href="../static/styles/topnav.css"/> -->
 
 </head>
 
 <body>
-  {% include "templates/topnav.html" %}
   <div id="home" class="main">
-    <h1 id="mainTitle"> The Bloggin Penguin</h1>
+    <h1 id="mainTitle"> How Do YOU Meme? </h1>
     <section id="topButtonContainers" class="rowFlexBox">
       <button id="likeButton"> Like!</button>
       <button id="subscribeButton"> Subscribe! </button>
     </section>
 
-    <h2> How Do You Meme? </h2>
+    <h2> Meme Info </h2>
     <form id="mainForm" method="post" action="/showPost">
       <h4> Post Title </h4>
       <input class="inputs" type="text" name="post-title" value="Post Title">
@@ -27,20 +27,17 @@
       <h4> Author Name </h4>
       <input class="inputs"type="text" name="post-author" value="Post Author">
       <br>
-      <h4> Meme </h4>
-      <form action="/action_page.php">
-        <input type="file" name="pic" accept="image/*">
-        <input type="submit">
-      </form>
-      <br>
       <h4> Description </h4>
       <input class = "inputs" type = "text" value = "Post Description">
-      <input id="btnPost"type="submit" value="Meme Away!!!">
+      <br>
+      <h4> Meme </h4>
+      <form action="/action_page.php">
+        <input type="file" name="pic" accept="image/*" value = "Attach your meme!">
+      </form>
+      <br>
+      <br>
+    <input id="btnPost"type="submit" value="Meme Away!!!">
     </form>
-
-
-
-
 
 </div id ="main">
 
