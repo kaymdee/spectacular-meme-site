@@ -9,10 +9,8 @@ from datetime import datetime
 <<<<<<< HEAD
 # import google.appengine.
 from google.appengine.api import images
-=======
 import google.appengine
 # from google.appengine.api.images import images
->>>>>>> bace6216e68d21febaa0f52e567791a36388470b
 from google.appengine.api import users
 
 jinja_env = jinja2.Environment(
