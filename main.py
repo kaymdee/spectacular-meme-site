@@ -42,8 +42,9 @@ def authUser():
 # the handler section
 class MainPage(webapp2.RequestHandler):
     def get(self):
+
         gUser = users.get_current_user()
-        #If user is logged in
+        #If user google is logged in
         if gUser:
             emailAddress = gUser.nickname()
             user = models.User.get_by_id(gUser.user_id())
@@ -72,7 +73,8 @@ class MainPage(webapp2.RequestHandler):
 
 class CreateNewProfileHandler(webapp2.RequestHandler):
     def get(self):
-
+        if not isinstance(authUser(),webapp2.Response):
+            return webapp2.redirect("/index.html")
         template = jinja_env.get_template('templates/createNewProfile.html')
         self.response.write(template.render())
     def post(self):
@@ -99,6 +101,10 @@ class FroggerPage(webapp2.RequestHandler):
 
 class NewPostPage(webapp2.RequestHandler):
     def get(self): #for a get request
+        authResp = authUser()
+        if(isinstance(authResp,webapp2.Response)):
+            return authResp#stop code execution if the user has been directed
+
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
         template = jinja_env.get_template('templates/newPost.html')
         self.response.write(template.render())
@@ -143,14 +149,17 @@ class ViewPostsPage(webapp2.RequestHandler):
 
 class ViewProfileHandler(webapp2.RequestHandler):
     def get(self):
-        authUser()
+        authResp = authUser()
+        if(isinstance(authResp,webapp2.Response)):
+            return authResp#stop code execution if the user has been directed
         gUser = users.get_current_user()
         user = models.User.get_by_id(gUser.user_id())
-
         template = jinja_env.get_template("templates/profile.html")
         dict = {"firstName" : user.firstName,
                 "lastName" : user.lastName,
-                "email" : user.email}
+                "email" : user.email,
+                "signInOrProfileHtml" : authResp[0],
+                "signoutHtml" : authResp[1] }
         self.response.write(template.render(dict))
 class PageNotFoundHandler(webapp2.RequestHandler):
     def get(self):
