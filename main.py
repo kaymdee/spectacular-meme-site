@@ -4,9 +4,10 @@ import webapp2
 import jinja2
 import os
 import time
-import models
+from models import Post, Comment, User
 from datetime import datetime
-import google.appengine.api.blobstore
+import google.appengine.
+# from google.appengine.api.images import images
 from google.appengine.api import users
 
 jinja_env = jinja2.Environment(
@@ -79,10 +80,10 @@ class NewPostPage(webapp2.RequestHandler):
         self.response.write(template.render())
 
         postTime = datetime.now()
-        postTitle = self.request.get("Post Title")
-        postAuthor = self.request.get("Post Author")
-        postDescription = self.request.get("Post Description")
-        image = Post.get_by_id(int(self.request.get("Post Image")))
+        postTitle = self.request.get("post-title")
+        postAuthor = self.request.get("post-author")
+        postDescription = self.request.get("post-description")
+        image = Post.get_by_id(int(self.request.get("post-image")))
         postImage = images.Image(image.fullSize)
 
         # image.resize(width = 150, height = 150)
