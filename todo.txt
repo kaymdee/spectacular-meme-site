@@ -41,7 +41,7 @@ Posts:
 -
 
 Profiles:
--Need to create html for profile page
+-Need to create html for profile page - WIP ALEX
 -How to render profile for different profiles into one template
 -Stretch: Friends
 
