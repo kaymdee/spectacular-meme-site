@@ -1,8 +1,47 @@
+Top is higher priority
+DONE:
 Finish Mocks of pages - DONE
-Need to upload mocks
-Figure out google auth - WIP
-Make all the pages and handlers
-Figure out how to data store pictures
-How to upload pictures
+How to upload pictures - TAHLEE DONE
+
+
+Make all the pages and handlers - as we go
+Header and front page design - DONE-ISH KHALAYA
+  -Make empty boxes for post
+  -Directory bar under menu icon (for friends)
+  {when click on post:
+      -send to viewPost handler that display single
+        post (but larger) w/ comments
+      -still provide option to like
+   }
+
+Like function (to be called )
+WIP:
+Need to upload mocks - WIP ALEX
+Figure out google auth - WIP ALEX
+
+Main Page:
+-Pull Data from Posts Datastore to make feed (main page)
+-
+-
+-
+
+Posts:
+-Figure out how to data store pictures/gifs - WIP TAHLEE
+-Creating Make Post Page - WIP TAHLEE
+-Make like feature for posts.
+-
+
+Profiles:
+-Need to create html for profile page
+-How to render profile for different profiles into one template
+-Stretch: Friends
+
+
+
+
+Streches:
+
+Create Friendslist Page and figure out how to add friends and search
 Fix view post page for new models.
+Chat room
 idk

@@ -31,7 +31,7 @@ class MainPage(webapp2.RequestHandler):
                 signInOrProfileHtml = jinja2.Markup('<a id="createNewProfile.html" href="createNewProfile.html">Sign Up</a>')
         else: #user isnt logged in and we need to log them in
             signoutHtml = ""
-            signInOrProfileHtml = jinja2.Markup('<a href="%s">Sign In with Google</a>' % (users.create_login_url('/')))
+            signInOrProfileHtml = jinja2.Markup('<a href="%s">Sign In with Google</a>' % (users.create_login_url('/createNewProfile.html')))
 
         self.response.headers['Content-Type'] = 'html' #change this to write html!
         template = jinja_env.get_template('templates/index.html')
@@ -49,15 +49,17 @@ class CreateNewProfileHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/createNewProfile.html')
         self.response.write(template.render())
     def post(self):
+        # print "post running"
         #create new user from the form
         gUser = users.get_current_user()
         if not gUser:
-            webapp2.redirect("/index.html")
+            # print "kicked out"
+            return webapp2.redirect("index.html")
         firstName = self.request.get("firstName")
         lastName = self.request.get("lastName")
-        user = models.User(email = gUser.nickname(),firstName=firstName, lastName=lastName, id=gUser.user_id())
+        user = models.User(email = gUser.email(),firstName=firstName, lastName=lastName, id=gUser.user_id())
         user.put()
-        webapp2.redirect("/index.html")
+        return webapp2.redirect("/index.html")
 
 
 
