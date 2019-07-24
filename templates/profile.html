@@ -5,19 +5,26 @@
   <title> New Meme Post </title>
   {% include "templates/head.html" %}
   {% include "templates/topnav.html" %}
-  <link rel = "stylesheet" href = "../static/styles/newPost.css"/>
+  <link rel = "stylesheet" href = "../static/styles/profile.css"/>
 
 </head>
 
 <body>
   <div id="home" class="main">
-    <h1 id="mainTitle"> View Profile Page </h1>
-    <section id="topButtonContainers" class="rowFlexBox">
-      <button id="likeButton"> Like!</button>
-      <button id="subscribeButton"> Subscribe! </button>
-    </section>
+    <h1 id="mainTitle"> Your Profile </h1>
 
-    <h2> Person Info </h2>
+    <h2> Your Profile </h2>
+    <div id="profileFile" class="rowFlexBox">
+      <img id="profilePicture" class="picture"
+        src = "../static/imgs/defaultProfileIcon.png"
+        alt = "profile picture"
+      />
+      <div id="profileDetails">
+        
+      </div>
+
+
+    </div>
     <h4> Name: {{firstName}} {{lastName}} </h4>
     <br>
     <h4> Email: {{email}} </h4>
