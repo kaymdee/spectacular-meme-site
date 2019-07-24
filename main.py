@@ -6,8 +6,8 @@ import os
 import time
 from models import Post, Comment, User
 from datetime import datetime
-import google.appengine.
-# from google.appengine.api.images import images
+# import google.appengine.
+from google.appengine.api import images
 from google.appengine.api import users
 
 jinja_env = jinja2.Environment(
@@ -89,8 +89,6 @@ class CreateNewProfileHandler(webapp2.RequestHandler):
         user.put()
         return webapp2.redirect("/index.html")
 
-
-
 class FroggerPage(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
@@ -104,37 +102,35 @@ class NewPostPage(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/newPost.html')
         self.response.write(template.render())
 
-        postTime = datetime.now()
-        postTitle = self.request.get("post-title")
-        postAuthor = self.request.get("post-author")
-        postDescription = self.request.get("post-description")
-        image = Post.get_by_id(int(self.request.get("post-image")))
-        postImage = images.Image(image.fullSize)
-
-        # image.resize(width = 150, height = 150)
-        # seenImage = image.execute_transforms(output_encoding=images.JPEG)
-
-        new_post_entity = Post(postTime, postAuthor, postDescription, postImage)
-        new_post_entity.put()
-
 class ShowPostPage(webapp2.RequestHandler):
     def get(self):
         pass
-    def post(self): #for a post request from NewPostPage
-        postTitle = self.request.get("post-title")
-        postAuthor = self.request.get("post-author")
-        postContent = self.request.get("post-content")
-        postDate = str(time.asctime(time.localtime(time.time())))
-        newBlogPostKey = models.Post(postTitle=postTitle, postAuthor=postAuthor,postContent=postContent).put()
-        postDict = {#DASHES IN JINJA ARE FOR WHITESPACE CONTROL. NOT ALLOWED FOR JINJA VARIABLES
-            "postTitle" : postTitle,
-            "postAuthor" : postAuthor,
-            "postContent" : postContent,
-            "postDate" : postDate,
-        }
-        self.response.headers['Content-Type'] = 'text/html' #change this to write html!
-        template = jinja_env.get_template('templates/showPost.html')
-        self.response.write(template.render(postDict))
+
+    def post(self):
+        print("running")
+        Title = self.request.get("post-title")
+        Author = self.request.get("post-author")
+        Description = self.request.get("post-description")
+        Image = self.request.get("post-image")
+
+        post = Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
+        post.put()
+
+        temp_dict = {"postTitle": Title,
+                    "postAuthor": Author,
+                    "postDesc": Description,
+                    "postDate": "now"
+                }
+
+    # postDict = {#DASHES IN JINJA ARE FOR WHITESPACE CONTROL. NOT ALLOWED FOR JINJA VARIABLES
+    #         "postTitle" : Title,
+    #         "postAuthor" : Author,
+    #         "postContent" : Description,
+    #         # "postDate" : .new_post_entity.get(postTime),
+    #     }
+    #     self.response.headers['Content-Type'] = 'text/html' #change this to write html!
+        # template = jinja_env.get_template('templates/showPost.html')
+        # self.response.write(template.render(postDict))
 
 class ViewPostsPage(webapp2.RequestHandler):
     def get(self):
@@ -165,7 +161,7 @@ app = webapp2.WSGIApplication([
     ('/index.*', MainPage), #this maps the root url to the Main Page Handler
     ('/frogger.*', FroggerPage),
     ("/newPost.*", NewPostPage),
-    ("/showPost.*",ShowPostPage),
+    ("/showPost.*", ShowPostPage),
     ("/viewPosts.*", ViewPostsPage),
     ("/createNewProfile.*", CreateNewProfileHandler),
     ("/profile.*", ViewProfileHandler),
