@@ -11,7 +11,7 @@ class User(ndb.Model):
     userPosts = ndb.KeyProperty(repeated=True)
 
 class Post(ndb.Model):
-    postTime = ndb.TimeProperty(required=True, default=time.time())
+    postTime = ndb.DateTimeProperty(auto_now_add=True)
     postTitle =  ndb.StringProperty(required=True)
     postAuthor =  ndb.StringProperty(required=True)
     postContent = ndb.StringProperty(required=True)
