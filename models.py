@@ -1,4 +1,4 @@
-
+from google.appengine.api import images
 from google.appengine.ext import ndb
 import time
 
@@ -16,7 +16,7 @@ class Post(ndb.Model):
     postAuthor =  ndb.StringProperty(required=True)
     postContent = ndb.StringProperty(required=True)
     postDesc = ndb.StringProperty(required=True)
-    #how to do image
+    postImage = ndb.BlobProperty(required=True)
     comments = ndb.KeyProperty(repeated=True)
     likes = ndb.IntegerProperty(required=False, default=0)
 
