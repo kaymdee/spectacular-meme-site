@@ -153,6 +153,7 @@ class ViewProfileHandler(webapp2.RequestHandler):
                 "lastName" : user.lastName,
                 "email" : user.email}
         self.response.write(template.render(dict))
+        #why this dict?
 class PageNotFoundHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
