@@ -91,11 +91,7 @@ hr {
   align-items: space-around;
 }
 
-.rightJustify{
-  align-self: end;
-  float: right;
-  justify-self: end;
-}
+
 #logoBox{
   padding: 0;
   height: 48px;
