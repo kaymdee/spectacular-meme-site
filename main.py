@@ -6,11 +6,9 @@ import os
 import time
 import models
 from datetime import datetime
-<<<<<<< HEAD
-# import google.appengine.
+
 from google.appengine.api import images
 import google.appengine
-# from google.appengine.api.images import images
 from google.appengine.api import users
 
 jinja_env = jinja2.Environment(
