@@ -14,10 +14,16 @@ Header and front page design - DONE-ISH KHALAYA
       -still provide option to like
    }
 
-Like function (to be called )
+Like function (to be called when needed (like navBar))
+  where:
+    -home page
+    -viewPosts page
+    -
+
 WIP:
 Need to upload mocks - WIP ALEX
 Figure out google auth - WIP ALEX
+
 
 Main Page:
 -Pull Data from Posts Datastore to make feed (main page)

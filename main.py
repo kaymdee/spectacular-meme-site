@@ -15,6 +15,30 @@ jinja_env = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
+#will redirect to GLogin if the user is not logged into Google
+#will redirect to create new profile if the user is logged into google but not register with our Website
+#Logic tree:
+#User G Logged and registered: returns signInOrProfileHtml and signoutHtml in list: [profileHtml, signoutHtml]
+#User G Logged and not reged: redirect to CreateNewProfileHandler
+#User not G Logged or reg: redirect to G Log -> CreateNewProfileHandler
+#User not GLogged but reged: redirect to GLog -> main page
+def authUser():
+    gUser = users.get_current_user()
+    #If user is G logged in
+    if gUser:
+        user = models.User.get_by_id(gUser.user_id())
+
+        #user object exists already in data base
+        if user:
+            signoutHtml = jinja2.Markup('<a href="%s">Sign out</a>' % (
+                users.create_logout_url('/')))
+            signInOrProfileHtml = jinja2.Markup('<a id="profile.html" href="profile.html">Profile</a>')
+            return [signInOrProfileHtml, signoutHtml]
+        #User has not been to our site
+        else:
+            return webapp2.redirect("/createNewProfile.html")
+    else: #user isnt logged in and we need to log them in
+        return webapp2.redirect((users.create_login_url('/createNewProfile.html')))
 
 # the handler section
 class MainPage(webapp2.RequestHandler):
@@ -49,6 +73,7 @@ class MainPage(webapp2.RequestHandler):
 
 class CreateNewProfileHandler(webapp2.RequestHandler):
     def get(self):
+
         template = jinja_env.get_template('templates/createNewProfile.html')
         self.response.write(template.render())
     def post(self):
@@ -119,6 +144,7 @@ class ViewPostsPage(webapp2.RequestHandler):
 
 class ViewProfileHandler(webapp2.RequestHandler):
     def get(self):
+        authUser()
         gUser = users.get_current_user()
         user = models.User.get_by_id(gUser.user_id())
 
