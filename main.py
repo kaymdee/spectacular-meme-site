@@ -12,7 +12,8 @@ jinja_env = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-
+def authUser():
+    
 # the handler section
 class MainPage(webapp2.RequestHandler):
     def get(self):
@@ -46,6 +47,7 @@ class MainPage(webapp2.RequestHandler):
 
 class CreateNewProfileHandler(webapp2.RequestHandler):
     def get(self):
+
         template = jinja_env.get_template('templates/createNewProfile.html')
         self.response.write(template.render())
     def post(self):
