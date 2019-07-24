@@ -14,12 +14,22 @@ Header and front page design - DONE-ISH KHALAYA
       -still provide option to like
    }
 
+<<<<<<< HEAD
+Like function (to be called where needed:
+    where:
+      -home page
+      -viewPosts page
+      -page where you view other people page *figure out placements
+
+      )
+=======
 Like function (to be called when needed (like navBar))
   where:
     -home page
     -viewPosts page
     -
 
+>>>>>>> 6c2a27c16a5fc37db933caf4f2949e6f0d3a5122
 WIP:
 Need to upload mocks - WIP ALEX
 Figure out google auth - WIP ALEX
