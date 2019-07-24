@@ -4,9 +4,9 @@ import webapp2
 import jinja2
 import os
 import time
-from models import Post, Comment, User
+import models
 from datetime import datetime
-import google.appengine.
+import google.appengine
 # from google.appengine.api.images import images
 from google.appengine.api import users
 
@@ -153,6 +153,7 @@ class ViewProfileHandler(webapp2.RequestHandler):
         authResp = authUser()
         if(isinstance(authResp,webapp2.Response)):
             return authResp#stop code execution if the user has been directed
+
         gUser = users.get_current_user()
         user = models.User.get_by_id(gUser.user_id())
         template = jinja_env.get_template("templates/profile.html")
