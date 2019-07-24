@@ -5,6 +5,8 @@ import jinja2
 import os
 import time
 import models
+from datetime import datetime
+import google.appengine.api.blobstore
 from google.appengine.api import users
 
 jinja_env = jinja2.Environment(
@@ -113,6 +115,20 @@ class NewPostPage(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
         template = jinja_env.get_template('templates/newPost.html')
         self.response.write(template.render())
+
+        postTime = datetime.now()
+        postTitle = self.request.get("Post Title")
+        postAuthor = self.request.get("Post Author")
+        postDescription = self.request.get("Post Description")
+        image = Post.get_by_id(int(self.request.get("Post Image")))
+        postImage = images.Image(image.fullSize)
+
+        # image.resize(width = 150, height = 150)
+        # seenImage = image.execute_transforms(output_encoding=images.JPEG)
+
+        new_post_entity = Post(postTime, postAuthor, postDescription, postImage)
+        new_post_entity.put()
+
 class ShowPostPage(webapp2.RequestHandler):
     def get(self):
         pass
