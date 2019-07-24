@@ -10,7 +10,7 @@ from datetime import datetime
 from google.appengine.api import images
 import google.appengine
 from google.appengine.api import users
-
+from google.appengine.ext import ndb
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
@@ -98,6 +98,16 @@ class FroggerPage(webapp2.RequestHandler):
         story_template = jinja_env.get_template('templates/frogger.html')
         self.response.write(story_template.render())
 
+class Image(webapp2.RequestHandler):
+    def get(self):
+        print("nsvl;sdn")
+        post_key = ndb.Key(urlsafe=self.request.get('img_id'))
+        post = post_key.get()
+        if post.postImage:
+            self.response.headers['Content-Type'] = 'image/png'
+            self.response.out.write(post.postImage)
+        else:
+            self.response.out.write('No image')
 
 class NewPostPage(webapp2.RequestHandler):
     def get(self): #for a get request
@@ -120,14 +130,23 @@ class ShowPostPage(webapp2.RequestHandler):
         Description = self.request.get("post-description")
         Image = self.request.get("post-image")
 
-        post = Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
+        post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
         post.put()
 
         temp_dict = {"postTitle": Title,
                     "postAuthor": Author,
                     "postDesc": Description,
-                    "postDate": "now"
+                    "postDate": "now",
+                    "postImage": jinja2.Markup('<img src="/img?img_id=%s"></img>' %
+                        post.key.urlsafe())
                 }
+
+        template = jinja_env.get_template("templates/showPost.html")
+
+
+
+
+        self.response.write(template.render(temp_dict))
 
     # postDict = {#DASHES IN JINJA ARE FOR WHITESPACE CONTROL. NOT ALLOWED FOR JINJA VARIABLES
     #         "postTitle" : Title,
@@ -176,5 +195,6 @@ app = webapp2.WSGIApplication([
     ("/viewPosts.*", ViewPostsPage),
     ("/createNewProfile.*", CreateNewProfileHandler),
     ("/profile.*", ViewProfileHandler),
+    ('/img', Image),
     ('.*', PageNotFoundHandler),
 ], debug=True)
