@@ -61,56 +61,6 @@ class CreateNewProfileHandler(webapp2.RequestHandler):
 
 
 
-class LogInHandler(webapp2.RequestHandler):#TODO NEEDS FIXING
-  def get(self):
-    gUser = users.get_current_user()
-    # If the user is logged in...
-    if gUser:
-      email_address = gUser.nickname()
-      user = models.User.get_by_id(gUser.user_id())
-      signout_link_html = '<a href="%s">sign out</a>' % (
-          users.create_logout_url('/'))
-      # If the user has previously been to our site, we greet them!
-      if user:
-        self.response.write('''
-            Welcome %s %s (%s)! <br> %s <br>''' % (
-              user.firstName,
-              user.lastName,
-              email_address,
-              signout_link_html))
-      # If the user hasn't been to our site, we ask them to sign up
-      else:
-        self.response.write('''
-            Welcome to our site, %s!  Please sign up! <br>
-            <form method="post" action="/login">
-            <input type="text" name="firstName">
-            <input type="text" name="lastName">
-            <input type="submit">
-            </form><br> %s <br>
-            ''' % (email_address, signout_link_html))
-    # Otherwise, the user isn't logged in!
-    else:
-      self.response.write('''
-        Please log in to use our site! <br>
-        <a href="%s">Sign in</a>''' % (
-          users.create_login_url('/')))
-
-  def post(self): #only when new account made
-    gUser = users.get_current_user()
-    if not gUser:
-      # You shouldn't be able to get here without being logged in
-      webapp2.redirect("/login")
-      return
-    user = models.User(
-        firstName=self.request.get('firstName'),
-        lastName=self.request.get('lastName'),
-        email = gUser.nickname(),
-        id=gUser.user_id())
-    user.put()
-    self.response.write('Thanks for signing up, %s!' %
-        user.firstName)
-
-
 class FroggerPage(webapp2.RequestHandler):
     def get(self): #for a get request
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
@@ -148,7 +98,16 @@ class ViewPostsPage(webapp2.RequestHandler):
         template = jinja_env.get_template("templates/viewPosts.html")
         self.response.write(template.render({"blogPosts":blogPosts}))
 
+class ViewProfileHandler(webapp2.RequestHandler):
+    def get(self):
+        gUser = users.get_current_user()
+        user = models.User.get_by_id(gUser.user_id())
 
+        template = jinja_env.get_template("templates/profile.html")
+        dict = {"firstName" : user.firstName,
+                "lastName" : user.lastName,
+                "email" : user.email}
+        self.response.write(template.render(dict))
 class PageNotFoundHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
@@ -162,7 +121,7 @@ app = webapp2.WSGIApplication([
     ("/newPost.*", NewPostPage),
     ("/showPost.*",ShowPostPage),
     ("/viewPosts.*", ViewPostsPage),
-    ("/login.*", LogInHandler),
     ("/createNewProfile.*", CreateNewProfileHandler),
+    ("/profile.*", ViewProfileHandler),
     ('.*', PageNotFoundHandler),
 ], debug=True)
