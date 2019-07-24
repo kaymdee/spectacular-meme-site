@@ -40,6 +40,12 @@ hr {
     border-width: 1px;
 }
 
+#size
+{
+  width: 50%;
+  height: 50%;
+}
+
 /* Add a black background color to the top navigation */
 .topnav{
   position: fixed;
@@ -97,15 +103,6 @@ hr {
   height: 48px;
 }
 #logo{
-<<<<<<< HEAD
-  /* -webkit-filter: invert(1); */
-   /* filter: invert(1); */
-   width: 67.9px;
-   height: 48px;
-=======
-  /* -webkit-filter: invert(1); */
-   /* filter: invert(1); */
    width: 60px;
-   height: 45px;
-
+   height: 48px;
 }

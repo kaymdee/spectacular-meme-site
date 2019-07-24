@@ -100,7 +100,6 @@ class FroggerPage(webapp2.RequestHandler):
 
 class Image(webapp2.RequestHandler):
     def get(self):
-        print("nsvl;sdn")
         post_key = ndb.Key(urlsafe=self.request.get('img_id'))
         post = post_key.get()
         if post.postImage:
@@ -137,7 +136,7 @@ class ShowPostPage(webapp2.RequestHandler):
                     "postAuthor": Author,
                     "postDesc": Description,
                     "postDate": "now",
-                    "postImage": jinja2.Markup('<img src="/img?img_id=%s"></img>' %
+                    "postImage": jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' %
                         post.key.urlsafe())
                 }
 
