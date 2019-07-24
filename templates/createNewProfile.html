@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> New Profile </title>
+  {% include "templates/head.html" %}
+  <!--link rel = "stylesheet" href = "../static/styles/newPost.css"/-->
+
+</head>
+
+<body>
+  {% include "templates/topnav.html" %}
+
+
+  <h2> Create New Account </h2>
+  <form id="mainForm" method="post" action="/createNewProfile.html">
+    <h4> First Name</h4>
+    <input class="inputs" type="text" name="firstName" value="First NAme">
+    <br>
+    <h4> Last Name </h4>
+    <input class="inputs"type="text" name="lastName" value="Last NAme">
+    <br>
+
+    <input id="btnPost"type="submit" value="Make Account">
+  </form>
+
+
+
+
+
+</body>
+</html>
