@@ -180,7 +180,33 @@ class ConfirmPostPage(webapp2.RequestHandler):
 
 class ViewPostPage(webapp2.RequestHandler):
     def get(self):
+<<<<<<< HEAD
         template = jinja_env.get_template("templates/viewPost")
+=======
+        template = jinja_env.get_template("templates/viewPost.html")
+
+        post_key = ndb.Key(urlsafe=self.request.get('post_id'))
+        post = post_key.get()
+
+        gUser = users.get_current_user()
+        Author = models.User.get_by_id(gUser.user_id()).key
+
+        postInfo = {
+            "Title": post.postTitle,
+            "Author": Author,
+            "Time": post.postTime,
+            "Image": jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' %
+                post.key.urlsafe()),
+            "Likes": post.likes,
+            "Comments": post.comments,
+            "Description": post.postDesc,
+        }
+
+        self.response.write(templates.render(postInfo))
+
+    def post(self):
+        self.get()
+>>>>>>> 545b669752a02230e9ff302dfb5a1b8c5bcd07a0
 
         # blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
         # template = jinja_env.get_template("templates/viewPost.html")
