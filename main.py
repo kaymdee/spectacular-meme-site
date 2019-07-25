@@ -196,20 +196,26 @@ class ViewProfileHandler(webapp2.RequestHandler):
         dict.update(getAccountHtml())#add on the html for the account tags
 
         self.response.write(template.render(dict))
-<<<<<<< HEAD
         #why this dict?
 
 class ViewComments(webapp2.RequestHandler):
+    def get(self):
+        commentPost = models.Post.query().filter(models.Post.Comments == parentPost).fetch()
+        comment_template = jinja_env.get_template("templates/comments.html")
+        self.response.write(comment_template.render({ 'comment_info' : commentPost }))
+
+
     def post(self):
+        gUser = users.get_current_user()
+        Author = models.User.get_by_id(gUser.user_id()).key
         comments_template = the_jinja_env.get_template('templates/comments.html')
         comment = self.request.get('comments')
-        new_comment = Comment()
+        new_comment = Comment(postDesc = comment, parentPost = Author, postAuthor = Author, postTitle = " ")
         new_comment.put();
 
 
 
-=======
->>>>>>> d1171e7a113b94dc9d9985c94f98aed5a3b2fd3a
+
 class PageNotFoundHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
@@ -222,12 +228,8 @@ app = webapp2.WSGIApplication([
     ('/frogger.*', FroggerPage),
     ("/newPost.*", NewPostPage),
     ("/showPost.*", ShowPostPage),
-<<<<<<< HEAD
     ("/viewPosts.*", ViewPostsPage),
     ("/comments", ViewComments),
-=======
-    ("/viewPost.*", ViewPostPage),
->>>>>>> d1171e7a113b94dc9d9985c94f98aed5a3b2fd3a
     ("/createNewProfile.*", CreateNewProfileHandler),
     ("/profile.*", ViewProfileHandler),
     ('/img', Image),
