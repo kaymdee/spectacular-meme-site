@@ -52,6 +52,7 @@ def authUser():
         return webapp2.redirect((users.create_login_url('/createNewProfile.html')))
 
 #returns the account HTML tags as a dictionary {"signInProfile" : accordinghtml, }
+
 def getAccountHtml():
     gUser = users.get_current_user()
     #If user google is logged in
@@ -70,15 +71,13 @@ def getAccountHtml():
         signoutHtml = ""
         signInOrProfileHtml = jinja2.Markup('<a href="%s">Sign In with Google</a>' % (users.create_login_url('/createNewProfile.html')))
     return {"signInOrProfileHtml" : signInOrProfileHtml, "signoutHtml": signoutHtml}
+>>>>>>> 4aad8d1af565ca84fca5e0f1c8d68f38e1a70c93
 #this is a wip.
 # the handler section
 class MainPage(webapp2.RequestHandler):
     def get(self):
 
         post_entity_list = models.Post.query().order(models.Post.postTime).fetch()
-        # for post in post_entity_list:
-        #     jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' % (post.key.urlsafe()))
-        #
 
 
         self.response.headers['Content-Type'] = 'html' #change this to write html!
