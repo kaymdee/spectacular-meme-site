@@ -25,7 +25,6 @@
     </section> -->
 
     {% for post in memePosts %}
-<<<<<<< HEAD
     <div id = container>
     <div id = "meme-post">
       <img id = "size" src="/img?img_id={{post.key.urlsafe()}}"></img>
@@ -33,30 +32,14 @@
     <div id="{{post.key.id()}}" class="blogPost">
       <h2>{{post.postTitle}}</h2>
 
-      <h3> By: {{post.postAuthor.firstName}} {{post.postAuthor.get().lastName}} on {{post.postTime}}</h3>
+      <h3> By: {{post.postAuthor.get().firstName}} {{post.postAuthor.get().lastName}} on {{post.postTime}}</h3>
 
-=======
-    <div id=container>
-      <div id="meme-post">
-        <img id="size" src="/img?img_id={{post.key.urlsafe()}}"></img>
-      </div>
-      <div id="{{post.key.id()}}" class="blogPost">
-        <h2>{{post.postTitle}}</h2>
-
-        <h3> By: {{post.postAuthor}} on {{post.postTime}}</h3>
-
-<<<<<<< HEAD
-        <p> {{post.postDesc}} </p>
-      </div>
-=======
->>>>>>> 72d3aeda859dc22719757d2bb1371b49e863d493
       <p> {{post.postDesc}} </p>
 
       <h4><form id = "likeform" method ="post" action = "/index.html?post_id={{post.key.urlsafe()}}">
         <input type = "submit" value ="Likes: {{post.likes}}" name = "pseudolike">
       </form></h4>
 
->>>>>>> 63832b8ea08ada52476297a0709fd466bae79daf
     </div>
     <hr width="80%">
     {% endfor %}
