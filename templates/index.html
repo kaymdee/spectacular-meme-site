@@ -24,16 +24,6 @@
     </section> -->
 
     {% for post in memePosts %}
-<<<<<<< HEAD
-    <div id = container>
-    <div id = "meme-post">
-      <img id = "size" src="/img?img_id={{post.key.urlsafe()}}"></img>
-    </div>
-    <div id="{{post.key.id()}}" class="blogPost">
-      <h2>{{post.postTitle}}</h2>
-
-      <h3> By: {{post.postAuthor.get().firstName}} {{post.postAuthor.get().lastName}} on {{post.postTime}}</h3>
-=======
     <div id=container>
       <div id="meme-post">
         <img id="size" src="/img?img_id={{post.key.urlsafe()}}"></img>
@@ -42,11 +32,9 @@
         <h2>{{post.postTitle}}</h2>
 
         <h3> By: {{post.postAuthor.get().firstName}} {{post.postAuthor.get().lastName}} on {{post.postTime}}</h3>
->>>>>>> 1f628f1ab2b7fb4bc3aa2b8903dc955a8adbc038
 
         <p> {{post.postDesc}} </p>
 
-<<<<<<< HEAD
       <h4><form id = "likeform" method ="post" action = "/index.html?post_id={{post.key.urlsafe()}}">
         <input type = "submit" value ="Likes: {{post.likes}}" name = "pseudolike">
       </form></h4>
@@ -54,20 +42,6 @@
     <hr width="80%">
     {% endfor %}
 </div id = "main">
-=======
-        <h4>
-          <form id="likeform" method="post" action="/index.html?post_id={{post.key.urlsafe()}}">
-            <input type="submit" value="Likes: {{post.likes}}" name="pseudolike">
-          </form>
-        </h4>
-
-      </div>
-      <hr width="80%">
-    </div id=container>
-    {% endfor %}
-  </div id="main">
-  <!--id="main"> -->
->>>>>>> 1f628f1ab2b7fb4bc3aa2b8903dc955a8adbc038
 
   <script src="../static/scripts/index.js"> </script>
 
