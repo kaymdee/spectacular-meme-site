@@ -190,19 +190,24 @@ class ViewPostPage(webapp2.RequestHandler):
         Author = models.User.get_by_id(gUser.user_id()).key
 
         postInfo = {
+            "post": post,
             "Title": post.postTitle,
             "Author": Author,
             "Time": post.postTime,
             "Image": jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' %
                 post.key.urlsafe()),
             "Likes": post.likes,
-            "Comments": post.comments,
+            # "Comments": post.comments,
             "Description": post.postDesc,
         }
 
-        self.response.write(templates.render(postInfo))
+        self.response.write(template.render(postInfo))
 
     def post(self):
+        post_key = ndb.Key(urlsafe=self.request.get('post_id'))
+        post = post_key.get()
+        post.likes += 1
+        post.put()
         self.get()
 
         # blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()

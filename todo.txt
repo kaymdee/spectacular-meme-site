@@ -48,7 +48,7 @@ Profiles:
 
 
 
-Streches:
+Stretches:
 
 Create Friendslist Page and figure out how to add friends and search
 Fix view post page for new models.
