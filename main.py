@@ -78,7 +78,6 @@ class MainPage(webapp2.RequestHandler):
 
         post_entity_list = models.Post.query().order(models.Post.postTime).fetch()
 
-
         self.response.headers['Content-Type'] = 'html' #change this to write html!
         template = jinja_env.get_template('templates/index.html')
         dict = {
@@ -89,11 +88,21 @@ class MainPage(webapp2.RequestHandler):
         self.response.write(template.render(dict))
 
     def post(self):
+        gUser = users.get_current_user()
+        user = models.User.get_by_id(gUser.user_id())
+
         post_key = ndb.Key(urlsafe=self.request.get('post_id'))
         post = post_key.get()
-        post.likes += 1
-        post.put()
-        self.get()
+
+        if post_key in user.likedPosts:
+            return webapp2.redirect("/index.html#%s" % self.request.get("post_id"))
+
+        else:
+            user.likedPosts.append(post_key)
+            post.likes += 1
+            post.put()
+            user.put()
+            return webapp2.redirect("/index.html#%s" % self.request.get("post_id"))
 
 class CreateNewProfileHandler(webapp2.RequestHandler):
     def get(self):
@@ -141,12 +150,21 @@ class ConfirmPostPage(webapp2.RequestHandler):
         Title = self.request.get("post-title")
         Description = self.request.get("post-description")
         Image = self.request.get("post-image")
+        
         gUser = users.get_current_user()
         Author = models.User.get_by_id(gUser.user_id()).key
-        post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
+
+        if Image:
+            post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
+        else:
+            post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description)
         post.put()
 
-
+        # if Image:
+        # post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
+        # else:
+        #     post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description)
+        post.put()
 
         temp_dict = {"postTitle": Title,
                     "postAuthor": Author,
@@ -172,9 +190,45 @@ class ConfirmPostPage(webapp2.RequestHandler):
 
 class ViewPostPage(webapp2.RequestHandler):
     def get(self):
-        blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
+
         template = jinja_env.get_template("templates/viewPost.html")
-        self.response.write(template.render({"blogPosts":blogPosts}))
+
+        post_key = ndb.Key(urlsafe=self.request.get('post_id'))
+        post = post_key.get()
+
+        gUser = users.get_current_user()
+        Author = models.User.get_by_id(gUser.user_id()).key
+
+        postInfo = {
+            "post": post,
+            "Title": post.postTitle,
+            "Author": Author,
+            "Time": post.postTime,
+            "Image": jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' %
+                post.key.urlsafe()),
+            "Likes": post.likes,
+            # "Comments": post.comments,
+            "Description": post.postDesc,
+        }
+
+        self.response.write(template.render(postInfo))
+
+    def post(self):
+        gUser = users.get_current_user()
+        user = models.User.get_by_id(gUser.user_id()).key
+
+        post_key = ndb.Key(urlsafe=self.request.get('post_id'))
+        post = post_key.get()
+
+        if post not in user.likedPosts:
+            post.user.likedPosts.append(post)
+            post.likes += 1
+            post.put()
+            self.get()
+
+        # blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
+        # template = jinja_env.get_template("templates/viewPost.html")
+        # self.response.write(template.render({"blogPosts":blogPosts}))
 
 class ViewProfileHandler(webapp2.RequestHandler):
     def get(self):

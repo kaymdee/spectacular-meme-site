@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title> Bloggin Penguin RPS </title>
+  <title> {{Title}} </title>
   <link rel="stylesheet" href="../static/styles/newPost.css"/>
   <link rel="stylesheet" href="../static/styles/topnav.css"/>
   {% include "templates/head.html" %}
@@ -13,32 +12,23 @@
 <body>
   {% include "templates/topnav.html" %}
   <div id="home" class="main">
-    <h1 id="mainTitle"> The Bloggin Penguin</h1>
-    <section id="topButtonContainers" class="rowFlexBox">
-      <button id="likeButton"> Like!</button>
-      <button id="subscribeButton"> Subscribe! </button>
-    </section>
+    <h1 id="mainTitle"> Me Two!!! </h1>
 
-    {% for post in blogPosts %}
-    <div id="{{post.key.id()}}" class="blogPost">
-      <h2>{{post.postTitle}}</h2>
-
-      <h3> By: {{post.postAuthor}} on {{post.postTime.strftime("%Y-%m-%d %H:%M:%S")}}</h3>
-
-      <p> {{post.postContent}} </p>
+    <div id="{{Title}}" class="blogPost">
+      <h2>{{Title}}</h2>
+      <h3> By: {{Author.get().firstName}} {{Author.get().lastName}} on {{Time}}</h3>
+      {{Image}}
+      <p> {{Description}} </p>
     </div>
+    <form id="likeform" method="post" action="/viewPost.html?post_id={{post.key.urlsafe()}}">
+      <input type="submit" value="Likes: {{post.likes}}" name="pseudolike">
+    </form>
     <hr width="80%">
-    {% endfor %}
 
   </div id ="main">
 
 
 
 <script src="../static/scripts/viewPost.js"> </script>
-<!-- link at the bottom to reduce load time -->
-<!--<script>
-includeHTML();
-</script>
--->
 </body>
 </html>

@@ -30,14 +30,14 @@ Figure out google auth - WIP ALEX
 
 Main Page:
 -Pull Data from Posts Datastore to make feed (main page) DONE TAHLEE
--Format data from posts to neaten up the feed
+-Format data from posts to neaten up the feed WIP Alex
 -
 -
 
 Posts:
 -Figure out how to data store pictures/gifs - DONE TAHLEE
--Creating Make Post Page - WIP TAHLEE
--Make like feature for posts.
+-Creating Make Post Page - DONE TAHLEE
+-Make like feature for posts. DONE TAHLEE
 -
 
 Profiles:
@@ -48,7 +48,7 @@ Profiles:
 
 
 
-Streches:
+Stretches:
 
 Create Friendslist Page and figure out how to add friends and search
 Fix view post page for new models.
