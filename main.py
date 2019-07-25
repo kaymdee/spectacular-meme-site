@@ -6,13 +6,11 @@ import os
 import time
 import models
 from datetime import datetime
-<<<<<<< HEAD
-# import google.appengine.
+
 from google.appengine.api import images
 import google.appengine
-# from google.appengine.api.images import images
 from google.appengine.api import users
-
+from google.appengine.ext import ndb
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
@@ -21,10 +19,19 @@ jinja_env = jinja2.Environment(
 #will redirect to GLogin if the user is not logged into Google
 #will redirect to create new profile if the user is logged into google but not register with our Website
 #Logic tree:
-#User G Logged and registered: returns signInOrProfileHtml and signoutHtml in list: [profileHtml, signoutHtml]
+#User G Logged and registered: returns signInOrProfileHtml and signoutHtml a dictionary
 #User G Logged and not reged: redirect to CreateNewProfileHandler
 #User not G Logged or reg: redirect to G Log -> CreateNewProfileHandler
 #User not GLogged but reged: redirect to GLog -> main page
+class Image(webapp2.RequestHandler):
+    def get(self):
+        post_key = ndb.Key(urlsafe=self.request.get('img_id'))
+        post = post_key.get()
+        if post.postImage:
+            self.response.headers['Content-Type'] = 'image/png'
+            self.response.out.write(post.postImage)
+        else:
+            self.response.out.write('No image')
 def authUser():
     gUser = users.get_current_user()
     #If user is G logged in
@@ -35,50 +42,64 @@ def authUser():
         if user:
             signoutHtml = jinja2.Markup('<a href="%s">Sign out</a>' % (
                 users.create_logout_url('/')))
-            signInOrProfileHtml = jinja2.Markup('<a id="profile.html" href="profile.html">Profile</a>')
-            return [signInOrProfileHtml, signoutHtml]
+            signInOrProfileHtml = jinja2.Markup('<a id="profile.html" href="profile.html?id=%s">Profile</a>') % user.key.urlsafe()
+            return {"signInOrProfileHtml":signInOrProfileHtml,
+                    "signoutHtml":signoutHtml}
         #User has not been to our site
         else:
             return webapp2.redirect("/createNewProfile.html")
     else: #user isnt logged in and we need to log them in
         return webapp2.redirect((users.create_login_url('/createNewProfile.html')))
 
+#returns the account HTML tags as a dictionary {"signInProfile" : accordinghtml, }
+
+def getAccountHtml():
+    gUser = users.get_current_user()
+    #If user google is logged in
+    if gUser:
+        emailAddress = gUser.nickname()
+        user = models.User.get_by_id(gUser.user_id())
+        signoutHtml = jinja2.Markup('<a href="%s">Sign out</a>' % (
+            users.create_logout_url('/')))
+        #user object exists already in data base
+        if user:
+            signInOrProfileHtml = jinja2.Markup('<a id="profile.html" href="profile.html?id=%s">Profile</a>' % user.key.urlsafe())
+        #User has not been to our site
+        else:
+            signInOrProfileHtml = jinja2.Markup('<a id="createNewProfile.html" href="createNewProfile.html">Sign Up</a>')
+    else: #user isnt logged in and we need to log them in
+        signoutHtml = ""
+        signInOrProfileHtml = jinja2.Markup('<a href="%s">Sign In with Google</a>' % (users.create_login_url('/createNewProfile.html')))
+    return {"signInOrProfileHtml" : signInOrProfileHtml, "signoutHtml": signoutHtml}
+#this is a wip.
 # the handler section
 class MainPage(webapp2.RequestHandler):
     def get(self):
 
-        gUser = users.get_current_user()
-        #If user google is logged in
-        if gUser:
-            emailAddress = gUser.nickname()
-            user = models.User.get_by_id(gUser.user_id())
-            signoutHtml = jinja2.Markup('<a href="%s">Sign out</a>' % (
-                users.create_logout_url('/')))
-            #user object exists already in data base
-            if user:
-                signInOrProfileHtml = jinja2.Markup('<a id="profile.html" href="profile.html">Profile</a>')
-            #User has not been to our site
-            else:
-                signInOrProfileHtml = jinja2.Markup('<a id="createNewProfile.html" href="createNewProfile.html">Sign Up</a>')
-        else: #user isnt logged in and we need to log them in
-            signoutHtml = ""
-            signInOrProfileHtml = jinja2.Markup('<a href="%s">Sign In with Google</a>' % (users.create_login_url('/createNewProfile.html')))
+        post_entity_list = models.Post.query().order(models.Post.postTime).fetch()
+
 
         self.response.headers['Content-Type'] = 'html' #change this to write html!
         template = jinja_env.get_template('templates/index.html')
         dict = {
-            "signoutHtml" : signoutHtml,
-            "signInOrProfileHtml" : signInOrProfileHtml
-
+            "memePosts": post_entity_list,
         }
+        dict.update(getAccountHtml())
 
         self.response.write(template.render(dict))
 
+    def post(self):
+        post_key = ndb.Key(urlsafe=self.request.get('post_id'))
+        post = post_key.get()
+        post.likes += 1
+        post.put()
+        self.get()
 
 class CreateNewProfileHandler(webapp2.RequestHandler):
     def get(self):
         if not isinstance(authUser(),webapp2.Response):
-            return webapp2.redirect("/index.html")
+            return webapp2.redirect("/index.html")#shouldn't be here if profile already exists
+
         template = jinja_env.get_template('templates/createNewProfile.html')
         self.response.write(template.render())
     def post(self):
@@ -100,7 +121,6 @@ class FroggerPage(webapp2.RequestHandler):
         story_template = jinja_env.get_template('templates/frogger.html')
         self.response.write(story_template.render())
 
-
 class NewPostPage(webapp2.RequestHandler):
     def get(self): #for a get request
         authResp = authUser()
@@ -116,20 +136,31 @@ class ShowPostPage(webapp2.RequestHandler):
         pass
 
     def post(self):
-        print("running")
+
         Title = self.request.get("post-title")
-        Author = self.request.get("post-author")
         Description = self.request.get("post-description")
         Image = self.request.get("post-image")
 
-        post = Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
+        post = models.Post(postTitle = Title, postAuthor = post.get(), postDesc = Description, postImage = Image)
         post.put()
+
+        gUser = users.get_current_user()
+        Author = models.User.get_by_id(gUser.user_id()).key()
 
         temp_dict = {"postTitle": Title,
                     "postAuthor": Author,
                     "postDesc": Description,
-                    "postDate": "now"
+                    "postDate": "now",
+                    "postImage": jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' %
+                        post.key.urlsafe())
                 }
+        temp_dict.update(getAccountHtml())
+        template = jinja_env.get_template("templates/showPost.html")
+
+
+
+
+        self.response.write(template.render(temp_dict))
 
     # postDict = {#DASHES IN JINJA ARE FOR WHITESPACE CONTROL. NOT ALLOWED FOR JINJA VARIABLES
     #         "postTitle" : Title,
@@ -141,10 +172,10 @@ class ShowPostPage(webapp2.RequestHandler):
         # template = jinja_env.get_template('templates/showPost.html')
         # self.response.write(template.render(postDict))
 
-class ViewPostsPage(webapp2.RequestHandler):
+class ViewPostPage(webapp2.RequestHandler):
     def get(self):
         blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
-        template = jinja_env.get_template("templates/viewPosts.html")
+        template = jinja_env.get_template("templates/viewPost.html")
         self.response.write(template.render({"blogPosts":blogPosts}))
 
 class ViewProfileHandler(webapp2.RequestHandler):
@@ -152,16 +183,20 @@ class ViewProfileHandler(webapp2.RequestHandler):
         authResp = authUser()
         if(isinstance(authResp,webapp2.Response)):
             return authResp#stop code execution if the user has been directed
-
-        gUser = users.get_current_user()
-        user = models.User.get_by_id(gUser.user_id())
+        userKey = ndb.Key(urlsafe=self.request.get('id'))
+        userPostList = models.Post.query().filter(models.Post.postAuthor == userKey).fetch()
+        user = userKey.get()
+        #renders current user...
+        # gUser = users.get_current_user()
+        # user = models.User.get_by_id(gUser.user_id())
         template = jinja_env.get_template("templates/profile.html")
-        dict = {"firstName" : user.firstName,
-                "lastName" : user.lastName,
-                "email" : user.email,
-                "signInOrProfileHtml" : authResp[0],
-                "signoutHtml" : authResp[1] }
+        dict = {"user" : user,
+                "userPosts" : userPostList
+                }
+        dict.update(getAccountHtml())#add on the html for the account tags
+
         self.response.write(template.render(dict))
+<<<<<<< HEAD
         #why this dict?
 
 class ViewComments(webapp2.RequestHandler):
@@ -173,6 +208,8 @@ class ViewComments(webapp2.RequestHandler):
 
 
 
+=======
+>>>>>>> d1171e7a113b94dc9d9985c94f98aed5a3b2fd3a
 class PageNotFoundHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
@@ -185,9 +222,14 @@ app = webapp2.WSGIApplication([
     ('/frogger.*', FroggerPage),
     ("/newPost.*", NewPostPage),
     ("/showPost.*", ShowPostPage),
+<<<<<<< HEAD
     ("/viewPosts.*", ViewPostsPage),
     ("/comments", ViewComments),
+=======
+    ("/viewPost.*", ViewPostPage),
+>>>>>>> d1171e7a113b94dc9d9985c94f98aed5a3b2fd3a
     ("/createNewProfile.*", CreateNewProfileHandler),
     ("/profile.*", ViewProfileHandler),
+    ('/img', Image),
     ('.*', PageNotFoundHandler),
 ], debug=True)

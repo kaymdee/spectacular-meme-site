@@ -15,7 +15,7 @@ Header and front page design - DONE-ISH KHALAYA
       -still provide option to like
    }
 
-Like function (to be called where needed:
+Like function (to be called where needed):
     where:
       -home page
       -viewPosts page
@@ -29,13 +29,13 @@ Figure out google auth - WIP ALEX
 
 
 Main Page:
--Pull Data from Posts Datastore to make feed (main page)
--
+-Pull Data from Posts Datastore to make feed (main page) DONE TAHLEE
+-Format data from posts to neaten up the feed
 -
 -
 
 Posts:
--Figure out how to data store pictures/gifs - WIP TAHLEE
+-Figure out how to data store pictures/gifs - DONE TAHLEE
 -Creating Make Post Page - WIP TAHLEE
 -Make like feature for posts.
 -

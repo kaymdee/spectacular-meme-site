@@ -3,104 +3,68 @@
 
 <head>
   <title> Me Two!!! </title>
-  <link rel="stylesheet" href="../static/styles/index.css"/>
+  <link rel="stylesheet" href="../static/styles/index.css" />
   {% include "templates/head.html" %}
 
-  <!--link rel="stylesheet" href="../static/styles/topnav.css"/-->
-  <!-- JQuery script to load the same header across diff htmls -->
-  <!-- DOES NOT WORK ON LOCAL FILES = only on webserver bc security issues
-  <script
-    src="https://code.jquery.com/jquery-3.3.1.js"
-    >
-  </script>
-  <script>
-  $(function(){
-    $("#topnav").load("topnav.html");
-  });
-  </script>
--->
+
 
 </head>
 
 <body>
   {% include "templates/topnav.html" %}
 
-  <img id="easterEggPikachu"
-    src="https://www.lifewire.com/thmb/1p3mrM5_hSoIFQUfh53VK1q4dvg=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/dicaprio3-583e33155f9b58d5b19e3a00.jpg"
-    alt="dicaprio.jpeg"
-  />
-  <img id="easterEggPenguin"
-    src="http://nheilke.com/blog/wp-content/uploads/2011/12/IMG_9120.jpg"
-    alt="Easter Egg Penguin"
-  />
+  <img id="easterEggPikachu" src="https://www.lifewire.com/thmb/1p3mrM5_hSoIFQUfh53VK1q4dvg=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/dicaprio3-583e33155f9b58d5b19e3a00.jpg" alt="dicaprio.jpeg" />
+  <img id="easterEggPenguin" src="http://nheilke.com/blog/wp-content/uploads/2011/12/IMG_9120.jpg" alt="Easter Egg Penguin" />
 
+  {% include "templates/topnav.html" %}
   <div id="home" class="main">
-    <h1 id="mainTitle"> The Bloggin Penguin</h1>
-    <div class="divider"></div>
-    <section id="topButtonContainers" class="rowFlexBox">
+    <h1 id="mainTitle"> Me Two!!! </h1>
+    <!-- <section id="topButtonContainers" class="rowFlexBox">
       <button id="likeButton"> Like!</button>
       <button id="subscribeButton"> Subscribe! </button>
-    </section>
-    <div class="red","blue"></div>
+    </section> -->
 
-    <h2> About Me! </h2>
-    <img
-      id="selfPicture"
-      src = "https://csg.tinkercad.com/things/clpPapKGRYT/t725.png?rev=145&s=185d80ee465ede90c761deda3b05c503&v=0"
-      alt = "Picture of myself (a penguin)"
+    {% for post in memePosts %}
+<<<<<<< HEAD
+    <div id = container>
+    <div id = "meme-post">
+      <img id = "size" src="/img?img_id={{post.key.urlsafe()}}"></img>
+    </div>
+    <div id="{{post.key.id()}}" class="blogPost">
+      <h2>{{post.postTitle}}</h2>
 
-    />
-    <p>
-      I am a penguin! I like eating fish and stuff and like memes.
-    </p>
-    <h2> Some Stuff I Like </h2>
-    <ul >
-      <li> Fish </li>
-      <li> Ice </li>
-      <li> Soccer </li>
-      <li> Memes </li>
-      <li> Google </li>
-    </ul>
+      <h3> By: {{post.postAuthor.firstName}} {{post.postAuthor.get().lastName}} on {{post.postTime}}</h3>
 
-    <h2> My Favorite Meme </h2>
+=======
+    <div id=container>
+      <div id="meme-post">
+        <img id="size" src="/img?img_id={{post.key.urlsafe()}}"></img>
+      </div>
+      <div id="{{post.key.id()}}" class="blogPost">
+        <h2>{{post.postTitle}}</h2>
 
-    <img
-      id = pikachuMeme
-      src = "https://pics.me.me/when-you-see-a-surprised-pikachu-meme-in-4k-woww-37497086.png"
-      alt = "pikachu meme"
+        <h3> By: {{post.postAuthor}} on {{post.postTime}}</h3>
 
-    />
+<<<<<<< HEAD
+        <p> {{post.postDesc}} </p>
+      </div>
+=======
+>>>>>>> 72d3aeda859dc22719757d2bb1371b49e863d493
+      <p> {{post.postDesc}} </p>
 
-    <a href="https://youtube.com"> The site that wastes all my time </a>
-    <button id=alertButton> Click for Alert </button>
+      <h4><form id = "likeform" method ="post" action = "/index.html?post_id={{post.key.urlsafe()}}">
+        <input type = "submit" value ="Likes: {{post.likes}}" name = "pseudolike">
+      </form></h4>
 
-    <form action="https://google.com">
-      <button type="submit">My Favorite Website!</button>
-    </form>
-    <video controls width="250">
+>>>>>>> 63832b8ea08ada52476297a0709fd466bae79daf
+    </div>
+    <hr width="80%">
+    {% endfor %}
 
-      <source src=""
-              type="video/webm">
+  </div id="main">
 
-      <source src=""
-              type="video/mp4">
+  <script src="../static/scripts/index.js"> </script>
 
-      Sorry, your browser doesn't support embedded videos.
-    </video>
-    <iframe
-      id=youtubeFrame
-      src="https://www.youtube.com/embed/tgbNymZ7vqY">
-    </iframe>
-
-</div id ="main">
-
-
-
-<script src="../static/scripts/index.js"> </script>
-<!-- link at the bottom to reduce load time -->
-<!--<script>
-includeHTML();
-</script>
--->
 </body>
+
 </html>
