@@ -93,7 +93,7 @@ class MainPage(webapp2.RequestHandler):
         post = post_key.get()
         post.likes += 1
         post.put()
-        self.get()
+        return webapp2.redirect("/index.html#%s" % self.request.get("post_id")) 
 
 class CreateNewProfileHandler(webapp2.RequestHandler):
     def get(self):
@@ -143,10 +143,18 @@ class ConfirmPostPage(webapp2.RequestHandler):
         Image = self.request.get("post-image")
         gUser = users.get_current_user()
         Author = models.User.get_by_id(gUser.user_id()).key
-        post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
+
+        if Image:
+            post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
+        else:
+            post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description)
         post.put()
 
-
+        # if Image:
+        # post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
+        # else:
+        #     post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description)
+        post.put()
 
         temp_dict = {"postTitle": Title,
                     "postAuthor": Author,
@@ -172,9 +180,11 @@ class ConfirmPostPage(webapp2.RequestHandler):
 
 class ViewPostPage(webapp2.RequestHandler):
     def get(self):
-        blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
-        template = jinja_env.get_template("templates/viewPost.html")
-        self.response.write(template.render({"blogPosts":blogPosts}))
+        template = jinja_env.get_template("templates/viewPost")
+
+        # blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
+        # template = jinja_env.get_template("templates/viewPost.html")
+        # self.response.write(template.render({"blogPosts":blogPosts}))
 
 class ViewProfileHandler(webapp2.RequestHandler):
     def get(self):

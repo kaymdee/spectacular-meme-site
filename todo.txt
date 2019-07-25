@@ -30,13 +30,13 @@ Figure out google auth - WIP ALEX
 
 Main Page:
 -Pull Data from Posts Datastore to make feed (main page) DONE TAHLEE
--Format data from posts to neaten up the feed
+-Format data from posts to neaten up the feed WIP Alex
 -
 -
 
 Posts:
 -Figure out how to data store pictures/gifs - DONE TAHLEE
--Creating Make Post Page - WIP TAHLEE
+-Creating Make Post Page - DONE TAHLEE
 -Make like feature for posts.
 -
 
