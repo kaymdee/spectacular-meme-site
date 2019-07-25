@@ -94,7 +94,7 @@ def like(post_id, returnUrl):#liked a post based on post key and verifies that t
 class MainPage(webapp2.RequestHandler):
     def get(self):
 
-        post_entity_list = models.Post.query().order(models.Post.postTime).fetch()
+        post_entity_list = models.Post.query().order(-models.Post.postTime).fetch()
 
         self.response.headers['Content-Type'] = 'html' #change this to write html!
         template = jinja_env.get_template('templates/index.html')
