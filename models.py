@@ -13,7 +13,7 @@ class User(ndb.Model):
 class Post(ndb.Model):
     postTime = ndb.DateTimeProperty(auto_now_add=True)
     postTitle =  ndb.StringProperty(required=True)
-    postAuthor =  ndb.StringProperty(required=True)
+    postAuthor =  ndb.KeyProperty(required=True)
     postDesc = ndb.StringProperty(required=True)
     postImage = ndb.BlobProperty(required=True)
     comments = ndb.KeyProperty(repeated=True)
