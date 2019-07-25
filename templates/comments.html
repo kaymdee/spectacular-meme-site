@@ -14,9 +14,9 @@
 </form>
 
   <ul>
-    {% for comment in comments_info %}
+    {% for commentKey in comments_info %}
 
-      <li>{{comment.comText}}</li>
+      <li>{{commentKey.get().comText}}</li>
     {% endfor %}
 
   </ul>
