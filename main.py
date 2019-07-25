@@ -106,8 +106,7 @@ class MainPage(webapp2.RequestHandler):
         self.response.write(template.render(dict))
 
     def post(self):
-        post_id = self.request.get("post_id")
-        return like(post_id, "/index.html#%s" % post_id)
+        
 
 class CreateNewProfileHandler(webapp2.RequestHandler):
     def get(self):
@@ -223,10 +222,6 @@ class ViewPostPage(webapp2.RequestHandler):
 
 
     def post(self):
-        post_id = self.request.get("post_id")
-        return like(post_id, "/viewPost.html?post_id=%s#%s" %  (post_id,post_id))
-
-
 
         comment = self.request.get('comments')
         new_comment = models.Comment(comText = comment)
@@ -259,8 +254,6 @@ class ViewProfileHandler(webapp2.RequestHandler):
 
         self.response.write(template.render(dict))
     def post(self):
-        post_id = self.request.get("post_id")
-        return like(post_id, "/profile.html?post_id=%s#%s" % (post_id, post_id))
 
         #why this dict?
 
@@ -285,7 +278,14 @@ class ViewComments(webapp2.RequestHandler):
         comment_template = jinja_env.get_template("templates/comments.html")
         self.response.write(comment_template.render({'comments_info' : commentList}))
 
-
+class LikeHandler(webapp2.RequestHandler):
+    def get(self):
+        return webapp2.redirect("/index.html")#shouldn't load this page
+    def post(self):
+        post_id = self.request.get("post_id")
+        #returnUrl = self.request.get("returnUrl")
+        like(post_id, "returnUrl")
+        return webapp2.redirect(self.request.referer)
 
 class PageNotFoundHandler(webapp2.RequestHandler):
     def get(self):
@@ -302,6 +302,7 @@ app = webapp2.WSGIApplication([
     ("/viewPost.*", ViewPostPage),
     ("/createNewProfile.*", CreateNewProfileHandler),
     ("/profile.*", ViewProfileHandler),
+    ("/likeHandler", LikeHandler),
     ('/img', Image),
     ('.*', PageNotFoundHandler),
 ], debug=True)

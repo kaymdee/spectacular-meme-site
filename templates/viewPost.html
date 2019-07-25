@@ -20,7 +20,7 @@
       {{Image}}
       <p> {{Description}} </p>
     </div>
-    <form id="likeform" method="post" action="/viewPost.html?post_id={{post.key.urlsafe()}}">
+    <form id="likeform" method="post" action="/likeHandler?post_id={{post.key.urlsafe()}}">
       <input type="submit" value="Likes: {{post.likes}}" name="pseudolike">
     </form>
     <hr width="80%">

@@ -40,7 +40,7 @@
           <p> {{post.postDesc}} </p>
 
           <h4>
-            <form id="likeform" method="post" action="/index.html?post_id={{post.key.urlsafe()}}">
+            <form id="likeform" method="post" action="/likeHandler?post_id={{post.key.urlsafe()}}">
               <input type="submit" value="Likes: {{post.likes}}" name="pseudolike">
             </form>
           </h4>
