@@ -163,6 +163,16 @@ class ViewProfileHandler(webapp2.RequestHandler):
                 "signoutHtml" : authResp[1] }
         self.response.write(template.render(dict))
         #why this dict?
+
+class ViewComments(webapp2.RequestHandler):
+    def post(self):
+        comments_template = the_jinja_env.get_template('templates/comments.html')
+        comment = self.request.get('comments')
+        new_comment = Comment()
+        new_comment.put();
+
+
+
 class PageNotFoundHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
@@ -176,6 +186,7 @@ app = webapp2.WSGIApplication([
     ("/newPost.*", NewPostPage),
     ("/showPost.*", ShowPostPage),
     ("/viewPosts.*", ViewPostsPage),
+    ("/comments", ViewComments),
     ("/createNewProfile.*", CreateNewProfileHandler),
     ("/profile.*", ViewProfileHandler),
     ('.*', PageNotFoundHandler),
