@@ -13,21 +13,17 @@
   <div id="home" class="main">
     <h1 id="mainTitle"> Your Profile </h1>
 
-    <h2> Your Profile </h2>
-    <div id="profileFile" class="rowFlexBox">
+    <div id="profileInfoDiv" class="rowFlexBox">
       <img id="profilePicture" class="picture"
         src = "../static/imgs/defaultProfileIcon.png"
         alt = "profile picture"
       />
       <div id="profileDetails">
-        
+        <h3> Name: {{firstName}} {{lastName}} </h3>
+        <h4> Email: {{email}} </h4>
       </div>
-
-
-    </div>
-    <h4> Name: {{firstName}} {{lastName}} </h4>
+    </div id="profileInfoDiv">
     <br>
-    <h4> Email: {{email}} </h4>
     <br>
 
     <br>
