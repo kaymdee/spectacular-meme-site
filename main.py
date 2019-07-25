@@ -150,7 +150,7 @@ class ConfirmPostPage(webapp2.RequestHandler):
         Title = self.request.get("post-title")
         Description = self.request.get("post-description")
         Image = self.request.get("post-image")
-        
+
         gUser = users.get_current_user()
         Author = models.User.get_by_id(gUser.user_id()).key
 
@@ -199,6 +199,8 @@ class ViewPostPage(webapp2.RequestHandler):
         gUser = users.get_current_user()
         Author = models.User.get_by_id(gUser.user_id()).key
 
+        commentList = models.Comment.query().fetch()
+
         postInfo = {
             "post": post,
             "Title": post.postTitle,
@@ -208,10 +210,12 @@ class ViewPostPage(webapp2.RequestHandler):
                 post.key.urlsafe()),
             "Likes": post.likes,
             # "Comments": post.comments,
+            "comments_info": commentList,
             "Description": post.postDesc,
         }
 
         self.response.write(template.render(postInfo))
+
 
     def post(self):
         gUser = users.get_current_user()
@@ -225,6 +229,15 @@ class ViewPostPage(webapp2.RequestHandler):
             post.likes += 1
             post.put()
             self.get()
+
+
+        comment = self.request.get('comments')
+        new_comment = models.Comment(comText = comment)
+        new_comment_key = new_comment.put();
+        commentList = models.Comment.query().fetch()
+        commentList.append(new_comment_key.get())
+        comment_template = jinja_env.get_template("templates/comments.html")
+        self.response.write(comment_template.render({'comments_info' : commentList}))
 
         # blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
         # template = jinja_env.get_template("templates/viewPost.html")
@@ -273,7 +286,6 @@ class ViewComments(webapp2.RequestHandler):
 
 
 
-
 class PageNotFoundHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
@@ -287,7 +299,6 @@ app = webapp2.WSGIApplication([
     ("/newPost.*", NewPostPage),
     ("/confirmPost.*", ConfirmPostPage),
     # ("/viewPosts.*", ViewPostsPage),
-    ("/comments", ViewComments),
     ("/viewPost.*", ViewPostPage),
     ("/createNewProfile.*", CreateNewProfileHandler),
     ("/profile.*", ViewProfileHandler),
