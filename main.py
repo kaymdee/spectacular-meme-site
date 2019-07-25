@@ -167,7 +167,7 @@ class ConfirmPostPage(webapp2.RequestHandler):
         if Image:
             post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
         else:
-            post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description)
+            post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = None)
         post.put()
 
         # if Image:
