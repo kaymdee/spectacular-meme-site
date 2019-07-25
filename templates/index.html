@@ -16,7 +16,6 @@
   <img id="easterEggPikachu" src="https://www.lifewire.com/thmb/1p3mrM5_hSoIFQUfh53VK1q4dvg=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/dicaprio3-583e33155f9b58d5b19e3a00.jpg" alt="dicaprio.jpeg" />
   <img id="easterEggPenguin" src="http://nheilke.com/blog/wp-content/uploads/2011/12/IMG_9120.jpg" alt="Easter Egg Penguin" />
 
-  {% include "templates/topnav.html" %}
   <div id="home" class="main">
     <h1 id="mainTitle"> Me Two!!! </h1>
     <!-- <section id="topButtonContainers" class="rowFlexBox">
@@ -25,6 +24,7 @@
     </section> -->
 
     {% for post in memePosts %}
+<<<<<<< HEAD
     <div id = container>
     <div id = "meme-post">
       <img id = "size" src="/img?img_id={{post.key.urlsafe()}}"></img>
@@ -33,9 +33,20 @@
       <h2>{{post.postTitle}}</h2>
 
       <h3> By: {{post.postAuthor.get().firstName}} {{post.postAuthor.get().lastName}} on {{post.postTime}}</h3>
+=======
+    <div id=container>
+      <div id="meme-post">
+        <img id="size" src="/img?img_id={{post.key.urlsafe()}}"></img>
+      </div>
+      <div id="{{post.key.id()}}" class="blogPost">
+        <h2>{{post.postTitle}}</h2>
 
-      <p> {{post.postDesc}} </p>
+        <h3> By: {{post.postAuthor.get().firstName}} {{post.postAuthor.get().lastName}} on {{post.postTime}}</h3>
+>>>>>>> 1f628f1ab2b7fb4bc3aa2b8903dc955a8adbc038
 
+        <p> {{post.postDesc}} </p>
+
+<<<<<<< HEAD
       <h4><form id = "likeform" method ="post" action = "/index.html?post_id={{post.key.urlsafe()}}">
         <input type = "submit" value ="Likes: {{post.likes}}" name = "pseudolike">
       </form></h4>
@@ -43,6 +54,20 @@
     <hr width="80%">
     {% endfor %}
 </div id = "main">
+=======
+        <h4>
+          <form id="likeform" method="post" action="/index.html?post_id={{post.key.urlsafe()}}">
+            <input type="submit" value="Likes: {{post.likes}}" name="pseudolike">
+          </form>
+        </h4>
+
+      </div>
+      <hr width="80%">
+    </div id=container>
+    {% endfor %}
+  </div id="main">
+  <!--id="main"> -->
+>>>>>>> 1f628f1ab2b7fb4bc3aa2b8903dc955a8adbc038
 
   <script src="../static/scripts/index.js"> </script>
 

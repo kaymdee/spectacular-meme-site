@@ -145,11 +145,15 @@ class ShowPostPage(webapp2.RequestHandler):
         post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
         post.put()
 
+<<<<<<< HEAD
         # if Image:
         post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
         # else:
         #     post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description)
         post.put()
+=======
+
+>>>>>>> 1f628f1ab2b7fb4bc3aa2b8903dc955a8adbc038
 
         temp_dict = {"postTitle": Title,
                     "postAuthor": Author,
