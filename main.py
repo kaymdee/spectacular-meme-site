@@ -143,7 +143,10 @@ class ShowPostPage(webapp2.RequestHandler):
         gUser = users.get_current_user()
         Author = models.User.get_by_id(gUser.user_id()).key
 
+        # if Image:
         post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
+        # else:
+        #     post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description)
         post.put()
 
         temp_dict = {"postTitle": Title,
@@ -192,7 +195,7 @@ class ViewProfileHandler(webapp2.RequestHandler):
         dict.update(getAccountHtml())#add on the html for the account tags
 
         self.response.write(template.render(dict))
-<<<<<<< HEAD
+
         #why this dict?
 
 class ViewComments(webapp2.RequestHandler):
@@ -204,8 +207,7 @@ class ViewComments(webapp2.RequestHandler):
 
 
 
-=======
->>>>>>> d1171e7a113b94dc9d9985c94f98aed5a3b2fd3a
+
 class PageNotFoundHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
@@ -218,12 +220,9 @@ app = webapp2.WSGIApplication([
     ('/frogger.*', FroggerPage),
     ("/newPost.*", NewPostPage),
     ("/showPost.*", ShowPostPage),
-<<<<<<< HEAD
-    ("/viewPosts.*", ViewPostsPage),
+    # ("/viewPosts.*", ViewPostsPage),
     ("/comments", ViewComments),
-=======
     ("/viewPost.*", ViewPostPage),
->>>>>>> d1171e7a113b94dc9d9985c94f98aed5a3b2fd3a
     ("/createNewProfile.*", CreateNewProfileHandler),
     ("/profile.*", ViewProfileHandler),
     ('/img', Image),

@@ -26,6 +26,7 @@
 
     {% for post in memePosts %}
     <div id = container>
+    <!-- {% for post in memePosts %} -->
     <div id = "meme-post">
       <img id = "size" src="/img?img_id={{post.key.urlsafe()}}"></img>
     </div>
@@ -39,12 +40,14 @@
       <h4><form id = "likeform" method ="post" action = "/index.html?post_id={{post.key.urlsafe()}}">
         <input type = "submit" value ="Likes: {{post.likes}}" name = "pseudolike">
       </form></h4>
-
+      <!-- {% endfor %} -->
     </div>
     <hr width="80%">
     {% endfor %}
-
-  </div id="main">
+  </div>
+  <!-- {% endfor %} -->
+</div id = "main">
+ <!--id="main"> -->
 
   <script src="../static/scripts/index.js"> </script>
 

@@ -15,7 +15,7 @@ class Post(ndb.Model):
     postTitle =  ndb.StringProperty(required=True)
     postAuthor =  ndb.KeyProperty(required=True)
     postDesc = ndb.StringProperty(required=True)
-    postImage = ndb.BlobProperty(required=True)
+    postImage = ndb.BlobProperty(required=False)
     Comments = ndb.KeyProperty(repeated=True)
     likes = ndb.IntegerProperty(required=False, default=0)
 
