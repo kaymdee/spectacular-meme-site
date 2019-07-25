@@ -142,13 +142,8 @@ class ShowPostPage(webapp2.RequestHandler):
         Image = self.request.get("post-image")
         gUser = users.get_current_user()
         Author = models.User.get_by_id(gUser.user_id()).key
-<<<<<<< HEAD
         post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
         post.put()
-
-
-
-=======
 
         # if Image:
         post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
@@ -156,7 +151,6 @@ class ShowPostPage(webapp2.RequestHandler):
         #     post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description)
         post.put()
 
->>>>>>> f1f0806cdbe0211132a36fe0e2efac541dd2a3c2
         temp_dict = {"postTitle": Title,
                     "postAuthor": Author,
                     "postDesc": Description,
