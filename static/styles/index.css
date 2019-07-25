@@ -28,16 +28,6 @@
   padding: 0px;
   border: solid purple 3px;
 }
-#selfPicture {
-  /* native is 725x453 */
-  border-radius: 20px;
-  width: 543.75px;
-  height: 339.75px;
-  margin: 20px;
-
-}
-
-
 #easterEggPikachu{
   display: none;
 }

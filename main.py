@@ -78,7 +78,6 @@ class MainPage(webapp2.RequestHandler):
 
         post_entity_list = models.Post.query().order(models.Post.postTime).fetch()
 
-
         self.response.headers['Content-Type'] = 'html' #change this to write html!
         template = jinja_env.get_template('templates/index.html')
         dict = {
