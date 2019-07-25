@@ -19,13 +19,27 @@
         alt = "profile picture"
       />
       <div id="profileDetails">
-        <h3> Name: {{firstName}} {{lastName}} </h3>
-        <h4> Email: {{email}} </h4>
+        <h3> Name: {{user.firstName}} {{user.lastName}} </h3>
+        <h4> Email: {{user.email}} </h4>
       </div>
     </div id="profileInfoDiv">
 
     <div id="profilePosts">
+      {% for post in userPosts %}
+      <div id=container>
+        <div id="meme-post">
+          <img id="size" src="/img?img_id={{post.key.urlsafe()}}"></img>
+        </div>
+        <div id="{{post.key.id()}}" class="blogPost">
+          <h2>{{post.postTitle}}</h2>
 
+          <h3> By: {{post.postAuthor}} on {{post.postTime}}</h3>
+
+          <p> {{post.postDesc}} </p>
+        </div>
+      </div>
+      <hr width="80%">
+      {% endfor %}
     </div id="profilePosts">
     <br>
     <br>

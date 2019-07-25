@@ -42,7 +42,7 @@ def authUser():
         if user:
             signoutHtml = jinja2.Markup('<a href="%s">Sign out</a>' % (
                 users.create_logout_url('/')))
-            signInOrProfileHtml = jinja2.Markup('<a id="profile.html" href="profile.html">Profile</a>')
+            signInOrProfileHtml = jinja2.Markup('<a id="profile.html" href="profile.html?id=%s">Profile</a>') % user.key.urlsafe()
             return {"signInOrProfileHtml":signInOrProfileHtml,
                     "signoutHtml":signoutHtml}
         #User has not been to our site
@@ -63,7 +63,7 @@ def getAccountHtml():
             users.create_logout_url('/')))
         #user object exists already in data base
         if user:
-            signInOrProfileHtml = jinja2.Markup('<a id="profile.html" href="profile.html">Profile</a>')
+            signInOrProfileHtml = jinja2.Markup('<a id="profile.html" href="profile.html?id=%s">Profile</a>' % user.key.urlsafe())
         #User has not been to our site
         else:
             signInOrProfileHtml = jinja2.Markup('<a id="createNewProfile.html" href="createNewProfile.html">Sign Up</a>')
@@ -71,7 +71,6 @@ def getAccountHtml():
         signoutHtml = ""
         signInOrProfileHtml = jinja2.Markup('<a href="%s">Sign In with Google</a>' % (users.create_login_url('/createNewProfile.html')))
     return {"signInOrProfileHtml" : signInOrProfileHtml, "signoutHtml": signoutHtml}
->>>>>>> 4aad8d1af565ca84fca5e0f1c8d68f38e1a70c93
 #this is a wip.
 # the handler section
 class MainPage(webapp2.RequestHandler):
@@ -176,18 +175,19 @@ class ViewProfileHandler(webapp2.RequestHandler):
         authResp = authUser()
         if(isinstance(authResp,webapp2.Response)):
             return authResp#stop code execution if the user has been directed
-
-        gUser = users.get_current_user()
-        user = models.User.get_by_id(gUser.user_id())
+        userKey = ndb.Key(urlsafe=self.request.get('id'))
+        userPostList = models.Post.query().filter(models.Post.postAuthor == userKey).fetch()
+        user = userKey.get()
+        #renders current user...
+        # gUser = users.get_current_user()
+        # user = models.User.get_by_id(gUser.user_id())
         template = jinja_env.get_template("templates/profile.html")
-        dict = {"firstName" : user.firstName,
-                "lastName" : user.lastName,
-                "email" : user.email,
+        dict = {"user" : user,
+                "userPosts" : userPostList
                 }
-        dict.update(authResp)#add on the html for the account tags
+        dict.update(getAccountHtml())#add on the html for the account tags
 
         self.response.write(template.render(dict))
-        #why this dict?
 class PageNotFoundHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
