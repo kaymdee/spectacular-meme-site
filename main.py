@@ -192,6 +192,20 @@ class ViewProfileHandler(webapp2.RequestHandler):
         dict.update(getAccountHtml())#add on the html for the account tags
 
         self.response.write(template.render(dict))
+<<<<<<< HEAD
+        #why this dict?
+
+class ViewComments(webapp2.RequestHandler):
+    def post(self):
+        comments_template = the_jinja_env.get_template('templates/comments.html')
+        comment = self.request.get('comments')
+        new_comment = Comment()
+        new_comment.put();
+
+
+
+=======
+>>>>>>> d1171e7a113b94dc9d9985c94f98aed5a3b2fd3a
 class PageNotFoundHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
@@ -204,7 +218,12 @@ app = webapp2.WSGIApplication([
     ('/frogger.*', FroggerPage),
     ("/newPost.*", NewPostPage),
     ("/showPost.*", ShowPostPage),
+<<<<<<< HEAD
+    ("/viewPosts.*", ViewPostsPage),
+    ("/comments", ViewComments),
+=======
     ("/viewPost.*", ViewPostPage),
+>>>>>>> d1171e7a113b94dc9d9985c94f98aed5a3b2fd3a
     ("/createNewProfile.*", CreateNewProfileHandler),
     ("/profile.*", ViewProfileHandler),
     ('/img', Image),
