@@ -6,6 +6,7 @@
  {% include "templates/head.html" %}
 </head>
 <body>
+<<<<<<< HEAD
  {% include "templates/topnav.html" %}
  <img id="easterEggPikachu" src="https://www.lifewire.com/thmb/1p3mrM5_hSoIFQUfh53VK1q4dvg=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/dicaprio3-583e33155f9b58d5b19e3a00.jpg(43 kB)
 https://www.lifewire.com/thmb/1p3mrM5_hSoIFQUfh53VK1q4dvg=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/dicaprio3-583e33155f9b58d5b19e3a00.jpg
@@ -37,5 +38,46 @@ http://nheilke.com/blog/wp-content/uploads/2011/12/IMG_9120.jpg
  </div id="main">
 
  <script src="../static/scripts/index.js"> </script>
+=======
+  {% include "templates/topnav.html" %}
+
+  <img id="easterEggPikachu" src="https://www.lifewire.com/thmb/1p3mrM5_hSoIFQUfh53VK1q4dvg=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/dicaprio3-583e33155f9b58d5b19e3a00.jpg" alt="dicaprio.jpeg" />
+  <img id="easterEggPenguin" src="http://nheilke.com/blog/wp-content/uploads/2011/12/IMG_9120.jpg" alt="Easter Egg Penguin" />
+
+  <div id="home" class="main">
+    <h1 id="mainTitle"> Me Two!!! </h1>
+    <!-- <section id="topButtonContainers" class="rowFlexBox">
+      <button id="likeButton"> Like!</button>
+      <button id="subscribeButton"> Subscribe! </button>
+    </section> -->
+
+    {% for post in memePosts %}
+    <div class="postContainer">
+      <img class="postImage"
+        src="/img?img_id={{post.key.urlsafe()}}"
+        ></img>
+      <div id="{{post.key.id()}}" class="blogPost">
+        <h2>{{post.postTitle}}</h2>
+
+        <h3> By: {{post.postAuthor.get().firstName}} {{post.postAuthor.get().lastName}} on {{post.postTime}}</h3>
+
+        <p> {{post.postDesc}} </p>
+
+        <h4>
+          <form id="likeform" method="post" action="/index.html?post_id={{post.key.urlsafe()}}">
+            <input type="submit" value="Likes: {{post.likes}}" name="pseudolike">
+          </form>
+        </h4>
+
+      </div>
+      <hr width="80%">
+    </div id="postContainer">
+    {% endfor %}
+  </div id="main">
+  <!--id="main"> -->
+
+  <script src="../static/scripts/index.js"> </script>
+
+>>>>>>> 9090def32358da7f8d6451dee9b86bb90628630d
 </body>
 </html>

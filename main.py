@@ -180,9 +180,11 @@ class ConfirmPostPage(webapp2.RequestHandler):
 
 class ViewPostPage(webapp2.RequestHandler):
     def get(self):
-        blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
-        template = jinja_env.get_template("templates/viewPost.html")
-        self.response.write(template.render({"blogPosts":blogPosts}))
+        template = jinja_env.get_template("templates/viewPost")
+
+        # blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
+        # template = jinja_env.get_template("templates/viewPost.html")
+        # self.response.write(template.render({"blogPosts":blogPosts}))
 
 class ViewProfileHandler(webapp2.RequestHandler):
     def get(self):
