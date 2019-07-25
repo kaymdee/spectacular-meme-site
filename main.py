@@ -143,11 +143,15 @@ class ConfirmPostPage(webapp2.RequestHandler):
         Image = self.request.get("post-image")
         gUser = users.get_current_user()
         Author = models.User.get_by_id(gUser.user_id()).key
-        post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
+
+        if Image:
+            post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
+        else:
+            post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description)
         post.put()
 
         # if Image:
-        post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
+        # post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
         # else:
         #     post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description)
         post.put()

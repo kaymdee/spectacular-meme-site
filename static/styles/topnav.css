@@ -43,7 +43,7 @@ hr {
 #container
 {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 #meme-post
