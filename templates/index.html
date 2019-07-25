@@ -16,7 +16,6 @@
   <img id="easterEggPikachu" src="https://www.lifewire.com/thmb/1p3mrM5_hSoIFQUfh53VK1q4dvg=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/dicaprio3-583e33155f9b58d5b19e3a00.jpg" alt="dicaprio.jpeg" />
   <img id="easterEggPenguin" src="http://nheilke.com/blog/wp-content/uploads/2011/12/IMG_9120.jpg" alt="Easter Egg Penguin" />
 
-  {% include "templates/topnav.html" %}
   <div id="home" class="main">
     <h1 id="mainTitle"> Me Two!!! </h1>
     <!-- <section id="topButtonContainers" class="rowFlexBox">
@@ -25,43 +24,29 @@
     </section> -->
 
     {% for post in memePosts %}
-<<<<<<< HEAD
-    <div id = container>
-    <div id = "meme-post">
-      <img id = "size" src="/img?img_id={{post.key.urlsafe()}}"></img>
-    </div>
-    <div id="{{post.key.id()}}" class="blogPost">
-      <h2>{{post.postTitle}}</h2>
-
-      <h3> By: {{post.postAuthor.firstName}} {{post.postAuthor.get().lastName}} on {{post.postTime}}</h3>
-
-=======
-    <div id=container>
-      <div id="meme-post">
-        <img id="size" src="/img?img_id={{post.key.urlsafe()}}"></img>
-      </div>
+    <div class="postContainer">
+      <img class="postImage"
+        src="/img?img_id={{post.key.urlsafe()}}"
+        ></img>
       <div id="{{post.key.id()}}" class="blogPost">
         <h2>{{post.postTitle}}</h2>
 
-        <h3> By: {{post.postAuthor}} on {{post.postTime}}</h3>
+        <h3> By: {{post.postAuthor.get().firstName}} {{post.postAuthor.get().lastName}} on {{post.postTime}}</h3>
 
-<<<<<<< HEAD
         <p> {{post.postDesc}} </p>
+
+        <h4>
+          <form id="likeform" method="post" action="/index.html?post_id={{post.key.urlsafe()}}">
+            <input type="submit" value="Likes: {{post.likes}}" name="pseudolike">
+          </form>
+        </h4>
+
       </div>
-=======
->>>>>>> 72d3aeda859dc22719757d2bb1371b49e863d493
-      <p> {{post.postDesc}} </p>
-
-      <h4><form id = "likeform" method ="post" action = "/index.html?post_id={{post.key.urlsafe()}}">
-        <input type = "submit" value ="Likes: {{post.likes}}" name = "pseudolike">
-      </form></h4>
-
->>>>>>> 63832b8ea08ada52476297a0709fd466bae79daf
-    </div>
-    <hr width="80%">
+      <hr width="80%">
+    </div id="postContainer">
     {% endfor %}
-
   </div id="main">
+  <!--id="main"> -->
 
   <script src="../static/scripts/index.js"> </script>
 

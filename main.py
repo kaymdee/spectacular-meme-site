@@ -131,7 +131,8 @@ class NewPostPage(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/newPost.html')
         self.response.write(template.render())
 
-class ShowPostPage(webapp2.RequestHandler):
+class ConfirmPostPage(webapp2.RequestHandler):
+    #makes the new post and stores it in data store. Shows the user their new post and gets the post method from newPost.html
     def get(self):
         pass
 
@@ -140,12 +141,12 @@ class ShowPostPage(webapp2.RequestHandler):
         Title = self.request.get("post-title")
         Description = self.request.get("post-description")
         Image = self.request.get("post-image")
-
-        post = models.Post(postTitle = Title, postAuthor = post.get(), postDesc = Description, postImage = Image)
+        gUser = users.get_current_user()
+        Author = models.User.get_by_id(gUser.user_id()).key
+        post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
         post.put()
 
-        gUser = users.get_current_user()
-        Author = models.User.get_by_id(gUser.user_id()).key()
+
 
         temp_dict = {"postTitle": Title,
                     "postAuthor": Author,
@@ -155,10 +156,7 @@ class ShowPostPage(webapp2.RequestHandler):
                         post.key.urlsafe())
                 }
         temp_dict.update(getAccountHtml())
-        template = jinja_env.get_template("templates/showPost.html")
-
-
-
+        template = jinja_env.get_template("templates/confirmPost.html")
 
         self.response.write(template.render(temp_dict))
 
@@ -169,7 +167,7 @@ class ShowPostPage(webapp2.RequestHandler):
     #         # "postDate" : .new_post_entity.get(postTime),
     #     }
     #     self.response.headers['Content-Type'] = 'text/html' #change this to write html!
-        # template = jinja_env.get_template('templates/showPost.html')
+        # template = jinja_env.get_template('templates/confirmPost.html')
         # self.response.write(template.render(postDict))
 
 class ViewPostPage(webapp2.RequestHandler):
@@ -196,6 +194,10 @@ class ViewProfileHandler(webapp2.RequestHandler):
         dict.update(getAccountHtml())#add on the html for the account tags
 
         self.response.write(template.render(dict))
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9090def32358da7f8d6451dee9b86bb90628630d
         #why this dict?
 
 class ViewComments(webapp2.RequestHandler):
@@ -227,9 +229,16 @@ app = webapp2.WSGIApplication([
     ('/index.*', MainPage), #this maps the root url to the Main Page Handler
     ('/frogger.*', FroggerPage),
     ("/newPost.*", NewPostPage),
+<<<<<<< HEAD
     ("/showPost.*", ShowPostPage),
     ("/viewPosts.*", ViewPostsPage),
     ("/comments", ViewComments),
+=======
+    ("/confirmPost.*", ConfirmPostPage),
+    # ("/viewPosts.*", ViewPostsPage),
+    ("/comments", ViewComments),
+    ("/viewPost.*", ViewPostPage),
+>>>>>>> 9090def32358da7f8d6451dee9b86bb90628630d
     ("/createNewProfile.*", CreateNewProfileHandler),
     ("/profile.*", ViewProfileHandler),
     ('/img', Image),

@@ -40,11 +40,6 @@ hr {
     border-width: 1px;
 }
 
-#container
-{
-  display: flex;
-  flex-direction: row;
-}
 
 #meme-post
 {
@@ -99,7 +94,7 @@ hr {
   display:flex;
   flex-flow: column nowrap;
   align-items: center;
-  justify-content: flex-start;
+  /* justify-content: flex-start; */
   background-color: rgba(255,255,255,.2);
   margin: 50px;
   border-radius: 30px;
