@@ -37,7 +37,7 @@ Main Page:
 Posts:
 -Figure out how to data store pictures/gifs - DONE TAHLEE
 -Creating Make Post Page - DONE TAHLEE
--Make like feature for posts.
+-Make like feature for posts. DONE TAHLEE
 -
 
 Profiles:

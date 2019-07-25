@@ -89,11 +89,21 @@ class MainPage(webapp2.RequestHandler):
         self.response.write(template.render(dict))
 
     def post(self):
+        gUser = users.get_current_user()
+        user = models.User.get_by_id(gUser.user_id())
+
         post_key = ndb.Key(urlsafe=self.request.get('post_id'))
         post = post_key.get()
-        post.likes += 1
-        post.put()
-        return webapp2.redirect("/index.html#%s" % self.request.get("post_id"))
+
+        if post_key in user.likedPosts:
+            return webapp2.redirect("/index.html#%s" % self.request.get("post_id"))
+
+        else:
+            user.likedPosts.append(post_key)
+            post.likes += 1
+            post.put()
+            user.put()
+            return webapp2.redirect("/index.html#%s" % self.request.get("post_id"))
 
 class CreateNewProfileHandler(webapp2.RequestHandler):
     def get(self):
@@ -141,6 +151,7 @@ class ConfirmPostPage(webapp2.RequestHandler):
         Title = self.request.get("post-title")
         Description = self.request.get("post-description")
         Image = self.request.get("post-image")
+        
         gUser = users.get_current_user()
         Author = models.User.get_by_id(gUser.user_id()).key
 
@@ -204,11 +215,17 @@ class ViewPostPage(webapp2.RequestHandler):
         self.response.write(template.render(postInfo))
 
     def post(self):
+        gUser = users.get_current_user()
+        user = models.User.get_by_id(gUser.user_id()).key
+
         post_key = ndb.Key(urlsafe=self.request.get('post_id'))
         post = post_key.get()
-        post.likes += 1
-        post.put()
-        self.get()
+
+        if post not in user.likedPosts:
+            post.user.likedPosts.append(post)
+            post.likes += 1
+            post.put()
+            self.get()
 
         # blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
         # template = jinja_env.get_template("templates/viewPost.html")
