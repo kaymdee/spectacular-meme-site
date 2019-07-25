@@ -25,12 +25,17 @@ Like function (to be called where needed):
       )
 WIP:
 Need to upload mocks - WIP ALEX
-Figure out google auth - WIP ALEX
+Figure out google auth - DONE
 
+General:
+-Update styling every everywhere
+--like button (be more responsive) - WIP KHALAYA
+--create profile page
+-Refactoring like post
 
 Main Page:
 -Pull Data from Posts Datastore to make feed (main page) DONE TAHLEE
--Format data from posts to neaten up the feed WIP Alex
+-Format data from posts to neaten up the feed DONE
 -
 -
 
@@ -41,8 +46,8 @@ Posts:
 -
 
 Profiles:
--Need to create html for profile page - WIP ALEX
--How to render profile for different profiles into one template
+-Need to create html for profile page - DONE
+-How to render profile for different profiles into one template DONE
 -Stretch: Friends
 
 
