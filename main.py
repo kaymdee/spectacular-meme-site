@@ -233,7 +233,7 @@ class ViewProfileHandler(webapp2.RequestHandler):
         if(isinstance(authResp,webapp2.Response)):
             return authResp#stop code execution if the user has been directed
         userKey = ndb.Key(urlsafe=self.request.get('id'))
-        userPostList = models.Post.query().filter(models.Post.postAuthor == userKey).fetch()
+        userPostList = models.Post.query().filter(models.Post.postAuthor == userKey).order(-models.Post.postTime).fetch()
         user = userKey.get()
         #renders current user...
         # gUser = users.get_current_user()
