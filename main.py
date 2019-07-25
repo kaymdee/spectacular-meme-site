@@ -93,7 +93,7 @@ class MainPage(webapp2.RequestHandler):
         post = post_key.get()
         post.likes += 1
         post.put()
-        return webapp2.redirect("/index.html#%s" % self.request.get("post_id")) 
+        return webapp2.redirect("/index.html#%s" % self.request.get("post_id"))
 
 class CreateNewProfileHandler(webapp2.RequestHandler):
     def get(self):
@@ -180,9 +180,7 @@ class ConfirmPostPage(webapp2.RequestHandler):
 
 class ViewPostPage(webapp2.RequestHandler):
     def get(self):
-<<<<<<< HEAD
-        template = jinja_env.get_template("templates/viewPost")
-=======
+
         template = jinja_env.get_template("templates/viewPost.html")
 
         post_key = ndb.Key(urlsafe=self.request.get('post_id'))
@@ -206,7 +204,6 @@ class ViewPostPage(webapp2.RequestHandler):
 
     def post(self):
         self.get()
->>>>>>> 545b669752a02230e9ff302dfb5a1b8c5bcd07a0
 
         # blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
         # template = jinja_env.get_template("templates/viewPost.html")
