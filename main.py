@@ -71,7 +71,6 @@ def getAccountHtml():
         signoutHtml = ""
         signInOrProfileHtml = jinja2.Markup('<a href="%s">Sign In with Google</a>' % (users.create_login_url('/createNewProfile.html')))
     return {"signInOrProfileHtml" : signInOrProfileHtml, "signoutHtml": signoutHtml}
->>>>>>> 4aad8d1af565ca84fca5e0f1c8d68f38e1a70c93
 #this is a wip.
 # the handler section
 class MainPage(webapp2.RequestHandler):
@@ -89,6 +88,12 @@ class MainPage(webapp2.RequestHandler):
 
         self.response.write(template.render(dict))
 
+    def post(self):
+        post_key = ndb.Key(urlsafe=self.request.get('post_id'))
+        post = post_key.get()
+        post.likes += 1
+        post.put()
+        self.get()
 
 class CreateNewProfileHandler(webapp2.RequestHandler):
     def get(self):

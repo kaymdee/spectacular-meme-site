@@ -57,6 +57,7 @@ hr {
 {
   width: 50%;
   height: 50%;
+  border: solid purple 5px;
 }
 
 /* Add a black background color to the top navigation */
