@@ -23,6 +23,15 @@ jinja_env = jinja2.Environment(
 #User G Logged and not reged: redirect to CreateNewProfileHandler
 #User not G Logged or reg: redirect to G Log -> CreateNewProfileHandler
 #User not GLogged but reged: redirect to GLog -> main page
+class Image(webapp2.RequestHandler):
+    def get(self):
+        post_key = ndb.Key(urlsafe=self.request.get('img_id'))
+        post = post_key.get()
+        if post.postImage:
+            self.response.headers['Content-Type'] = 'image/png'
+            self.response.out.write(post.postImage)
+        else:
+            self.response.out.write('No image')
 def authUser():
     gUser = users.get_current_user()
     #If user is G logged in
@@ -45,6 +54,11 @@ def authUser():
 class MainPage(webapp2.RequestHandler):
     def get(self):
 
+        post_entity_list = models.Post.query().order(models.Post.postTime).fetch()
+        # for post in post_entity_list:
+        #     jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' % (post.key.urlsafe()))
+        #
+
         gUser = users.get_current_user()
         #If user google is logged in
         if gUser:
@@ -66,7 +80,8 @@ class MainPage(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/index.html')
         dict = {
             "signoutHtml" : signoutHtml,
-            "signInOrProfileHtml" : signInOrProfileHtml
+            "signInOrProfileHtml" : signInOrProfileHtml,
+            "memePosts": post_entity_list,
 
         }
 
@@ -98,16 +113,6 @@ class FroggerPage(webapp2.RequestHandler):
         story_template = jinja_env.get_template('templates/frogger.html')
         self.response.write(story_template.render())
 
-class Image(webapp2.RequestHandler):
-    def get(self):
-        post_key = ndb.Key(urlsafe=self.request.get('img_id'))
-        post = post_key.get()
-        if post.postImage:
-            self.response.headers['Content-Type'] = 'image/png'
-            self.response.out.write(post.postImage)
-        else:
-            self.response.out.write('No image')
-
 class NewPostPage(webapp2.RequestHandler):
     def get(self): #for a get request
         authResp = authUser()
@@ -123,7 +128,6 @@ class ShowPostPage(webapp2.RequestHandler):
         pass
 
     def post(self):
-        print("running")
         Title = self.request.get("post-title")
         Author = self.request.get("post-author")
         Description = self.request.get("post-description")
