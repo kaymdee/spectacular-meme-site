@@ -52,7 +52,26 @@ def authUser():
         return webapp2.redirect((users.create_login_url('/createNewProfile.html')))
 
 #returns the account HTML tags as a dictionary {"signInProfile" : accordinghtml, }
-# def getAccountHtml():
+
+def getAccountHtml():
+    gUser = users.get_current_user()
+    #If user google is logged in
+    if gUser:
+        emailAddress = gUser.nickname()
+        user = models.User.get_by_id(gUser.user_id())
+        signoutHtml = jinja2.Markup('<a href="%s">Sign out</a>' % (
+            users.create_logout_url('/')))
+        #user object exists already in data base
+        if user:
+            signInOrProfileHtml = jinja2.Markup('<a id="profile.html" href="profile.html">Profile</a>')
+        #User has not been to our site
+        else:
+            signInOrProfileHtml = jinja2.Markup('<a id="createNewProfile.html" href="createNewProfile.html">Sign Up</a>')
+    else: #user isnt logged in and we need to log them in
+        signoutHtml = ""
+        signInOrProfileHtml = jinja2.Markup('<a href="%s">Sign In with Google</a>' % (users.create_login_url('/createNewProfile.html')))
+    return {"signInOrProfileHtml" : signInOrProfileHtml, "signoutHtml": signoutHtml}
+>>>>>>> 4aad8d1af565ca84fca5e0f1c8d68f38e1a70c93
 #this is a wip.
 # the handler section
 class MainPage(webapp2.RequestHandler):
@@ -60,31 +79,13 @@ class MainPage(webapp2.RequestHandler):
 
         post_entity_list = models.Post.query().order(models.Post.postTime).fetch()
 
-        gUser = users.get_current_user()
-        #If user google is logged in
-        if gUser:
-            emailAddress = gUser.nickname()
-            user = models.User.get_by_id(gUser.user_id())
-            signoutHtml = jinja2.Markup('<a href="%s">Sign out</a>' % (
-                users.create_logout_url('/')))
-            #user object exists already in data base
-            if user:
-                signInOrProfileHtml = jinja2.Markup('<a id="profile.html" href="profile.html">Profile</a>')
-            #User has not been to our site
-            else:
-                signInOrProfileHtml = jinja2.Markup('<a id="createNewProfile.html" href="createNewProfile.html">Sign Up</a>')
-        else: #user isnt logged in and we need to log them in
-            signoutHtml = ""
-            signInOrProfileHtml = jinja2.Markup('<a href="%s">Sign In with Google</a>' % (users.create_login_url('/createNewProfile.html')))
 
         self.response.headers['Content-Type'] = 'html' #change this to write html!
         template = jinja_env.get_template('templates/index.html')
         dict = {
-            "signoutHtml" : signoutHtml,
-            "signInOrProfileHtml" : signInOrProfileHtml,
             "memePosts": post_entity_list,
-
         }
+        dict.update(getAccountHtml())
 
         self.response.write(template.render(dict))
 
