@@ -60,6 +60,7 @@ hr {
   overflow: hidden;
   background-color: #ffd300;
   display:flex;
+  justify-content: space-between;
 }
 
 /* Style the links inside the navigation bar */
