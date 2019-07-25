@@ -106,7 +106,7 @@ class MainPage(webapp2.RequestHandler):
         self.response.write(template.render(dict))
 
     def post(self):
-        
+        pass
 
 class CreateNewProfileHandler(webapp2.RequestHandler):
     def get(self):
@@ -254,7 +254,7 @@ class ViewProfileHandler(webapp2.RequestHandler):
 
         self.response.write(template.render(dict))
     def post(self):
-
+        pass
         #why this dict?
 
 class ViewComments(webapp2.RequestHandler):
