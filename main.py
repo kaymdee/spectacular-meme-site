@@ -132,6 +132,7 @@ class ShowPostPage(webapp2.RequestHandler):
         pass
 
     def post(self):
+
         Title = self.request.get("post-title")
         Author = self.request.get("post-author")
         Description = self.request.get("post-description")
@@ -147,7 +148,7 @@ class ShowPostPage(webapp2.RequestHandler):
                     "postImage": jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' %
                         post.key.urlsafe())
                 }
-
+        temp_dict.update(getAccountHtml())
         template = jinja_env.get_template("templates/showPost.html")
 
 
@@ -165,10 +166,10 @@ class ShowPostPage(webapp2.RequestHandler):
         # template = jinja_env.get_template('templates/showPost.html')
         # self.response.write(template.render(postDict))
 
-class ViewPostsPage(webapp2.RequestHandler):
+class ViewPostPage(webapp2.RequestHandler):
     def get(self):
         blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
-        template = jinja_env.get_template("templates/viewPosts.html")
+        template = jinja_env.get_template("templates/viewPost.html")
         self.response.write(template.render({"blogPosts":blogPosts}))
 
 class ViewProfileHandler(webapp2.RequestHandler):
@@ -200,7 +201,7 @@ app = webapp2.WSGIApplication([
     ('/frogger.*', FroggerPage),
     ("/newPost.*", NewPostPage),
     ("/showPost.*", ShowPostPage),
-    ("/viewPosts.*", ViewPostsPage),
+    ("/viewPost.*", ViewPostPage),
     ("/createNewProfile.*", CreateNewProfileHandler),
     ("/profile.*", ViewProfileHandler),
     ('/img', Image),

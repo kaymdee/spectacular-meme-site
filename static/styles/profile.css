@@ -1,0 +1,9 @@
+#profileInfoDiv{
+  justify-content: space-around;
+  width: 100vh;
+  padding: 0px 10vh;
+}
+#profilePicture{
+  height: 10vh;
+  width: 10vh;
+}
