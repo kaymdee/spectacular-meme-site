@@ -9,6 +9,7 @@ class User(ndb.Model):
     friends = ndb.KeyProperty(repeated = True)
     likedPosts = ndb.KeyProperty(repeated=True)
     userPosts = ndb.KeyProperty(repeated=True)
+    postImage = ndb.BlobProperty(required=False)
 
 class Post(ndb.Model):
     postTime = ndb.DateTimeProperty(auto_now_add=True)

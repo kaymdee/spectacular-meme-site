@@ -12,12 +12,9 @@
 <body>
   <div id="home" class="main">
     <h1 id="mainTitle">Profile </h1>
-
+    <img class="postImage"src="/img?img_id={{user.key.urlsafe()}}"></img>
     <div id="profileInfoDiv" class="rowFlexbox">
-      <img id="profilePicture" class="picture"
-        src = "../static/imgs/defaultProfileIcon.png"
-        alt = "profile picture"
-      />
+      <img id="profilePicture" class="picture"/>
       <div id="profileDetails">
         <h3> Name: {{user.firstName}} {{user.lastName}} </h3>
         <h4> Email: {{user.email}} </h4>

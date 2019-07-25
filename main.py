@@ -124,7 +124,13 @@ class CreateNewProfileHandler(webapp2.RequestHandler):
             return webapp2.redirect("index.html")
         firstName = self.request.get("firstName")
         lastName = self.request.get("lastName")
-        user = models.User(email = gUser.email(),firstName=firstName, lastName=lastName, id=gUser.user_id())
+        image = self.request.get("icon")
+
+        if image:
+            user = models.User(email = gUser.email(),firstName=firstName, lastName=lastName, id=gUser.user_id(), postImage = image)
+        else:
+            user = models.User(email = gUser.email(),firstName=firstName, lastName=lastName, id=gUser.user_id())
+            
         user.put()
         return webapp2.redirect("/index.html")
 
@@ -243,12 +249,15 @@ class ViewProfileHandler(webapp2.RequestHandler):
         userKey = ndb.Key(urlsafe=self.request.get('id'))
         userPostList = models.Post.query().filter(models.Post.postAuthor == userKey).order(-models.Post.postTime).fetch()
         user = userKey.get()
+        image = user.postImage
         #renders current user...
         # gUser = users.get_current_user()
         # user = models.User.get_by_id(gUser.user_id())
         template = jinja_env.get_template("templates/profile.html")
         dict = {"user" : user,
-                "userPosts" : userPostList
+                "userPosts" : userPostList,
+                "icon": jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' %
+                    user.key.urlsafe())
                 }
         dict.update(getAccountHtml())#add on the html for the account tags
 
