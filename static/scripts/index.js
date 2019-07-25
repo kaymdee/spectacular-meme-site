@@ -27,11 +27,11 @@ alertButton.addEventListener("click", (event) => {
   alert("Get Alerted by the Event Listener!");
 });
 
-const pikachuMeme = document.querySelector("#pikachuMeme");
-pikachuMeme.addEventListener("click", (event) => {
-  alert("Don't click my pikachu");
-  pikachuMeme.style.transform = "scale(2x)";
-});
+// const pikachuMeme = document.querySelector("#pikachuMeme");
+// pikachuMeme.addEventListener("click", (event) => {
+//   alert("Don't click my pikachu");
+//   pikachuMeme.style.transform = "scale(2x)";
+// });
 
 //like button event listeners
 const likeButton = document.querySelector("#likeButton");
@@ -53,23 +53,23 @@ likeButton.addEventListener("mouseout", (e) => {
 });
 //subscribe button event listeners
 //-------------------------
-const subscribeButton = document.querySelector("#subscribeButton");
-subscribeButton.addEventListener("click", (event) => {
-  subscribeButton.innerHTML = "Subscribed!";
-  subscribeButton.style.backgroundColor = "green";
-  subscribed = true;
-});
-
-subscribeButton.addEventListener("mouseover", (e) => {
-  if (subscribed) return;
-  subscribeButton.style.backgroundColor = "lightgreen";
-});
-
-subscribeButton.addEventListener("mouseout", (e) => {
-  if (subscribed) return;
-  subscribeButton.style.backgroundColor = "white";
-
-});
+// const subscribeButton = document.querySelector("#subscribeButton");
+// subscribeButton.addEventListener("click", (event) => {
+//   subscribeButton.innerHTML = "Subscribed!";
+//   subscribeButton.style.backgroundColor = "green";
+//   subscribed = true;
+// });
+//
+// subscribeButton.addEventListener("mouseover", (e) => {
+//   if (subscribed) return;
+//   subscribeButton.style.backgroundColor = "lightgreen";
+// });
+//
+// subscribeButton.addEventListener("mouseout", (e) => {
+//   if (subscribed) return;
+//   subscribeButton.style.backgroundColor = "white";
+//
+// });
 //END subscribe button event listeners
 
 //make the title random color when clicked

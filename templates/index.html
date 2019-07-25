@@ -34,8 +34,17 @@
 
         <h3> By: {{post.postAuthor}} on {{post.postTime}}</h3>
 
+<<<<<<< HEAD
         <p> {{post.postDesc}} </p>
       </div>
+=======
+      <p> {{post.postDesc}} </p>
+
+      <h4><form id = "likeform" method ="post" action = "/index.html?post_id={{post.key.urlsafe()}}">
+        <input type = "submit" value ="Likes: {{post.likes}}" name = "pseudolike">
+      </form></h4>
+
+>>>>>>> 63832b8ea08ada52476297a0709fd466bae79daf
     </div>
     <hr width="80%">
     {% endfor %}

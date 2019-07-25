@@ -88,6 +88,12 @@ class MainPage(webapp2.RequestHandler):
 
         self.response.write(template.render(dict))
 
+    def post(self):
+        post_key = ndb.Key(urlsafe=self.request.get('post_id'))
+        post = post_key.get()
+        post.likes += 1
+        post.put()
+        self.get()
 
 class CreateNewProfileHandler(webapp2.RequestHandler):
     def get(self):
