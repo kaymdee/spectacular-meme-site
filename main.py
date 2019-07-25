@@ -19,7 +19,7 @@ jinja_env = jinja2.Environment(
 #will redirect to GLogin if the user is not logged into Google
 #will redirect to create new profile if the user is logged into google but not register with our Website
 #Logic tree:
-#User G Logged and registered: returns signInOrProfileHtml and signoutHtml in list: [profileHtml, signoutHtml]
+#User G Logged and registered: returns signInOrProfileHtml and signoutHtml a dictionary
 #User G Logged and not reged: redirect to CreateNewProfileHandler
 #User not G Logged or reg: redirect to G Log -> CreateNewProfileHandler
 #User not GLogged but reged: redirect to GLog -> main page
@@ -34,13 +34,17 @@ def authUser():
             signoutHtml = jinja2.Markup('<a href="%s">Sign out</a>' % (
                 users.create_logout_url('/')))
             signInOrProfileHtml = jinja2.Markup('<a id="profile.html" href="profile.html">Profile</a>')
-            return [signInOrProfileHtml, signoutHtml]
+            return {"signInOrProfileHtml":signInOrProfileHtml,
+                    "signoutHtml":signoutHtml}
         #User has not been to our site
         else:
             return webapp2.redirect("/createNewProfile.html")
     else: #user isnt logged in and we need to log them in
         return webapp2.redirect((users.create_login_url('/createNewProfile.html')))
 
+#returns the account HTML tags as a dictionary {"signInProfile" : accordinghtml, }
+def getAccountHtml():
+#this is a wip.
 # the handler section
 class MainPage(webapp2.RequestHandler):
     def get(self):
@@ -76,7 +80,8 @@ class MainPage(webapp2.RequestHandler):
 class CreateNewProfileHandler(webapp2.RequestHandler):
     def get(self):
         if not isinstance(authUser(),webapp2.Response):
-            return webapp2.redirect("/index.html")
+            return webapp2.redirect("/index.html")#shouldn't be here if profile already exists
+
         template = jinja_env.get_template('templates/createNewProfile.html')
         self.response.write(template.render())
     def post(self):
@@ -176,8 +181,9 @@ class ViewProfileHandler(webapp2.RequestHandler):
         dict = {"firstName" : user.firstName,
                 "lastName" : user.lastName,
                 "email" : user.email,
-                "signInOrProfileHtml" : authResp[0],
-                "signoutHtml" : authResp[1] }
+                }
+        dict.update(authResp)#add on the html for the account tags
+
         self.response.write(template.render(dict))
         #why this dict?
 class PageNotFoundHandler(webapp2.RequestHandler):
