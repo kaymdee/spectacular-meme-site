@@ -42,7 +42,15 @@ hr {
 
 #container
 {
-  display
+  display: flex;
+  flex-direction: row;
+}
+
+#meme-post
+{
+  margin: 0px;
+  padding: 0px;
+  border: solid purple 5px;
 }
 
 #size
