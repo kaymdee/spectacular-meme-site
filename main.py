@@ -252,11 +252,25 @@ class ViewProfileHandler(webapp2.RequestHandler):
         #why this dict?
 
 class ViewComments(webapp2.RequestHandler):
+
+    def get(self):
+        #post_key = ndb.Key(urlsafe=self.request.get('post_id'))
+        #commentList = models.Comment.query().filter(models.Comment.parentPost==post_key).fetch()
+        commentList = models.Comment.query().fetch()
+        comment_template = jinja_env.get_template("templates/comments.html")
+        self.response.write(comment_template.render({'comments_info' : commentList}))
+
+
     def post(self):
-        comments_template = the_jinja_env.get_template('templates/comments.html')
+        gUser = users.get_current_user()
+        Author = models.User.get_by_id(gUser.user_id()).key
         comment = self.request.get('comments')
-        new_comment = Comment()
-        new_comment.put();
+        new_comment = models.Comment(comText = comment)
+        new_comment_key = new_comment.put();
+        commentList = models.Comment.query().fetch()
+        commentList.append(new_comment_key.get())
+        comment_template = jinja_env.get_template("templates/comments.html")
+        self.response.write(comment_template.render({'comments_info' : commentList}))
 
 
 

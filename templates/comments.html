@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-
+<html>
 <title>Comments</title>
 <!--<link rel="stylesheet" href="/Users/cssi/spectacular-meme-site/static/styles/comments.css">-->
+
 <form id="commentForm" action="/comments"  method="post">
 
   Comments:<br>
@@ -13,3 +14,13 @@
 
 <!--<iframe name="viewComments" width="75%" height="75%"></iframe>-->
 </form>
+
+  <ul>
+    {% for comment in comments_info %}
+
+      <li>{{comment.comText}}</li>
+    {% endfor %}
+
+  </ul>
+
+</html>
