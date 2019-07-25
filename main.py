@@ -71,7 +71,25 @@ def getAccountHtml():
         signoutHtml = ""
         signInOrProfileHtml = jinja2.Markup('<a href="%s">Sign In with Google</a>' % (users.create_login_url('/createNewProfile.html')))
     return {"signInOrProfileHtml" : signInOrProfileHtml, "signoutHtml": signoutHtml}
-#this is a wip.
+
+def like(post_id, returnUrl):#liked a post based on post key and verifies that the user has not already liked it. Adds ikt to the user likedPosts
+    post_key = ndb.Key(urlsafe=post_id)
+    post = post_key.get()
+
+    gUser = users.get_current_user()
+    user = models.User.get_by_id(gUser.user_id())
+
+
+    if post_key in user.likedPosts:
+        return webapp2.redirect(returnUrl)
+
+    else:
+        user.likedPosts.append(post_key)
+        post.likes += 1
+        post.put()
+        user.put()
+        return webapp2.redirect(returnUrl)
+
 # the handler section
 class MainPage(webapp2.RequestHandler):
     def get(self):
@@ -88,21 +106,8 @@ class MainPage(webapp2.RequestHandler):
         self.response.write(template.render(dict))
 
     def post(self):
-        gUser = users.get_current_user()
-        user = models.User.get_by_id(gUser.user_id())
-
-        post_key = ndb.Key(urlsafe=self.request.get('post_id'))
-        post = post_key.get()
-
-        if post_key in user.likedPosts:
-            return webapp2.redirect("/index.html#%s" % self.request.get("post_id"))
-
-        else:
-            user.likedPosts.append(post_key)
-            post.likes += 1
-            post.put()
-            user.put()
-            return webapp2.redirect("/index.html#%s" % self.request.get("post_id"))
+        post_id = self.request.get("post_id")
+        return like(post_id, "/index.html#%s" % post_id)
 
 class CreateNewProfileHandler(webapp2.RequestHandler):
     def get(self):
@@ -150,7 +155,7 @@ class ConfirmPostPage(webapp2.RequestHandler):
         Title = self.request.get("post-title")
         Description = self.request.get("post-description")
         Image = self.request.get("post-image")
-        
+
         gUser = users.get_current_user()
         Author = models.User.get_by_id(gUser.user_id()).key
 
@@ -214,17 +219,9 @@ class ViewPostPage(webapp2.RequestHandler):
         self.response.write(template.render(postInfo))
 
     def post(self):
-        gUser = users.get_current_user()
-        user = models.User.get_by_id(gUser.user_id()).key
+        post_id = self.request.get("post_id")
+        return like(post_id, "/viewPost.html?post_id=%s#%s" %  (post_id,post_id))
 
-        post_key = ndb.Key(urlsafe=self.request.get('post_id'))
-        post = post_key.get()
-
-        if post not in user.likedPosts:
-            post.user.likedPosts.append(post)
-            post.likes += 1
-            post.put()
-            self.get()
 
         # blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
         # template = jinja_env.get_template("templates/viewPost.html")
@@ -248,6 +245,9 @@ class ViewProfileHandler(webapp2.RequestHandler):
         dict.update(getAccountHtml())#add on the html for the account tags
 
         self.response.write(template.render(dict))
+    def post(self):
+        post_id = self.request.get("post_id")
+        return like(post_id, "/profile.html?post_id=%s#%s" % (post_id, post_id))
 
         #why this dict?
 
