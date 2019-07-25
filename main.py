@@ -142,11 +142,21 @@ class ShowPostPage(webapp2.RequestHandler):
         Image = self.request.get("post-image")
         gUser = users.get_current_user()
         Author = models.User.get_by_id(gUser.user_id()).key
+<<<<<<< HEAD
         post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
         post.put()
 
 
 
+=======
+
+        # if Image:
+        post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
+        # else:
+        #     post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description)
+        post.put()
+
+>>>>>>> f1f0806cdbe0211132a36fe0e2efac541dd2a3c2
         temp_dict = {"postTitle": Title,
                     "postAuthor": Author,
                     "postDesc": Description,
@@ -156,9 +166,6 @@ class ShowPostPage(webapp2.RequestHandler):
                 }
         temp_dict.update(getAccountHtml())
         template = jinja_env.get_template("templates/showPost.html")
-
-
-
 
         self.response.write(template.render(temp_dict))
 
@@ -196,6 +203,19 @@ class ViewProfileHandler(webapp2.RequestHandler):
         dict.update(getAccountHtml())#add on the html for the account tags
 
         self.response.write(template.render(dict))
+
+        #why this dict?
+
+class ViewComments(webapp2.RequestHandler):
+    def post(self):
+        comments_template = the_jinja_env.get_template('templates/comments.html')
+        comment = self.request.get('comments')
+        new_comment = Comment()
+        new_comment.put();
+
+
+
+
 class PageNotFoundHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
@@ -208,6 +228,8 @@ app = webapp2.WSGIApplication([
     ('/frogger.*', FroggerPage),
     ("/newPost.*", NewPostPage),
     ("/showPost.*", ShowPostPage),
+    # ("/viewPosts.*", ViewPostsPage),
+    ("/comments", ViewComments),
     ("/viewPost.*", ViewPostPage),
     ("/createNewProfile.*", CreateNewProfileHandler),
     ("/profile.*", ViewProfileHandler),

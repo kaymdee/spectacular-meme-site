@@ -40,26 +40,6 @@ hr {
     border-width: 1px;
 }
 
-#container
-{
-  display: flex;
-  flex-direction: column;
-}
-
-#meme-post
-{
-  margin: 0px;
-  padding: 0px;
-  border: solid purple 5px;
-}
-
-#size
-{
-  width: 50%;
-  height: 50%;
-  border: solid purple 5px;
-}
-
 /* Add a black background color to the top navigation */
 .topnav{
   position: fixed;
@@ -69,7 +49,6 @@ hr {
   overflow: hidden;
   background-color: #ffd300;
   display:flex;
-  justify-content: space-between;
 }
 
 /* Style the links inside the navigation bar */
@@ -99,7 +78,6 @@ hr {
   display:flex;
   flex-flow: column nowrap;
   align-items: center;
-  /* justify-content: flex-start; */
   background-color: rgba(255,255,255,.2);
   margin: 50px;
   border-radius: 30px;
@@ -113,15 +91,21 @@ hr {
   align-items: space-around;
 }
 
-.picBox{
-
-}
 
 #logoBox{
   padding: 0;
   height: 48px;
 }
 #logo{
-   width: 60px;
+<<<<<<< HEAD
+  /* -webkit-filter: invert(1); */
+   /* filter: invert(1); */
+   width: 67.9px;
    height: 48px;
+=======
+  /* -webkit-filter: invert(1); */
+   /* filter: invert(1); */
+   width: 60px;
+   height: 45px;
+
 }

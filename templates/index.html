@@ -25,6 +25,7 @@
     </section> -->
 
     {% for post in memePosts %}
+<<<<<<< HEAD
     <div id=container>
       <div id="meme-post">
         <img id="size" src="/img?img_id={{post.key.urlsafe()}}"></img>
@@ -33,19 +34,36 @@
         <h2>{{post.postTitle}}</h2>
 
         <h3> By: {{post.postAuthor}} on {{post.postTime}}</h3>
+=======
+    <div id = container>
+    <!-- {% for post in memePosts %} -->
+    <div id = "meme-post">
+      <img id = "size" src="/img?img_id={{post.key.urlsafe()}}"></img>
+    </div>
+    <div id="{{post.key.id()}}" class="blogPost">
+      <h2>{{post.postTitle}}</h2>
+
+      <h3> By: {{post.postAuthor.get().firstName}} {{post.postAuthor.get().lastName}} on {{post.postTime}}</h3>
+>>>>>>> f1f0806cdbe0211132a36fe0e2efac541dd2a3c2
 
       <p> {{post.postDesc}} </p>
 
       <h4><form id = "likeform" method ="post" action = "/index.html?post_id={{post.key.urlsafe()}}">
         <input type = "submit" value ="Likes: {{post.likes}}" name = "pseudolike">
       </form></h4>
+<<<<<<< HEAD
 
+=======
+      <!-- {% endfor %} -->
+>>>>>>> f1f0806cdbe0211132a36fe0e2efac541dd2a3c2
     </div>
     <hr width="80%">
   </div id=container>
     {% endfor %}
-
-  </div id="main">
+  </div>
+  <!-- {% endfor %} -->
+</div id = "main">
+ <!--id="main"> -->
 
   <script src="../static/scripts/index.js"> </script>
 

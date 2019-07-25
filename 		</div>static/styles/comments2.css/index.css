@@ -1,0 +1,30 @@
+
+
+
+#likeButton, #subscribeButton{
+  transition: 800ms all;
+  border-radius: 600px;
+  height: 50px;
+  width: 100px;
+  background-color: white;
+
+}
+#selfPicture {
+  /* native is 725x453 */
+  border-radius: 20px;
+  width: 543.75px;
+  height: 339.75px;
+  margin: 20px;
+
+}
+#youtubeFrame{
+  width: 608
+  height: 308
+}
+
+#easterEggPikachu{
+  display: none;
+}
+#easterEggPenguin{
+  display: none;
+}
