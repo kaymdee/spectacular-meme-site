@@ -26,19 +26,28 @@
 
     <div id="profilePosts" class="main">
       {% for post in userPosts %}
-      <div id=container>
-        <div id="meme-post">
-          <img id="size" src="/img?img_id={{post.key.urlsafe()}}"></img>
-        </div>
-        <div id="{{post.key.id()}}" class="blogPost">
+      <div id="{{post.key.urlsafe()}}"class="postContainer">
+        <a href="viewPost.html?post_id={{post.key.urlsafe()}}">
+          <img class="postImage"
+            src="/img?img_id={{post.key.urlsafe()}}"
+            ></img>
+        </a>
+        <div class="blogPost">
           <h2>{{post.postTitle}}</h2>
 
-          <h3> By: {{post.postAuthor}} on {{post.postTime}}</h3>
+          <h3> By: <a href="profile.html?id={{post.postAuthor.urlsafe()}}">{{post.postAuthor.get().firstName}} {{post.postAuthor.get().lastName}} </a> on {{post.postTime.strftime("%b %d, %Y")}}</h3>
 
           <p> {{post.postDesc}} </p>
+
+          <h4>
+            <form id="likeform" method="post" action="/index.html?post_id={{post.key.urlsafe()}}">
+              <input type="submit" value="Likes: {{post.likes}}" name="pseudolike">
+            </form>
+          </h4>
+
         </div>
-      </div>
-      <hr width="80%">
+        <hr width="80%">
+      </div id="postContainer">
       {% endfor %}
     </div id="profilePosts">
     <br>

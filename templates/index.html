@@ -26,10 +26,10 @@
           src="/img?img_id={{post.key.urlsafe()}}"
           ></img>
       </a>
-      <div  class="blogPost">
+      <div class="blogPost">
         <h2>{{post.postTitle}}</h2>
 
-        <h3> By: {{post.postAuthor.get().firstName}} {{post.postAuthor.get().lastName}} on {{post.postTime.strftime("%b %d, %Y")}}</h3>
+        <h3> By: <a href="profile.html?id={{post.postAuthor.urlsafe()}}">{{post.postAuthor.get().firstName}} {{post.postAuthor.get().lastName}} </a> on {{post.postTime.strftime("%b %d, %Y")}}</h3>
 
         <p> {{post.postDesc}} </p>
 
