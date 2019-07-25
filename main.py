@@ -194,26 +194,28 @@ class ViewProfileHandler(webapp2.RequestHandler):
         dict.update(getAccountHtml())#add on the html for the account tags
 
         self.response.write(template.render(dict))
-<<<<<<< HEAD
-=======
-
->>>>>>> 9090def32358da7f8d6451dee9b86bb90628630d
         #why this dict?
 
 class ViewComments(webapp2.RequestHandler):
+
     def get(self):
-        commentPost = models.Post.query().filter(models.Post.Comments == parentPost).fetch()
+        #post_key = ndb.Key(urlsafe=self.request.get('post_id'))
+        #commentList = models.Comment.query().filter(models.Comment.parentPost==post_key).fetch()
+        commentList = models.Comment.query().fetch()
         comment_template = jinja_env.get_template("templates/comments.html")
-        self.response.write(comment_template.render({ 'comment_info' : commentPost }))
+        self.response.write(comment_template.render({'comments_info' : commentList}))
 
 
     def post(self):
         gUser = users.get_current_user()
         Author = models.User.get_by_id(gUser.user_id()).key
-        comments_template = the_jinja_env.get_template('templates/comments.html')
         comment = self.request.get('comments')
-        new_comment = Comment(postDesc = comment, parentPost = Author, postAuthor = Author, postTitle = " ")
-        new_comment.put();
+        new_comment = models.Comment(comText = comment)
+        new_comment_key = new_comment.put();
+        commentList = models.Comment.query().fetch()
+        commentList.append(new_comment_key.get())
+        comment_template = jinja_env.get_template("templates/comments.html")
+        self.response.write(comment_template.render({'comments_info' : commentList}))
 
 
 
@@ -229,16 +231,10 @@ app = webapp2.WSGIApplication([
     ('/index.*', MainPage), #this maps the root url to the Main Page Handler
     ('/frogger.*', FroggerPage),
     ("/newPost.*", NewPostPage),
-<<<<<<< HEAD
-    ("/showPost.*", ShowPostPage),
-    ("/viewPosts.*", ViewPostsPage),
-    ("/comments", ViewComments),
-=======
     ("/confirmPost.*", ConfirmPostPage),
     # ("/viewPosts.*", ViewPostsPage),
     ("/comments", ViewComments),
     ("/viewPost.*", ViewPostPage),
->>>>>>> 9090def32358da7f8d6451dee9b86bb90628630d
     ("/createNewProfile.*", CreateNewProfileHandler),
     ("/profile.*", ViewProfileHandler),
     ('/img', Image),

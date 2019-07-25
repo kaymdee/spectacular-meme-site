@@ -19,6 +19,7 @@ class Post(ndb.Model):
     Comments = ndb.KeyProperty(repeated=True)
     likes = ndb.IntegerProperty(required=False, default=0)
 
-class Comment(Post):
-    parentPost = ndb.KeyProperty(required=True)
+class Comment(ndb.Model):
+    #parentPost = ndb.KeyProperty()
+    comText = ndb.StringProperty(required=True)
 #previously parentPost

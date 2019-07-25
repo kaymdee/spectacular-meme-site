@@ -14,16 +14,13 @@
 
 <!--<iframe name="viewComments" width="75%" height="75%"></iframe>-->
 </form>
-<iframe name="viewComments" width="75%" height="75%">
+
   <ul>
     {% for comment in comments_info %}
 
-      <li>{{comment.get()}}</li>
-    {% endfor % }
+      <li>{{comment.comText}}</li>
+    {% endfor %}
 
   </ul>
-
-
-</iframe>
 
 </html>
