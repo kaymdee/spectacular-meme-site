@@ -24,10 +24,10 @@
     </section> -->
 
     {% for post in memePosts %}
-    <div id=container>
-      <div id="meme-post">
-        <img id="size" src="/img?img_id={{post.key.urlsafe()}}"></img>
-      </div>
+    <div class="postContainer">
+      <img class="postImage"
+        src="/img?img_id={{post.key.urlsafe()}}"
+        ></img>
       <div id="{{post.key.id()}}" class="blogPost">
         <h2>{{post.postTitle}}</h2>
 
@@ -43,7 +43,7 @@
 
       </div>
       <hr width="80%">
-    </div id=container>
+    </div id="postContainer">
     {% endfor %}
   </div id="main">
   <!--id="main"> -->

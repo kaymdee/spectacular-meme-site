@@ -40,11 +40,6 @@ hr {
     border-width: 1px;
 }
 
-#container
-{
-  display: flex;
-  flex-direction: column;
-}
 
 #meme-post
 {
