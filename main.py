@@ -93,7 +93,7 @@ class MainPage(webapp2.RequestHandler):
         post = post_key.get()
         post.likes += 1
         post.put()
-        self.get()
+        return webapp2.redirect("/index.html#%s" % self.request.get("post_id")) 
 
 class CreateNewProfileHandler(webapp2.RequestHandler):
     def get(self):
