@@ -299,7 +299,6 @@ app = webapp2.WSGIApplication([
     ('/frogger.*', FroggerPage),
     ("/newPost.*", NewPostPage),
     ("/confirmPost.*", ConfirmPostPage),
-    # ("/viewPosts.*", ViewPostsPage),
     ("/viewPost.*", ViewPostPage),
     ("/createNewProfile.*", CreateNewProfileHandler),
     ("/profile.*", ViewProfileHandler),
