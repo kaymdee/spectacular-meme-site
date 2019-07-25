@@ -123,11 +123,10 @@ class CreateNewProfileHandler(webapp2.RequestHandler):
         image = self.request.get("icon")
 
         if image:
-            profilePic = image
+            user = models.User(email = gUser.email(),firstName=firstName, lastName=lastName, id=gUser.user_id(), postImage = image)
         else:
-            profilePic = "../static/imgs/defaultProfileIcon.png"
-
-        user = models.User(email = gUser.email(),firstName=firstName, lastName=lastName, id=gUser.user_id(), postImage = profilePic)
+            user = models.User(email = gUser.email(),firstName=firstName, lastName=lastName, id=gUser.user_id())
+            
         user.put()
         return webapp2.redirect("/index.html")
 
