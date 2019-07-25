@@ -131,7 +131,8 @@ class NewPostPage(webapp2.RequestHandler):
         template = jinja_env.get_template('templates/newPost.html')
         self.response.write(template.render())
 
-class ShowPostPage(webapp2.RequestHandler):
+class ConfirmPostPage(webapp2.RequestHandler):
+    #makes the new post and stores it in data store. Shows the user their new post and gets the post method from newPost.html
     def get(self):
         pass
 
@@ -155,7 +156,7 @@ class ShowPostPage(webapp2.RequestHandler):
                         post.key.urlsafe())
                 }
         temp_dict.update(getAccountHtml())
-        template = jinja_env.get_template("templates/showPost.html")
+        template = jinja_env.get_template("templates/confirmPost.html")
 
         self.response.write(template.render(temp_dict))
 
@@ -166,7 +167,7 @@ class ShowPostPage(webapp2.RequestHandler):
     #         # "postDate" : .new_post_entity.get(postTime),
     #     }
     #     self.response.headers['Content-Type'] = 'text/html' #change this to write html!
-        # template = jinja_env.get_template('templates/showPost.html')
+        # template = jinja_env.get_template('templates/confirmPost.html')
         # self.response.write(template.render(postDict))
 
 class ViewPostPage(webapp2.RequestHandler):
@@ -217,7 +218,7 @@ app = webapp2.WSGIApplication([
     ('/index.*', MainPage), #this maps the root url to the Main Page Handler
     ('/frogger.*', FroggerPage),
     ("/newPost.*", NewPostPage),
-    ("/showPost.*", ShowPostPage),
+    ("/confirmPost.*", ConfirmPostPage),
     # ("/viewPosts.*", ViewPostsPage),
     ("/comments", ViewComments),
     ("/viewPost.*", ViewPostPage),
