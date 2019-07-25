@@ -71,12 +71,30 @@ def getAccountHtml():
         signoutHtml = ""
         signInOrProfileHtml = jinja2.Markup('<a href="%s">Sign In with Google</a>' % (users.create_login_url('/createNewProfile.html')))
     return {"signInOrProfileHtml" : signInOrProfileHtml, "signoutHtml": signoutHtml}
-#this is a wip.
+
+def like(post_id, returnUrl):#liked a post based on post key and verifies that the user has not already liked it. Adds ikt to the user likedPosts
+    post_key = ndb.Key(urlsafe=post_id)
+    post = post_key.get()
+
+    gUser = users.get_current_user()
+    user = models.User.get_by_id(gUser.user_id())
+
+
+    if post_key in user.likedPosts:
+        return webapp2.redirect(returnUrl)
+
+    else:
+        user.likedPosts.append(post_key)
+        post.likes += 1
+        post.put()
+        user.put()
+        return webapp2.redirect(returnUrl)
+
 # the handler section
 class MainPage(webapp2.RequestHandler):
     def get(self):
 
-        post_entity_list = models.Post.query().order(models.Post.postTime).fetch()
+        post_entity_list = models.Post.query().order(-models.Post.postTime).fetch()
 
         self.response.headers['Content-Type'] = 'html' #change this to write html!
         template = jinja_env.get_template('templates/index.html')
@@ -88,21 +106,8 @@ class MainPage(webapp2.RequestHandler):
         self.response.write(template.render(dict))
 
     def post(self):
-        gUser = users.get_current_user()
-        user = models.User.get_by_id(gUser.user_id())
-
-        post_key = ndb.Key(urlsafe=self.request.get('post_id'))
-        post = post_key.get()
-
-        if post_key in user.likedPosts:
-            return webapp2.redirect("/index.html#%s" % self.request.get("post_id"))
-
-        else:
-            user.likedPosts.append(post_key)
-            post.likes += 1
-            post.put()
-            user.put()
-            return webapp2.redirect("/index.html#%s" % self.request.get("post_id"))
+        post_id = self.request.get("post_id")
+        return like(post_id, "/index.html#%s" % post_id)
 
 class CreateNewProfileHandler(webapp2.RequestHandler):
     def get(self):
@@ -205,6 +210,8 @@ class ViewPostPage(webapp2.RequestHandler):
         gUser = users.get_current_user()
         Author = models.User.get_by_id(gUser.user_id()).key
 
+        commentList = models.Comment.query().fetch()
+
         postInfo = {
             "post": post,
             "Title": post.postTitle,
@@ -214,23 +221,26 @@ class ViewPostPage(webapp2.RequestHandler):
                 post.key.urlsafe()),
             "Likes": post.likes,
             # "Comments": post.comments,
+            "comments_info": commentList,
             "Description": post.postDesc,
         }
 
         self.response.write(template.render(postInfo))
 
+
     def post(self):
-        gUser = users.get_current_user()
-        user = models.User.get_by_id(gUser.user_id()).key
+        post_id = self.request.get("post_id")
+        return like(post_id, "/viewPost.html?post_id=%s#%s" %  (post_id,post_id))
 
-        post_key = ndb.Key(urlsafe=self.request.get('post_id'))
-        post = post_key.get()
 
-        if post not in user.likedPosts:
-            post.user.likedPosts.append(post)
-            post.likes += 1
-            post.put()
-            self.get()
+
+        comment = self.request.get('comments')
+        new_comment = models.Comment(comText = comment)
+        new_comment_key = new_comment.put();
+        commentList = models.Comment.query().fetch()
+        commentList.append(new_comment_key.get())
+        comment_template = jinja_env.get_template("templates/comments.html")
+        self.response.write(comment_template.render({'comments_info' : commentList}))
 
         # blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
         # template = jinja_env.get_template("templates/viewPost.html")
@@ -242,7 +252,7 @@ class ViewProfileHandler(webapp2.RequestHandler):
         if(isinstance(authResp,webapp2.Response)):
             return authResp#stop code execution if the user has been directed
         userKey = ndb.Key(urlsafe=self.request.get('id'))
-        userPostList = models.Post.query().filter(models.Post.postAuthor == userKey).fetch()
+        userPostList = models.Post.query().filter(models.Post.postAuthor == userKey).order(-models.Post.postTime).fetch()
         user = userKey.get()
         image = user.postImage
         #renders current user...
@@ -257,16 +267,32 @@ class ViewProfileHandler(webapp2.RequestHandler):
         dict.update(getAccountHtml())#add on the html for the account tags
 
         self.response.write(template.render(dict))
+    def post(self):
+        post_id = self.request.get("post_id")
+        return like(post_id, "/profile.html?post_id=%s#%s" % (post_id, post_id))
 
         #why this dict?
 
 class ViewComments(webapp2.RequestHandler):
-    def post(self):
-        comments_template = the_jinja_env.get_template('templates/comments.html')
-        comment = self.request.get('comments')
-        new_comment = Comment()
-        new_comment.put();
 
+    def get(self):
+        #post_key = ndb.Key(urlsafe=self.request.get('post_id'))
+        #commentList = models.Comment.query().filter(models.Comment.parentPost==post_key).fetch()
+        commentList = models.Comment.query().fetch()
+        comment_template = jinja_env.get_template("templates/comments.html")
+        self.response.write(comment_template.render({'comments_info' : commentList}))
+
+
+    def post(self):
+        gUser = users.get_current_user()
+        Author = models.User.get_by_id(gUser.user_id()).key
+        comment = self.request.get('comments')
+        new_comment = models.Comment(comText = comment)
+        new_comment_key = new_comment.put();
+        commentList = models.Comment.query().fetch()
+        commentList.append(new_comment_key.get())
+        comment_template = jinja_env.get_template("templates/comments.html")
+        self.response.write(comment_template.render({'comments_info' : commentList}))
 
 
 
@@ -283,7 +309,6 @@ app = webapp2.WSGIApplication([
     ("/newPost.*", NewPostPage),
     ("/confirmPost.*", ConfirmPostPage),
     # ("/viewPosts.*", ViewPostsPage),
-    ("/comments", ViewComments),
     ("/viewPost.*", ViewPostPage),
     ("/createNewProfile.*", CreateNewProfileHandler),
     ("/profile.*", ViewProfileHandler),
