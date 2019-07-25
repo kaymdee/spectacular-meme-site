@@ -138,12 +138,14 @@ class ShowPostPage(webapp2.RequestHandler):
     def post(self):
 
         Title = self.request.get("post-title")
-        Author = self.request.get("post-author")
         Description = self.request.get("post-description")
         Image = self.request.get("post-image")
 
-        post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
+        post = models.Post(postTitle = Title, postAuthor = post.get(), postDesc = Description, postImage = Image)
         post.put()
+
+        gUser = users.get_current_user()
+        Author = models.User.get_by_id(gUser.user_id()).key()
 
         temp_dict = {"postTitle": Title,
                     "postAuthor": Author,

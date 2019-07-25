@@ -38,7 +38,7 @@
     <div id="{{post.key.id()}}" class="blogPost">
       <h2>{{post.postTitle}}</h2>
 
-      <h3> By: {{post.postAuthor}} on {{post.postTime}}</h3>
+      <h3> By: {{post.postAuthor.firstName}} {{post.postAuthor.get().lastName}} on {{post.postTime}}</h3>
 
       <p> {{post.postDesc}} </p>
 
