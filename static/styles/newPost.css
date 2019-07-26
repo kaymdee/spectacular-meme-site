@@ -1,22 +1,34 @@
 body
 {
-  background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d77e2b6d-fe85-4ab1-8012-d370aedd8be0/d99xk5z-cee52d2c-d98e-4ccd-ab92-1e681816e3e3.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Q3N2UyYjZkLWZlODUtNGFiMS04MDEyLWQzNzBhZWRkOGJlMFwvZDk5eGs1ei1jZWU1MmQyYy1kOThlLTRjY2QtYWI5Mi0xZTY4MTgxNmUzZTMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.izPhXQYofVvjgCmk-su-mdWUwRu3sx8kGmfCvABfWqg");
+  background-image: url("https://picserio.com/data/out/188/drake-wallpaper-background_4039942.jpg"); */
+  /* background-image: url("https://static1.fjcdn.com/comments/+_3c601ae1c7bd60dfbc5fe2b4adeaecca.jpg"); */
   background-size: auto;
+  background-size: cover;
   /* background-repeat: no-repeat; */
-  background-repeat: repeat;
+  /* background-repeat: repeat; */
   justify-content: center;
   align-items: center;
   /* background-size: 500px; */
+}
+
+#mainTitle
+{
+  color: black;
 }
 
 #mainForm
 {
   font-size: 24px;
   padding: 10px;
-  opacity: .5;
+  opacity: .8;
   font-weight: bold;
   color: white;
   background-color: black;
+}
+
+.main
+{
+  opacity: .8;
 }
 
 #mainForm .inputs
