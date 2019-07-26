@@ -13,15 +13,27 @@
   border: solid purple 5px;
   object-fit: cover;
 }
-#likeButton, #subscribeButton{
-  transition: 800ms all;
-  border-radius: 600px;
+#likeBtn{
+  transition: 0.3s ease all;
+  border-radius: 1px solid white;
+  /*padding: 10px 30px;*/
+  border: 2px solid green;
+  color: green;
   height: 50px;
-  width: 100px;
-  background-color: white;
-
+  width: 87px;
+  text-align: center;
+  background-color: #ffef00;
+  object-fit: fill;
+  font-family: "Molengo", sans-serif;
+  font-size: 20px;
 }
 
+#likeBtn:hover{
+  background-color: green;
+  color: #ffef00;
+  border: 2px solid #ffef00;
+
+}
 #meme-post
 {
   margin: 0px;
