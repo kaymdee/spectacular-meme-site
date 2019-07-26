@@ -85,11 +85,11 @@ hr {
   display:flex;
   flex-flow: column nowrap;
   align-items: center;
-  /* justify-content: flex-start; */
+  justify-content: center;
   background-color: rgba(255,255,255,.2);
-  margin: 50px;
+  margin: 150px 80px 80px 80px;
   border-radius: 30px;
-  padding: 20px 70px;
+  padding: 50px 70px;
   background-clip: border-box;
 }
 

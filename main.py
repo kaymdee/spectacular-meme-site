@@ -72,7 +72,7 @@ def getAccountHtml():
         signInOrProfileHtml = jinja2.Markup('<a href="%s">Sign In with Google</a>' % (users.create_login_url('/createNewProfile.html')))
     return {"signInOrProfileHtml" : signInOrProfileHtml, "signoutHtml": signoutHtml}
 
-def like(post_id, returnUrl):#liked a post based on post key and verifies that the user has not already liked it. Adds ikt to the user likedPosts
+def like(post_id, returnUrl):#liked a post based on post key and verifies that the user has not already liked it. Adds it to the user likedPosts
     post_key = ndb.Key(urlsafe=post_id)
     post = post_key.get()
 
@@ -114,7 +114,9 @@ class CreateNewProfileHandler(webapp2.RequestHandler):
             return webapp2.redirect("/index.html")#shouldn't be here if profile already exists
 
         template = jinja_env.get_template('templates/createNewProfile.html')
-        self.response.write(template.render())
+        dict ={}
+        dict.update(getAccountHtml())
+        self.response.write(template.render(dict))
     def post(self):
         # print "post running"
         #create new user from the form
@@ -148,9 +150,7 @@ class NewPostPage(webapp2.RequestHandler):
 
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
         template = jinja_env.get_template('templates/newPost.html')
-        dict = {}
-        dict.update(getAccountHtml())
-        self.response.write(template.render(dict))
+        self.response.write(template.render())
 
 class ConfirmPostPage(webapp2.RequestHandler):
     #makes the new post and stores it in data store. Shows the user their new post and gets the post method from newPost.html
@@ -169,7 +169,7 @@ class ConfirmPostPage(webapp2.RequestHandler):
         if Image:
             post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
         else:
-            post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = None)
+            post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description)
         post.put()
 
         # if Image:
@@ -181,7 +181,7 @@ class ConfirmPostPage(webapp2.RequestHandler):
         temp_dict = {"postTitle": Title,
                     "postAuthor": Author,
                     "postDesc": Description,
-                    "postDate": "now",
+                    "postDate": datetime.now(),
                     "postImage": jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' %
                         post.key.urlsafe())
                 }
@@ -208,29 +208,37 @@ class ViewPostPage(webapp2.RequestHandler):
         post_key = ndb.Key(urlsafe=self.request.get('post_id'))
         post = post_key.get()
 
+        gUser = users.get_current_user()
+        Author = models.User.get_by_id(gUser.user_id()).key
 
-        # commentList = models.Comment.query().fetch()
+        commentList = models.Comment.query().fetch()
 
         postInfo = {
             "post": post,
+            "Title": post.postTitle,
+            "Author": Author,
+            "Time": post.postTime,
             "Image": jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' %
                 post.key.urlsafe()),
-            "comments_info": post.comments,
+            "Likes": post.likes,
+            # "Comments": post.comments,
+            "comments_info": commentList,
+            "Description": post.postDesc,
         }
 
         self.response.write(template.render(postInfo))
 
 
     def post(self):
-        comment = self.request.get('comments')
-        post_key = ndb.Key(urlsafe=self.request.get('post_id'))
 
+        comment = self.request.get('comments')
         new_comment = models.Comment(comText = comment)
         new_comment_key = new_comment.put();
-        post = post_key.get()
-        post.comments.append(new_comment_key)
-        post.put()
-        return webapp2.redirect(self.request.referer)
+        commentList = models.Comment.query().fetch()
+        commentList.append(new_comment_key.get())
+        comment_template = jinja_env.get_template("templates/comments.html")
+        self.response.write(comment_template.render({'comments_info' : commentList}))
+
         # blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
         # template = jinja_env.get_template("templates/viewPost.html")
         # self.response.write(template.render({"blogPosts":blogPosts}))
@@ -285,11 +293,6 @@ class LikeHandler(webapp2.RequestHandler):
     def get(self):
         return webapp2.redirect("/index.html")#shouldn't load this page
     def post(self):
-        #make sure signed in
-        authResp = authUser()
-        if(isinstance(authResp,webapp2.Response)):
-            return authResp#stop code execution if the user has been directed
-        #make sure signed in end
         post_id = self.request.get("post_id")
         #returnUrl = self.request.get("returnUrl")
         like(post_id, "returnUrl")

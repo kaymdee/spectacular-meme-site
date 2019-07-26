@@ -10,26 +10,32 @@
 <body>
   {% include "templates/topnav.html" %}
 
+  <div class="main">
+    <h1> Create New Account </h1>
+    <form id="mainForm" method="post" action="/createNewProfile.html" enctype="multipart/form-data">
+      <div class="rowFlexbox">
+        <h4>First Name</h4>
+        <input class="inputs" type="text" name="firstName" value="First Name">
+      </div>
+      <br>
+      <div class="rowFlexbox">
+        <h4>Last Name </h4>
+        <input class="inputs" type="text" name="lastName" value="Last Name">
+      </div>
+      <br>
+      <div class="rowFlexbox">
+        <h4>Profile Pic </h4>
+        <input type="file" name="icon" accept="image/*" value="Upload Profile Icon">
+      </div>
+      <br>
 
-  <h2> Create New Account </h2>
-  <form id="mainForm" method="post" action="/createNewProfile.html" enctype = "multipart/form-data">
-    <h4> First Name</h4>
-    <input class="inputs" type="text" name="firstName" value="First Name">
-    <br>
-    <h4> Last Name </h4>
-    <input class="inputs"type="text" name="lastName" value="Last Name">
-    <br>
-    <h4> Profile Pic </h4>
-    <input type="file" name="icon" accept="image/*" value = "Upload Profile Icon">
-
-    <br>
-
-    <input id="btnPost"type="submit" value="Make Account">
-  </form>
-
+      <input id="btnPost" type="submit" value="Make Account">
+    </form>
+  </div id="main">
 
 
 
 
 </body>
+
 </html>
