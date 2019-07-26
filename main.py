@@ -209,21 +209,14 @@ class ViewPostPage(webapp2.RequestHandler):
         post = post_key.get()
 
         gUser = users.get_current_user()
-        Author = models.User.get_by_id(gUser.user_id()).key
 
-        commentList = models.Comment.query().fetch()
+        commentList = post.comments
 
         postInfo = {
             "post": post,
-            "Title": post.postTitle,
-            "Author": Author,
-            "Time": post.postTime,
             "Image": jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' %
                 post.key.urlsafe()),
-            "Likes": post.likes,
-            # "Comments": post.comments,
             "comments_info": commentList,
-            "Description": post.postDesc,
         }
 
         self.response.write(template.render(postInfo))
