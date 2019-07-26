@@ -150,9 +150,7 @@ class NewPostPage(webapp2.RequestHandler):
 
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
         template = jinja_env.get_template('templates/newPost.html')
-        dict ={}
-        dict.update(getAccountHtml())
-        self.response.write(template.render(dict))
+        self.response.write(template.render())
 
 class ConfirmPostPage(webapp2.RequestHandler):
     #makes the new post and stores it in data store. Shows the user their new post and gets the post method from newPost.html
@@ -211,41 +209,35 @@ class ViewPostPage(webapp2.RequestHandler):
         post = post_key.get()
 
         gUser = users.get_current_user()
-        user = models.User.get_by_id(gUser.user_id())
+        Author = models.User.get_by_id(gUser.user_id()).key
 
-        commentList = post.comments
+        commentList = models.Comment.query().fetch()
 
         postInfo = {
             "post": post,
+            "Title": post.postTitle,
+            "Author": Author,
+            "Time": post.postTime,
             "Image": jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' %
                 post.key.urlsafe()),
+            "Likes": post.likes,
+            # "Comments": post.comments,
             "comments_info": commentList,
+            "Description": post.postDesc,
         }
-        postInfo.update(getAccountHtml())
+
         self.response.write(template.render(postInfo))
 
 
     def post(self):
-        #the user is attempting to comment
-        #verify the user is logged in otherwise send them to log in]
-        authResp = authUser()
-        if(isinstance(authResp,webapp2.Response)):
-            return authResp#redirect to correct page
-        #user must be logged in at this point
 
-        #get the user
-        gUser = users.get_current_user()
-        user = models.User.get_by_id(gUser.user_id())
-
-        comment = self.request.get('commentText')
-        new_comment = models.Comment(comText = comment, comAuthor = user.key)
+        comment = self.request.get('comments')
+        new_comment = models.Comment(comText = comment)
         new_comment_key = new_comment.put();
-        post_key = ndb.Key(urlsafe=self.request.get('post_id'))
-        post = post_key.get()
-        post.comments.append(new_comment_key)
-        post.put()
+        commentList = models.Comment.query().fetch()
+        commentList.append(new_comment_key.get())
         comment_template = jinja_env.get_template("templates/comments.html")
-        self.response.write(comment_template.render({'comments_info' : post.comments}))
+        self.response.write(comment_template.render({'comments_info' : commentList}))
 
         # blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
         # template = jinja_env.get_template("templates/viewPost.html")
@@ -276,6 +268,8 @@ class ViewProfileHandler(webapp2.RequestHandler):
         pass
         #why this dict?
 
+
+#INACTIVE Comment Handler- EXAMPLE DON'T DELETEEE
 class ViewComments(webapp2.RequestHandler):
 
     def get(self):
@@ -297,6 +291,9 @@ class ViewComments(webapp2.RequestHandler):
         comment_template = jinja_env.get_template("templates/comments.html")
         self.response.write(comment_template.render({'comments_info' : commentList}))
 
+# Thanks for complying!!
+#You are
+#Awesome!
 class LikeHandler(webapp2.RequestHandler):
     def get(self):
         return webapp2.redirect("/index.html")#shouldn't load this page
