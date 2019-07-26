@@ -114,7 +114,9 @@ class CreateNewProfileHandler(webapp2.RequestHandler):
             return webapp2.redirect("/index.html")#shouldn't be here if profile already exists
 
         template = jinja_env.get_template('templates/createNewProfile.html')
-        self.response.write(template.render())
+        dict ={}
+        dict.update(getAccountHtml())
+        self.response.write(template.render(dict))
     def post(self):
         # print "post running"
         #create new user from the form

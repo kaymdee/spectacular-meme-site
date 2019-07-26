@@ -8,8 +8,8 @@
 }
 .postImage
 {
-  width: 50vh;
-  height: 50vh;
+  width: 60vh;
+  height: 60vh;
   border: solid purple 5px;
   object-fit: cover;
 }
