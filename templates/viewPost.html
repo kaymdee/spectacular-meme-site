@@ -12,9 +12,13 @@
 <body>
   {% include "templates/topnav.html" %}
   <div id="home" class="main">
+<<<<<<< HEAD
+
+=======
+>>>>>>> 8134427a6cf24314bbe0352430f1b96473b6bb53
     <div id="{{post.key.urlsafe()}}" class="blogPost">
       <h2>{{post.postTitle}}</h2>
-      <h3> By: {{post.postAuthor.get().firstName}} {{post.postAuthor.get().lastName}} on {{post.postTime.strftime("%b %d, %Y")}}</h3>
+      <h3> By: <a href="profile.html?id={{post.postAuthor.urlsafe()}}"> {{post.postAuthor.get().firstName}} {{post.postAuthor.get().lastName}} </a> on {{post.postTime.strftime("%b %d, %Y")}}</h3>
       {{Image}}
       <p> {{post.postDesc}} </p>
     </div>

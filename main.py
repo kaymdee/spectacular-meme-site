@@ -215,10 +215,14 @@ class ViewPostPage(webapp2.RequestHandler):
 
         postInfo = {
             "post": post,
+<<<<<<< HEAD
             "Title": post.postTitle,
             "Author": Author,
             "Time": post.postTime,
             "Image": jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' %
+=======
+            "Image": jinja2.Markup('<img id = "size" class="postImage" src="/img?img_id=%s"></img>' %
+>>>>>>> 810c5ee215899fd3f1f3f4a2cf0c4003b8774177
                 post.key.urlsafe()),
             "Likes": post.likes,
             # "Comments": post.comments,
@@ -234,11 +238,27 @@ class ViewPostPage(webapp2.RequestHandler):
         comment = self.request.get('comments')
         new_comment = models.Comment(comText = comment)
         new_comment_key = new_comment.put();
+<<<<<<< HEAD
         commentList = models.Comment.query().fetch()
         commentList.append(new_comment_key.get())
         comment_template = jinja_env.get_template("templates/comments.html")
         self.response.write(comment_template.render({'comments_info' : commentList}))
+=======
+        post_key = ndb.Key(urlsafe=self.request.get('post_id'))
+        post = post_key.get()
+        post.comments.append(new_comment_key)
+>>>>>>> 810c5ee215899fd3f1f3f4a2cf0c4003b8774177
 
+        template = jinja_env.get_template("templates/viewPost.html")
+        postInfo = {
+            "post": post,
+            "Image": jinja2.Markup('<img id = "size" class="postImage" src="/img?img_id=%s"></img>' %
+                post.key.urlsafe()),
+            "comments_info": commentList,
+        }
+        postInfo.update(getAccountHtml())
+        self.response.write(template.render(postInfo))
+        post.put()
         # blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
         # template = jinja_env.get_template("templates/viewPost.html")
         # self.response.write(template.render({"blogPosts":blogPosts}))
@@ -251,15 +271,14 @@ class ViewProfileHandler(webapp2.RequestHandler):
         userKey = ndb.Key(urlsafe=self.request.get('id'))
         userPostList = models.Post.query().filter(models.Post.postAuthor == userKey).order(-models.Post.postTime).fetch()
         user = userKey.get()
-        image = user.postImage
+        likedPostList = user.likedPosts
         #renders current user...
         # gUser = users.get_current_user()
         # user = models.User.get_by_id(gUser.user_id())
         template = jinja_env.get_template("templates/profile.html")
         dict = {"user" : user,
                 "userPosts" : userPostList,
-                "icon": jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' %
-                    user.key.urlsafe())
+                "likedPosts": likedPostList,
                 }
         dict.update(getAccountHtml())#add on the html for the account tags
 

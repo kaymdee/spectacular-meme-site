@@ -1,22 +1,38 @@
+<link rel="stylesheet" href="../static/styles/comments.css">
 
-<!--<link rel="stylesheet" href="/Users/cssi/spectacular-meme-site/static/styles/comments.css">-->
+<form id="commentForm" action="/viewPost.html?post_id={{post.key.urlsafe()}}" method="post">
 
-<form id="commentForm" action="/viewPost.html?post_id={{post.key.urlsafe()}}"  method="post">
-
-  Comments:<br>
+  <h2>Comments:</h2>
+  <br>
   <textarea name="commentText" id="commentsArea">
     Your comment here
   </textarea><br>
 
-<input type="submit" value="Submit">
-
-<!--<iframe name="viewComments" width="75%" height="75%"></iframe>-->
+  <input id="submitComment" type="submit" value="Submit">
+<hr width=90%/>
+  <!--<iframe name="viewComments" width="75%" height="75%"></iframe>-->
 </form>
+<div id="commentBox">
+{% for commentKey in comments_info %}
+<div class="comment">
+  {%set comment = commentKey.get()%}
+  {%set user = comment.comAuthor.get()%}
+  <a href="profile.html?id={{post.postAuthor.urlsafe()}}">
+    <div class="authorInfo">
+      {% if user.postImage != None %}
+        <img class = "commentIcon" src = "/img?img_id={{user.key.urlsafe()}}"></img>
+      {% else %}
+        <img class="commentIcon"src="../static/imgs/defaultProfileIcon.png"></img>
+      {% endif %}
+      <h3 class="userName"> {{user.firstName}} {{user.lastName}}</h3>
 
-  {% for commentKey in comments_info %}
-    {%set comment = commentKey.get()%}
-    {%set user = comment.comAuthor.get()%}
-    <h3>{{user.firstName}} {{user.lastName}}</h3>
+    </div>
+  </a>
+  <div class="commentInfo">
     <p>{{comment.comText}}</p>
-    <hr width=90%/>
-  {% endfor %}
+  </div class="commentInfo">
+</div class="comment">
+<hr width=90% />
+
+{% endfor %}
+</div id="commentBox">

@@ -1,7 +1,54 @@
-
-
+h2{
+  margin: 5px 0px;
+}
+form{
+  display:flex;
+  flex-direction: column;
+}
 textarea{
     border: 10px solid #fff;
-    height: 100px;
-    width: 50px;
+    height: 50px;
+    width: 70vw;
+}
+.comment a{
+  text-decoration:none;
+  color: #000000;
+  font-style:normal;
+  font-size: 1em;
+  width: 40%;
+}
+.authorInfo{
+  display: flex;
+  align-items: center;
+  width:100%;
+
+}
+.comment{
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+  align-items:center;
+  width: 100%;
+}
+.commentInfo{
+  width: 60%;
+  object-fit:cover;
+}
+.userName{
+  margin: 0px 10%;
+}
+.commentIcon{
+  border: solid yellow 1px;
+  width: 15%;
+
+}
+#commentBox{
+  display: flex;
+  flex-direction:column;
+  justify-content:center;
+  width:65vw;
+}
+#submitComment{
+  float: right;
+  align-self: flex-end;
 }
