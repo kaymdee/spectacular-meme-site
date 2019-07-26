@@ -23,4 +23,5 @@ class Post(ndb.Model):
 class Comment(ndb.Model):
     #parentPost = ndb.KeyProperty()
     comText = ndb.StringProperty(required=True)
+    comAuthor = ndb.KeyProperty(required=True)
 #previously parentPost

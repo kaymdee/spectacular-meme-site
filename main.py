@@ -211,6 +211,7 @@ class ViewPostPage(webapp2.RequestHandler):
         post = post_key.get()
 
         gUser = users.get_current_user()
+        user = models.User.get_by_id(gUser.user_id())
 
         commentList = post.comments
 
@@ -226,14 +227,25 @@ class ViewPostPage(webapp2.RequestHandler):
 
     def post(self):
         #the user is attempting to comment
+        #verify the user is logged in otherwise send them to log in]
+        authResp = authUser()
+        if(isinstance(authResp,webapp2.Response)):
+            return authResp#redirect to correct page
+        #user must be logged in at this point
 
-        comment = self.request.get('comments')
-        new_comment = models.Comment(comText = comment)
+        #get the user
+        gUser = users.get_current_user()
+        user = models.User.get_by_id(gUser.user_id())
+
+        comment = self.request.get('commentText')
+        new_comment = models.Comment(comText = comment, comAuthor = user.key)
         new_comment_key = new_comment.put();
-        commentList = models.Comment.query().fetch()
-        commentList.append(new_comment_key.get())
+        post_key = ndb.Key(urlsafe=self.request.get('post_id'))
+        post = post_key.get()
+        post.comments.append(new_comment_key)
+        post.put()
         comment_template = jinja_env.get_template("templates/comments.html")
-        self.response.write(comment_template.render({'comments_info' : commentList}))
+        self.response.write(comment_template.render({'comments_info' : post.comments}))
 
         # blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
         # template = jinja_env.get_template("templates/viewPost.html")
