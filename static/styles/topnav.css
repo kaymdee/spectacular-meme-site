@@ -58,16 +58,19 @@ hr {
   align-items:center;
 }
 .topnav div{
-  height: 100%
+  display: flex;
+  align-items:stretch;
+
 }
 /* Style the links inside the navigation bar */
 .topnav a {
   color: #f2f2f2;
   text-align: center;
   height: 100%;
-  padding: 0px 16px;
+  padding: 0px 25px;
+  line-height: 69px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 20px;
 }
 
 /* Change the color of links on hover */
@@ -107,11 +110,11 @@ hr {
 
 #logoBox{
   padding: 0;
-  height: 48px;
+  height: 69px;
 }
 #logo{
-   width: 60px;
-   height: 48px;
+   width: 86px;
+   height: 69px;
 }
 
 #headerTitle{
