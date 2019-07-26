@@ -98,7 +98,6 @@ hr {
 .rowFlexbox{
   display: flex;
   flex-direction: row;
-  align-items: space-around;
 }
 
 .picBox{
