@@ -150,7 +150,9 @@ class NewPostPage(webapp2.RequestHandler):
 
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
         template = jinja_env.get_template('templates/newPost.html')
-        self.response.write(template.render())
+        dict ={}
+        dict.update(getAccountHtml())
+        self.response.write(template.render(dict))
 
 class ConfirmPostPage(webapp2.RequestHandler):
     #makes the new post and stores it in data store. Shows the user their new post and gets the post method from newPost.html
@@ -223,6 +225,7 @@ class ViewPostPage(webapp2.RequestHandler):
 
 
     def post(self):
+        #the user is attempting to comment
 
         comment = self.request.get('comments')
         new_comment = models.Comment(comText = comment)
