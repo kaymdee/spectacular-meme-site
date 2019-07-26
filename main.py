@@ -72,7 +72,7 @@ def getAccountHtml():
         signInOrProfileHtml = jinja2.Markup('<a href="%s">Sign In with Google</a>' % (users.create_login_url('/createNewProfile.html')))
     return {"signInOrProfileHtml" : signInOrProfileHtml, "signoutHtml": signoutHtml}
 
-def like(post_id, returnUrl):#liked a post based on post key and verifies that the user has not already liked it. Adds ikt to the user likedPosts
+def like(post_id, returnUrl):#liked a post based on post key and verifies that the user has not already liked it. Adds it to the user likedPosts
     post_key = ndb.Key(urlsafe=post_id)
     post = post_key.get()
 
@@ -167,7 +167,7 @@ class ConfirmPostPage(webapp2.RequestHandler):
         if Image:
             post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = Image)
         else:
-            post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description, postImage = None)
+            post = models.Post(postTitle = Title, postAuthor = Author, postDesc = Description)
         post.put()
 
         # if Image:
