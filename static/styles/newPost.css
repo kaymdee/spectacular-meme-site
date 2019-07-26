@@ -1,14 +1,10 @@
 body
 {
   background-image: url("https://picserio.com/data/out/188/drake-wallpaper-background_4039942.jpg"); */
-  /* background-image: url("https://static1.fjcdn.com/comments/+_3c601ae1c7bd60dfbc5fe2b4adeaecca.jpg"); */
   background-size: auto;
   background-size: cover;
-  /* background-repeat: no-repeat; */
-  /* background-repeat: repeat; */
   justify-content: center;
   align-items: center;
-  /* background-size: 500px; */
 }
 
 #mainTitle
