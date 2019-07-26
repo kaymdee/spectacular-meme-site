@@ -217,7 +217,7 @@ class ViewPostPage(webapp2.RequestHandler):
 
         postInfo = {
             "post": post,
-            "Image": jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' %
+            "Image": jinja2.Markup('<img id = "size" class="postImage" src="/img?img_id=%s"></img>' %
                 post.key.urlsafe()),
             "comments_info": commentList,
         }
