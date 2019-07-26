@@ -30,7 +30,7 @@ Figure out google auth - DONE
 General:
 -Update styling every everywhere
 --like button (be more responsive) - WIP KHALAYA
---create profile page
+--create profile page -
 -Refactoring like post
 
 Main Page:

@@ -55,14 +55,17 @@ hr {
   background-color: #ffd300;
   display:flex;
   justify-content: space-between;
+  align-items:center;
 }
-
+.topnav div{
+  height: 100%
+}
 /* Style the links inside the navigation bar */
 .topnav a {
-  float: left;
   color: #f2f2f2;
   text-align: center;
-  padding: 14px 16px;
+  height: 100%;
+  padding: 0px 16px;
   text-decoration: none;
   font-size: 17px;
 }
@@ -109,4 +112,11 @@ hr {
 #logo{
    width: 60px;
    height: 48px;
+}
+
+#headerTitle{
+  display:block;
+  font-size: 2em;
+  font-weight: bold;
+  margin: .5em;
 }
