@@ -56,14 +56,15 @@
           </h4>
 
         </div>
-        <hr width="80%">
+        <hr width="100%" id = "likedPosts">
       </div id="postContainer">
       {% endfor %}
-    </div id="profilePosts">
+    </div>
+    <br>
     <br>
     <br>
     <h2> Liked Posts </h2>
-    <div id ="likedPosts">
+    <div>
       {% for post in likedPosts %}
       <div id="{{post.urlsafe()}}"class="postContainer">
         <a href="viewPost.html?post_id={{post.urlsafe()}}">
