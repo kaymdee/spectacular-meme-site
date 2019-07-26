@@ -4,12 +4,13 @@
 <head>
   <title> New Meme Post </title>
   {% include "templates/head.html" %}
-  {% include "templates/topnav.html" %}
   <link rel = "stylesheet" href = "../static/styles/profile.css"/>
 
 </head>
 
 <body>
+  {% include "templates/topnav.html" %}
+
   <div id="home" class="main">
     <div id = "sticky">
       <section id = "postType">
@@ -50,19 +51,20 @@
 
           <h4>
             <form id="likeform" method="post" action="/likeHandler?post_id={{post.key.urlsafe()}}">
-              <input type="submit" value="Likes: {{post.likes}}" name="pseudolike">
+              <input class="likeBtn" type="submit" value="Likes: {{post.likes}}" name="pseudolike">
             </form>
           </h4>
 
         </div>
-        <hr width="80%">
+        <hr width="100%" id = "likedPosts">
       </div id="postContainer">
       {% endfor %}
-    </div id="profilePosts">
+    </div>
+    <br>
     <br>
     <br>
     <h2> Liked Posts </h2>
-    <div id ="likedPosts">
+    <div>
       {% for post in likedPosts %}
       <div id="{{post.urlsafe()}}"class="postContainer">
         <a href="viewPost.html?post_id={{post.urlsafe()}}">
