@@ -10,7 +10,7 @@
 {
   width: 50vh;
   height: 50vh;
-  border: solid purple 5px;
+  /* border: solid purple 5px; */
   object-fit: cover;
 }
 #likeButton, #subscribeButton{
