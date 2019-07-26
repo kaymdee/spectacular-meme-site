@@ -11,6 +11,12 @@
 
 <body>
   <div id="home" class="main">
+    <div id = "sticky">
+      <section id = "postType">
+      <a href = "#profilePosts"><button id = "yourPost"> Your Posts </button></a>
+      <a href = "#likedPosts"><button id = "likedPost"> Liked Posts </button></a>
+    </section>
+    </div>
     <h1 id="mainTitle">Profile </h1>
     <div id="profileInfoDiv" class="rowFlexbox">
     {% if user.postImage != None %}
@@ -26,6 +32,7 @@
     <br>
     <hr width=95%>
     <br>
+    <h2> Your Posts </h2>
     <div id="profilePosts" >
       {% for post in userPosts %}
       <div id="{{post.key.urlsafe()}}"class="postContainer">
@@ -54,10 +61,7 @@
     </div id="profilePosts">
     <br>
     <br>
-
-    <br>
-    <br>
-
+    <h2> Liked Posts </h2>
     <div id ="likedPosts">
       {% for post in likedPosts %}
       <div id="{{post.urlsafe()}}"class="postContainer">
