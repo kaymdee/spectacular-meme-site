@@ -221,7 +221,7 @@ class ViewPostPage(webapp2.RequestHandler):
                 post.key.urlsafe()),
             "comments_info": commentList,
         }
-
+        postInfo.update(getAccountHtml())
         self.response.write(template.render(postInfo))
 
 
