@@ -12,19 +12,21 @@
 <body>
   <div id="home" class="main">
     <h1 id="mainTitle">Profile </h1>
-    {% if user.postImage != None %}
-      <img class = "postImage" src = "/img?img_id={{user.key.urlsafe()}}"></img>
-    {% else %}
-      <img class="postImage"src="../static/imgs/defaultProfileIcon.png"></img>
-    {% endif %}
     <div id="profileInfoDiv" class="rowFlexbox">
+    {% if user.postImage != None %}
+      <img class = "profileIcon" src = "/img?img_id={{user.key.urlsafe()}}"></img>
+    {% else %}
+      <img class="profileIcon"src="../static/imgs/defaultProfileIcon.png"></img>
+    {% endif %}
       <div id="profileDetails">
-        <h3> Name: {{user.firstName}} {{user.lastName}} </h3>
-        <h4> Email: {{user.email}} </h4>
+        <h2> Name: {{user.firstName}} {{user.lastName}} </h3>
+        <h2> Email: {{user.email}} </h4>
       </div>
     </div id="profileInfoDiv">
-
-    <div id="profilePosts" class="main">
+    <br>
+    <hr width=95%>
+    <br>
+    <div id="profilePosts" >
       {% for post in userPosts %}
       <div id="{{post.key.urlsafe()}}"class="postContainer">
         <a href="viewPost.html?post_id={{post.key.urlsafe()}}">
