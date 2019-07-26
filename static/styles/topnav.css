@@ -31,17 +31,13 @@ hr {
     border-width: 1px;
 }
 
-
-
-
-
-
 /* Add a black background color to the top navigation */
 .topnav{
   position: fixed;
   top: 0;
   width: 100%;
   left:0;
+  height: 69px;
   overflow: hidden;
   background-color: #ffef00;
   display:flex;
@@ -49,15 +45,17 @@ hr {
   align-items:center;
 }
 
-#headerTitle
-{
-  font-family: "Fascinate Inline", cursive;
-}
-
 .topnav div{
   display: flex;
   align-items:stretch;
+}
 
+#centerTopnav
+{
+  display: flex;
+  flex: auto;
+  justify-content: center;
+  /* margin-right: 3%; */
 }
 /* Style the links inside the navigation bar */
 .topnav a {
@@ -98,7 +96,6 @@ hr {
 .rowFlexbox{
   display: flex;
   flex-direction: row;
-  align-items: space-around;
 }
 
 .picBox{
@@ -110,13 +107,14 @@ hr {
   height: 69px;
 }
 #logo{
-   width: 86px;
+   width: 80px;
    height: 69px;
 }
 
 #headerTitle{
   display:block;
-  font-size: 2em;
+  font-size: 2.7em;
   font-weight: bold;
   margin: .5em;
+  font-family: "Fascinate Inline", cursive;
 }

@@ -8,9 +8,9 @@
 }
 .postImage
 {
-  width: 60vh;
-  height: 60vh;
-  border: solid purple 5px;
+  width: 50vh;
+  height: 50vh;
+  border: solid yellow 1px;
   object-fit: cover;
 }
 #likeBtn{

@@ -4,7 +4,7 @@
 <form id="commentForm" action="/viewPost.html?post_id={{post.key.urlsafe()}}"  method="post">
 
   Comments:<br>
-  <textarea name="comments" id="commentsArea">
+  <textarea name="commentText" id="commentsArea">
     Your comment here
   </textarea><br>
 
@@ -13,10 +13,10 @@
 <!--<iframe name="viewComments" width="75%" height="75%"></iframe>-->
 </form>
 
-  <ul>
-    {% for commentKey in comments_info %}
-
-      <li>{{commentKey.get().comText}}</li>
-    {% endfor %}
-
-  </ul>
+  {% for commentKey in comments_info %}
+    {%set comment = commentKey.get()%}
+    {%set user = comment.comAuthor.get()%}
+    <h3>{{user.firstName}} {{user.lastName}}</h3>
+    <p>{{comment.comText}}</p>
+    <hr width=90%/>
+  {% endfor %}

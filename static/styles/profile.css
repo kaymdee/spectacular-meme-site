@@ -6,11 +6,18 @@
   align-items:center;
   justify-content:center;
 }
+.profileIcon{
+  width:20vh;
+  height:20vh;
+  border: solid yellow 1px;
+  object-fit: cover;
+
+}
 .postImage
 {
   width: 50vh;
   height: 50vh;
-  border: solid purple 5px;
+  border: solid yellow 1px;
   object-fit: cover;
 }
 #likeButton, #subscribeButton{
@@ -26,7 +33,7 @@
 {
   margin: 0px;
   padding: 0px;
-  border: solid purple 3px;
+  border: solid yellow 1px;
 }
 #profileInfoDiv{
   justify-content: space-around;
