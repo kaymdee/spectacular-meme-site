@@ -148,9 +148,7 @@ class NewPostPage(webapp2.RequestHandler):
 
         self.response.headers['Content-Type'] = 'text/html' #change this to write html!
         template = jinja_env.get_template('templates/newPost.html')
-        dict = {}
-        dict.update(getAccountHtml())
-        self.response.write(template.render(dict))
+        self.response.write(template.render())
 
 class ConfirmPostPage(webapp2.RequestHandler):
     #makes the new post and stores it in data store. Shows the user their new post and gets the post method from newPost.html
@@ -181,7 +179,7 @@ class ConfirmPostPage(webapp2.RequestHandler):
         temp_dict = {"postTitle": Title,
                     "postAuthor": Author,
                     "postDesc": Description,
-                    "postDate": "now",
+                    "postDate": datetime.now(),
                     "postImage": jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' %
                         post.key.urlsafe())
                 }
