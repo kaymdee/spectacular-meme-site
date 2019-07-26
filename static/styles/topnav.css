@@ -3,25 +3,15 @@
 }
 body {
   display: flex;
-  background-image: url("https://previews.123rf.com/images/jes2ufoto/jes2ufoto1708/jes2ufoto170800109/83814232-old-white-brick-wall-texture-design-empty-white-brick-background-for-presentations-and-web-design-a-.jpg");
-/*
-brick wall w/mic: https://wallpaperplay.com/walls/full/5/5/8/282500.jpg
-curtins w/ spotlight: https://i.pinimg.com/originals/c9/ab/b6/c9abb656a6189a18187c2d2b0dcd1e01.jpg
-white brick: https://previews.123rf.com/images/jes2ufoto/jes2ufoto1708/jes2ufoto170800109/83814232-old-white-brick-wall-texture-design-empty-white-brick-background-for-presentations-and-web-design-a-.jpg
-
-*/
-
-
-  /* Full height */
-  min-height: 100vh;
-  height: 100%;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  /* Center and scale the image nicely */
+  /* background-image: url("https://previews.123rf.com/images/jes2ufoto/jes2ufoto1708/jes2ufoto170800109/83814232-old-white-brick-wall-texture-design-empty-white-brick-background-for-presentations-and-web-design-a-.jpg"); */
+  background-image: url("http://epicwallpaperz.com/wallpaper-hd/meme-wallpapers-for-android-On-wallpaper-hd.png");
+  background-size: cover;
+  background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  flex: auto;
+  justify-content: center;
+  align-items: center;
 
 }
 
