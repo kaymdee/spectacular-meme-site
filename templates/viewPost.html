@@ -12,8 +12,6 @@
 <body>
   {% include "templates/topnav.html" %}
   <div id="home" class="main">
-    <h1 id="mainTitle"> Me Two!!! </h1>
-
     <div id="{{post.key.urlsafe()}}" class="blogPost">
       <h2>{{post.postTitle}}</h2>
       <h3> By: {{post.postAuthor.get().firstName}} {{post.postAuthor.get().lastName}} on {{post.postTime.strftime("%b %d, %Y")}}</h3>
