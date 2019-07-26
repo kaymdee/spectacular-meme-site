@@ -25,7 +25,7 @@ light green: 2cdb4c
   border-radius: 1px solid white;
   /*padding: 10px 30px;*/
   border: 2px solid #2dc248;
-  color: #2dc248;
+  color: black;
   height: 50px;
   width: 87px;
   text-align: center;
@@ -37,7 +37,7 @@ light green: 2cdb4c
 
 #likeBtn:hover{
   background-color: #2dc248;
-  color: #ffef00;
+  color: black;
   border: 2px solid #ffef00;
 
 }

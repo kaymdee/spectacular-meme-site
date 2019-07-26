@@ -215,14 +215,7 @@ class ViewPostPage(webapp2.RequestHandler):
 
         postInfo = {
             "post": post,
-<<<<<<< HEAD
-            "Title": post.postTitle,
-            "Author": Author,
-            "Time": post.postTime,
-            "Image": jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' %
-=======
             "Image": jinja2.Markup('<img id = "size" class="postImage" src="/img?img_id=%s"></img>' %
->>>>>>> 810c5ee215899fd3f1f3f4a2cf0c4003b8774177
                 post.key.urlsafe()),
             "Likes": post.likes,
             # "Comments": post.comments,
@@ -238,16 +231,9 @@ class ViewPostPage(webapp2.RequestHandler):
         comment = self.request.get('comments')
         new_comment = models.Comment(comText = comment)
         new_comment_key = new_comment.put();
-<<<<<<< HEAD
-        commentList = models.Comment.query().fetch()
-        commentList.append(new_comment_key.get())
-        comment_template = jinja_env.get_template("templates/comments.html")
-        self.response.write(comment_template.render({'comments_info' : commentList}))
-=======
         post_key = ndb.Key(urlsafe=self.request.get('post_id'))
         post = post_key.get()
         post.comments.append(new_comment_key)
->>>>>>> 810c5ee215899fd3f1f3f4a2cf0c4003b8774177
 
         template = jinja_env.get_template("templates/viewPost.html")
         postInfo = {
