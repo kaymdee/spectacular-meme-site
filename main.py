@@ -243,10 +243,17 @@ class ViewPostPage(webapp2.RequestHandler):
         post_key = ndb.Key(urlsafe=self.request.get('post_id'))
         post = post_key.get()
         post.comments.append(new_comment_key)
-        post.put()
-        comment_template = jinja_env.get_template("templates/comments.html")
-        self.response.write(comment_template.render({'comments_info' : post.comments}))
 
+        template = jinja_env.get_template("templates/viewPost.html")
+        postInfo = {
+            "post": post,
+            "Image": jinja2.Markup('<img id = "size" class="postImage" src="/img?img_id=%s"></img>' %
+                post.key.urlsafe()),
+            "comments_info": commentList,
+        }
+        postInfo.update(getAccountHtml())
+        self.response.write(template.render(postInfo))
+        post.put()
         # blogPosts = models.Post.query().order(models.BlogPost.postTime).fetch()
         # template = jinja_env.get_template("templates/viewPost.html")
         # self.response.write(template.render({"blogPosts":blogPosts}))
