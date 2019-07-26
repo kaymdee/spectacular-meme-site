@@ -12,6 +12,7 @@ body {
   flex: auto;
   justify-content: center;
   align-items: center;
+  font-family: "Molengo", sans-serif;
 
 }
 
@@ -42,22 +43,31 @@ hr {
   width: 100%;
   left:0;
   overflow: hidden;
-  background-color: #ffd300;
+  background-color: #ffef00;
   display:flex;
   justify-content: space-between;
   align-items:center;
 }
+
+#headerTitle
+{
+  font-family: "Fascinate Inline", cursive;
+}
+
 .topnav div{
-  height: 100%
+  display: flex;
+  align-items:stretch;
+
 }
 /* Style the links inside the navigation bar */
 .topnav a {
-  color: #f2f2f2;
+  color: black;
   text-align: center;
   height: 100%;
-  padding: 0px 16px;
+  padding: 0px 25px;
+  line-height: 69px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 20px;
 }
 
 /* Change the color of links on hover */
@@ -77,11 +87,11 @@ hr {
   display:flex;
   flex-flow: column nowrap;
   align-items: center;
-  /* justify-content: flex-start; */
+  justify-content: center;
   background-color: rgba(255,255,255,.2);
-  margin: 50px;
+  margin: 150px 80px 80px 80px;
   border-radius: 30px;
-  padding: 20px 70px;
+  padding: 50px 70px;
   background-clip: border-box;
 }
 
@@ -97,11 +107,11 @@ hr {
 
 #logoBox{
   padding: 0;
-  height: 48px;
+  height: 69px;
 }
 #logo{
-   width: 60px;
-   height: 48px;
+   width: 86px;
+   height: 69px;
 }
 
 #headerTitle{
