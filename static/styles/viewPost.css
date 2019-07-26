@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 .postContainer{
   display: flex;
@@ -32,4 +33,9 @@
 }
 #easterEggPenguin{
   display: none;
+=======
+#home
+{
+  font-size: 1.5em;
+>>>>>>> 1cf614cbb6539a8bca76b5567279843909d91f98
 }
