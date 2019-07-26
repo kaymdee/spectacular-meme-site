@@ -15,6 +15,7 @@ textarea{
   color: #000000;
   font-style:normal;
   font-size: 1em;
+  width: 40%;
 }
 .authorInfo{
   display: flex;
@@ -30,7 +31,8 @@ textarea{
   width: 100%;
 }
 .commentInfo{
-  width: 60%
+  width: 60%;
+  object-fit:cover;
 }
 .userName{
   margin: 0px 10%;

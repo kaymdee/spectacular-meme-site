@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7b7ea1a462881189ca4bf73cdd23407d1eab0633
 
 .postContainer{
   display: flex;
@@ -33,9 +36,4 @@
 }
 #easterEggPenguin{
   display: none;
-=======
-#home
-{
-  font-size: 1.5em;
->>>>>>> 1cf614cbb6539a8bca76b5567279843909d91f98
 }
