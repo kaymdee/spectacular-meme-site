@@ -243,11 +243,8 @@ class ViewPostPage(webapp2.RequestHandler):
         post_key = ndb.Key(urlsafe=self.request.get('post_id'))
         post = post_key.get()
         post.comments.append(new_comment_key)
-<<<<<<< HEAD
 
-=======
         commentList = post.comments
->>>>>>> 70e376424a16210f24da47691e13d737742daeb8
         template = jinja_env.get_template("templates/viewPost.html")
         postInfo = {
             "post": post,
