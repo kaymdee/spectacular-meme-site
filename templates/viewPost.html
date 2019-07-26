@@ -15,10 +15,10 @@
     <h1 id="mainTitle"> Me Two!!! </h1>
 
     <div id="{{post.key.urlsafe()}}" class="blogPost">
-      <h2>{{Title}}</h2>
-      <h3> By: {{Author.get().firstName}} {{Author.get().lastName}} on {{Time}}</h3>
+      <h2>{{post.postTitle}}</h2>
+      <h3> By: {{post.postAuthor.get().firstName}} {{post.postAuthor.get().lastName}} on {{post.postTime.strftime("%b %d, %Y")}}</h3>
       {{Image}}
-      <p> {{Description}} </p>
+      <p> {{post.postDesc}} </p>
     </div>
     <form id="likeform" method="post" action="/likeHandler?post_id={{post.key.urlsafe()}}">
       <input type="submit" value="Likes: {{post.likes}}" name="pseudolike">
