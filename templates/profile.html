@@ -58,6 +58,32 @@
     <br>
     <br>
 
+    <div id ="likedPosts">
+      {% for post in likedPostList %}
+      <div id="{{post.key.urlsafe()}}"class="postContainer">
+        <a href="viewPost.html?post_id={{post.key.urlsafe()}}">
+          <img class="postImage"
+            src="/img?img_id={{post.key.urlsafe()}}"
+            ></img>
+        </a>
+        <div class="blogPost">
+          <h2>{{post.postTitle}}</h2>
+
+          <h3> By: <a href="profile.html?id={{post.postAuthor.urlsafe()}}">{{post.postAuthor.get().firstName}} {{post.postAuthor.get().lastName}} </a> on {{post.postTime.strftime("%b %d, %Y")}}</h3>
+
+          <p> {{post.postDesc}} </p>
+
+          <h4>
+            <form id="likeform" method="post" action="/likeHandler?post_id={{post.key.urlsafe()}}">
+              <input type="submit" value="Likes: {{post.likes}}" name="pseudolike">
+            </form>
+          </h4>
+
+        </div>
+        <hr width="80%">
+      </div id="postContainer">
+      {% endfor %}
+    </div>
 </div id ="main">
 
 
