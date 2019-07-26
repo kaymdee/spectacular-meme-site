@@ -8,15 +8,9 @@
 }
 .postImage
 {
-<<<<<<< HEAD
   width: 60vh;
   height: 60vh;
   border: solid purple 5px;
-=======
-  width: 50vh;
-  height: 50vh;
-  /* border: solid purple 5px; */
->>>>>>> 33cac90baad9812572c900f90d91df22c59a3787
   object-fit: cover;
 }
 #likeButton, #subscribeButton{
