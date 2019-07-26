@@ -1,0 +1,35 @@
+
+.postContainer{
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+}
+.postImage
+{
+  width: 80vh;
+  height: 80vh;
+  border: solid yellow 1px;
+  object-fit: fit;
+}
+#likeButton, #subscribeButton{
+  transition: 800ms all;
+  border-radius: 600px;
+  height: 50px;
+  width: 100px;
+  background-color: white;
+
+}
+
+#meme-post
+{
+  margin: 0px;
+  padding: 0px;
+  border: solid purple 3px;
+}
+#easterEggPikachu{
+  display: none;
+}
+#easterEggPenguin{
+  display: none;
+}
