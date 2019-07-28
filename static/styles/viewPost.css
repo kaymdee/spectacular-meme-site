@@ -10,7 +10,7 @@
   width: 80vh;
   height: 80vh;
   border: solid yellow 1px;
-  object-fit: fit;
+  object-fit: contain;
 }
 #likeButton, #subscribeButton{
   transition: 800ms all;
