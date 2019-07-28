@@ -184,7 +184,7 @@ class ConfirmPostPage(webapp2.RequestHandler):
                     "postAuthor": Author,
                     "postDesc": Description,
                     "postDate": datetime.now(),
-                    "postImage": jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' %
+                    "postImage": jinja2.Markup('<img class ="postImage" id = "size" src="/img?img_id=%s"></img>' %
                         post.key.urlsafe())
                 }
         temp_dict.update(getAccountHtml())

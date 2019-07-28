@@ -1,0 +1,34 @@
+
+
+.postContainer{
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+}
+.postImage
+{
+  width: 50vh;
+  height: 50vh;
+  border: solid yellow 2px;
+  object-fit: cover;
+}
+
+/*
+dark green: 2dc248
+medium green: 24d444
+light green: 2cdb4c
+*/
+
+#meme-post
+{
+  margin: 0px;
+  padding: 0px;
+  border: solid purple 3px;
+}
+#easterEggPikachu{
+  display: none;
+}
+#easterEggPenguin{
+  display: none;
+}
