@@ -11,10 +11,7 @@
 <body>
   {% include "templates/topnav.html" %}
   <div id="home" class="main">
-    <section id="postType">
-      <a href="#profilePosts"><button id="profilePost"> Profile's Posts </button></a>
-      <a href="#likedPosts"><button id="likedPost"> Liked Posts </button></a>
-    </section>
+
     <h1 id="mainTitle">Profile </h1>
     <div id="profileInfoDiv" class="rowFlexbox">
       {% if user.postImage != None %}
@@ -29,11 +26,15 @@
     </div id="profileInfoDiv">
     <br>
     <br id = "profilePosts">
+    <section id="postType" class="rowFlexbox">
+      <a><button id="profilePost"> Profile's Posts </button></a>
+      <a><button id="likedPost"> Liked Posts </button></a>
+    </section>
     <hr width=95%>
     <br>
     <div id="profilePostsDiv" class="centerColFlexBox">
 
-      <h2 id="profilePosts"> Profile's Posts </h2>
+      <h2 id="profilePostsTitle">Profile's Posts</h2>
       {% for post in userPosts %}
       <div id="{{post.key.urlsafe()}}" class="postContainer">
         <a href="viewPost.html?post_id={{post.key.urlsafe()}}">
@@ -59,7 +60,7 @@
     </div>
 
     <div id="likedPostsDiv" class="hidden centerColFlexBox">
-      <h2 id="likedPosts"> Liked Posts </h2>
+      <h2 id="likedPostsTitle"> Liked Posts </h2>
       {% for postKey in likedPosts %}
       {% set post = postKey.get() %}
       {%if post != None %}

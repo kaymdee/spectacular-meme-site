@@ -22,7 +22,10 @@ const likeAction = () => {
 };
 
 likeBtn.addEventListener("click", likeAction);
-
+//set profile posts button to green at beginning
+yourBtn.style.backgroundColor = "#2dc248";
+yourBtn.style.color = "#ffef00";
+yourBtn.style.borderColor ="#ffef00";
 const yourPostAction = () => {
   if(likeAction){
     likeBtn.style.backgroundColor = "#ffef00";
@@ -32,7 +35,7 @@ const yourPostAction = () => {
 
   yourBtn.style.backgroundColor = "#2dc248";
   yourBtn.style.color = "#ffef00";
-  yourBtn.style.borderColor ="#ffef00"
+  yourBtn.style.borderColor ="#ffef00";
   //yourBtn.classList.add("liked");
 }
 }

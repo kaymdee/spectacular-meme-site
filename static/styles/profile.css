@@ -37,15 +37,13 @@
   border: 2px solid #2dc248;
   color: #2dc248;
   height: 50px;
-  width: 120px;
+  width: 100%;
   /* text-align: center; */
   background-color: #ffef00;
   object-fit: fill;
   font-family: "Molengo", sans-serif;
   font-size: 20px;
-  position: fixed;
-  top: 220px;
-  left: 30px;
+
 
 }
 
@@ -54,23 +52,28 @@
   color: #ffef00;
   border: 2px solid #ffef00;
 }
-
-#likedPost{
+#postType{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+#postType a{
+  width: 45%;
+}
+#likedPost, #profilePost{
   transition: 0.3s ease all;
   border-radius: 1px solid white;
-  /*padding: 10px 30px;*/
+  padding: 10px 30px;
   border: 2px solid #2dc248;
   color: #2dc248;
   height: 50px;
-  width: 120px;
+  width: 100%;
   text-align: center;
   background-color: #ffef00;
   object-fit: fill;
   font-family: "Molengo", sans-serif;
   font-size: 20px;
-  position: fixed;
-  top: 279px;
-  left: 30px;
+
   /*right: 330px;*/
 
 }
@@ -80,8 +83,11 @@
   color: #ffef00;
   border: 2px solid #ffef00;
 }
-#profileposts, #likedposts{
+#profilePostsTitle, #likedPostsTitle{
   font-size:2.5em;
+}
+#profileDetails{
+  margin:10px;
 }
 .hidden{
   display:none;
