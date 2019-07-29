@@ -184,7 +184,7 @@ class ConfirmPostPage(webapp2.RequestHandler):
                     "postAuthor": Author,
                     "postDesc": Description,
                     "postDate": datetime.now(),
-                    "postImage": jinja2.Markup('<img id = "size" src="/img?img_id=%s"></img>' %
+                    "postImage": jinja2.Markup('<img class ="postImage" id = "size" src="/img?img_id=%s"></img>' %
                         post.key.urlsafe())
                 }
         temp_dict.update(getAccountHtml())
@@ -210,8 +210,8 @@ class ViewPostPage(webapp2.RequestHandler):
         post_key = ndb.Key(urlsafe=self.request.get('post_id'))
         post = post_key.get()
 
-        gUser = users.get_current_user()
-        user = models.User.get_by_id(gUser.user_id())
+        # gUser = users.get_current_user()
+        # user = models.User.get_by_id(gUser.user_id())
 
         commentList = post.comments
 
@@ -281,7 +281,6 @@ class ViewProfileHandler(webapp2.RequestHandler):
         self.response.write(template.render(dict))
     def post(self):
         pass
-        #why this dict?
 
 class ViewComments(webapp2.RequestHandler):
 
@@ -308,6 +307,11 @@ class LikeHandler(webapp2.RequestHandler):
     def get(self):
         return webapp2.redirect("/index.html")#shouldn't load this page
     def post(self):
+        #check user logged in or redirect
+        authResp = authUser()
+        if(isinstance(authResp,webapp2.Response)):
+            return authResp#stop code execution if the user has been directed
+        #user mnust be logged in at this point
         post_id = self.request.get("post_id")
         #returnUrl = self.request.get("returnUrl")
         like(post_id, "returnUrl")

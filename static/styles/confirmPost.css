@@ -1,4 +1,5 @@
 
+
 .postContainer{
   display: flex;
   flex-direction: column;
@@ -7,19 +8,17 @@
 }
 .postImage
 {
-  width: 80vh;
-  height: 80vh;
-  border: solid yellow 1px;
-  object-fit: contain;
+  width: 50vh;
+  height: 50vh;
+  border: solid yellow 2px;
+  object-fit: cover;
 }
-#likeButton, #subscribeButton{
-  transition: 800ms all;
-  border-radius: 600px;
-  height: 50px;
-  width: 100px;
-  background-color: white;
 
-}
+/*
+dark green: 2dc248
+medium green: 24d444
+light green: 2cdb4c
+*/
 
 #meme-post
 {

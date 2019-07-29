@@ -17,7 +17,7 @@
 <div class="comment">
   {%set comment = commentKey.get()%}
   {%set user = comment.comAuthor.get()%}
-  <a href="profile.html?id={{post.postAuthor.urlsafe()}}">
+  <a href="profile.html?id={{comment.comAuthor.urlsafe()}}">
     <div class="authorInfo">
       {% if user.postImage != None %}
         <img class = "commentIcon" src = "/img?img_id={{user.key.urlsafe()}}"></img>
