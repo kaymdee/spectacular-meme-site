@@ -4,40 +4,38 @@
 <head>
   <title> New Meme Post </title>
   {% include "templates/head.html" %}
-  <link rel = "stylesheet" href = "../static/styles/profile.css"/>
+  <link rel="stylesheet" href="../static/styles/profile.css" />
 
 </head>
 
 <body>
   {% include "templates/topnav.html" %}
   <div id="home" class="main">
-      <section id = "postType">
-      <a href = "#profilePosts"><button id = "yourPost"> Profile's Posts </button></a>
-      <a href = "#likedPosts"><button id = "likedPost"> Liked Posts </button></a>
+    <section id="postType">
+      <a href="#profilePosts"><button id="yourPost"> Profile's Posts </button></a>
+      <a href="#likedPosts"><button id="likedPost"> Liked Posts </button></a>
     </section>
     <h1 id="mainTitle">Profile </h1>
     <div id="profileInfoDiv" class="rowFlexbox">
-    {% if user.postImage != None %}
-      <img class = "profileIcon" src = "/img?img_id={{user.key.urlsafe()}}"></img>
-    {% else %}
-      <img class="profileIcon"src="../static/imgs/defaultProfileIcon.png"></img>
-    {% endif %}
+      {% if user.postImage != None %}
+      <img class="profileIcon" src="/img?img_id={{user.key.urlsafe()}}"></img>
+      {% else %}
+      <img class="profileIcon" src="../static/imgs/defaultProfileIcon.png"></img>
+      {% endif %}
       <div id="profileDetails">
         <h2> Name: {{user.firstName}} {{user.lastName}} </h3>
-        <h2> Email: {{user.email}} </h4>
+          <h2> Email: {{user.email}} </h4>
       </div>
     </div id="profileInfoDiv">
     <br>
     <hr width=95%>
     <br>
-    <h2> Profile's Posts </h2>
-    <div id="profilePosts" >
+    <h2 id="profilePosts"> Profile's Posts </h2>
+    <div>
       {% for post in userPosts %}
-      <div id="{{post.key.urlsafe()}}"class="postContainer">
+      <div id="{{post.key.urlsafe()}}" class="postContainer">
         <a href="viewPost.html?post_id={{post.key.urlsafe()}}">
-          <img class="postImage"
-            src="/img?img_id={{post.key.urlsafe()}}"
-            ></img>
+          <img class="postImage" src="/img?img_id={{post.key.urlsafe()}}"></img>
         </a>
         <div class="blogPost">
           <h2>{{post.postTitle}}</h2>
@@ -53,23 +51,21 @@
           </h4>
 
         </div>
-        <hr width="100%" id = "likedPosts">
+        <hr width="100%" id="likedPosts">
       </div id="postContainer">
       {% endfor %}
     </div>
     <br>
     <br>
     <br>
-    <h2 id-="likedPosts"> Liked Posts </h2>
+    <h2 id="likedPosts"> Liked Posts </h2>
     <div>
       {% for postKey in likedPosts %}
       {% set post = postKey.get() %}
       {%if post != None %}
-      <div id="{{postKey.urlsafe()}}"class="postContainer">
+      <div id="{{postKey.urlsafe()}}" class="postContainer">
         <a href="viewPost.html?post_id={{postKey.urlsafe()}}">
-          <img class="postImage"
-            src="/img?img_id={{postKey.urlsafe()}}"
-            ></img>
+          <img class="postImage" src="/img?img_id={{postKey.urlsafe()}}"></img>
         </a>
         <div class="blogPost">
           <h2>{{post.postTitle}}</h2>
@@ -90,9 +86,10 @@
       {% endif %}
       {% endfor %}
     </div>
-</div id ="main">
+  </div id="main">
 
-<script src="../static/scripts/likeBtn.js"></script>
+  <script src="../static/scripts/likeBtn.js"></script>
 
 </body>
+
 </html>
