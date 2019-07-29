@@ -1,5 +1,3 @@
-
-
 .postContainer{
   display: flex;
   flex-direction: column;
@@ -35,8 +33,8 @@
   font-family: "Molengo", sans-serif;
   font-size: 20px;
   position: fixed;
-  top: 545px;
-  left: 450px;
+  top: 220px;
+  left: 30px;
 
 }
 
@@ -60,8 +58,9 @@
   font-family: "Molengo", sans-serif;
   font-size: 20px;
   position: fixed;
-  top: 545px;
-  right: 330px;
+  top: 279px;
+  left: 30px;
+  /*right: 330px;*/
 
 }
 
@@ -70,6 +69,7 @@
   color: #ffef00;
   border: 2px solid #ffef00;
 }
+
 /*
 #sticky
 {
