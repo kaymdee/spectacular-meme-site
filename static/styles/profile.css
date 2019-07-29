@@ -19,7 +19,16 @@
   object-fit: cover;
 }
 
-#yourPost{
+
+.centerColFlexBox{
+  display:flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#profilePost{
   display: flex;
   flex-direction: column;
   transition: 0.3s ease all;
@@ -40,7 +49,7 @@
 
 }
 
-#yourPost:hover{
+#profilePost:hover{
   background-color: #2dc248;
   color: #ffef00;
   border: 2px solid #ffef00;
@@ -73,6 +82,9 @@
 }
 #profilePosts, #likedPosts{
   font-size:2.5em;
+}
+.hidden{
+  display:none;
 }
 /*
 #sticky

@@ -4,7 +4,7 @@ const likeBtn =
   document.querySelector("#likedPost");
 
 const yourBtn =
-    document.querySelector("#yourPost");
+    document.querySelector("#profilePost");
 
 const likeAction = () => {
   if(likeAction){
