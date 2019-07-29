@@ -79,9 +79,13 @@ hr {
 .topnav a.active {
   background-color: #4CAF50;
   color: white;
-  
+
 }
 
+.blogPost p{
+  max-width: 30vw;
+  min-width: 30vw;
+}
 
 .main{
   display:flex;
