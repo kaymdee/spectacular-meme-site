@@ -103,13 +103,19 @@ hr {
 }
 
 .likeBtn{
+  /* position: static; */
+  display: flex; */
+  justify-content: center; */
+  /* align-items: center; */ */
+  margin-left: 35%;
+  margin-right: 35%;
   transition: 0.3s ease all;
   border-radius: 1px solid white;
   /*padding: 10px 30px;*/
   border: 2px solid #2dc248;
   color: #2dc248;
   height: 50px;
-  width: 87px;
+  width: auto;
   text-align: center;
   background-color: #ffef00;
   object-fit: fill;
