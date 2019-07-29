@@ -10,14 +10,11 @@
 
 <body>
   {% include "templates/topnav.html" %}
-
   <div id="home" class="main">
-    <div id = "sticky">
       <section id = "postType">
       <a href = "#profilePosts"><button id = "yourPost"> Profile's Posts </button></a>
       <a href = "#likedPosts"><button id = "likedPost"> Liked Posts </button></a>
     </section>
-    </div>
     <h1 id="mainTitle">Profile </h1>
     <div id="profileInfoDiv" class="rowFlexbox">
     {% if user.postImage != None %}
@@ -33,7 +30,7 @@
     <br>
     <hr width=95%>
     <br>
-    <h2> Your Posts </h2>
+    <h2> Profile's Posts </h2>
     <div id="profilePosts" >
       {% for post in userPosts %}
       <div id="{{post.key.urlsafe()}}"class="postContainer">
@@ -95,8 +92,7 @@
     </div>
 </div id ="main">
 
-
-
+<script src="../static/scripts/likeBtn.js"></script>
 
 </body>
 </html>

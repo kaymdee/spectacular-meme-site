@@ -1,5 +1,3 @@
-
-
 .postContainer{
   display: flex;
   flex-direction: column;
@@ -20,21 +18,73 @@
   border: solid yellow 1px;
   object-fit: cover;
 }
-#likeButton, #subscribeButton{
-  transition: 800ms all;
-  border-radius: 600px;
+
+#yourPost{
+  transition: 0.3s ease all;
+  border-radius: 1px solid white;
+  /*padding: 10px 30px;*/
+  border: 2px solid #2dc248;
+  color: #2dc248;
   height: 50px;
-  width: 100px;
-  background-color: white;
+  width: 145px;
+  text-align: center;
+  background-color: #ffef00;
+  object-fit: fill;
+  font-family: "Molengo", sans-serif;
+  font-size: 20px;
+  position: fixed;
+  top: 220px;
+  left: 30px;
 
 }
 
+#yourPost:hover{
+  background-color: #2dc248;
+  color: #ffef00;
+  border: 2px solid #ffef00;
+}
+
+#likedPost{
+  transition: 0.3s ease all;
+  border-radius: 1px solid white;
+  /*padding: 10px 30px;*/
+  border: 2px solid #2dc248;
+  color: #2dc248;
+  height: 50px;
+  width: 145px;
+  text-align: center;
+  background-color: #ffef00;
+  object-fit: fill;
+  font-family: "Molengo", sans-serif;
+  font-size: 20px;
+  position: fixed;
+  top: 279px;
+  left: 30px;
+  /*right: 330px;*/
+
+}
+
+#likedPost:hover{
+  background-color: #2dc248;
+  color: #ffef00;
+  border: 2px solid #ffef00;
+}
+
+/*
 #sticky
 {
   position: -webkit-sticky;
   position: sticky;
-  top: 69px;
+  top: 500px;
 }
+
+/*()
+#sticky
+{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 500px;
+}*
 
 #meme-post
 {
