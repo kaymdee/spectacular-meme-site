@@ -15,13 +15,13 @@
 
     <form id="mainForm" method="post" action="/confirmPost" enctype="multipart/form-data">
       <h4> Post Title </h4>
-      <input class="inputs" type="text" name="post-title" value="Post Title">
+      <input class="inputs" type="text" name="post-title" required>
       <br>
       <h4> Description </h4>
-      <input class = "inputs" type = "text" name = "post-description" value = "Post Description">
+      <input class = "inputs" type = "text" name = "post-description" required>
       <br>
       <h4> Meme </h4>
-        <input type="file" name="post-image" accept="image/*" value = "Attach your meme!">
+        <input type="file" name="post-image" accept="image/*" value = "Attach your meme!" required>
       <br>
       <br>
     <input id="btnPost" type="submit" value="Meme Away!!!">
