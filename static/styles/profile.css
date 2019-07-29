@@ -37,8 +37,8 @@
   border: 2px solid #2dc248;
   color: #2dc248;
   height: 50px;
-  width: 145px;
-  text-align: center;
+  width: 120px;
+  /* text-align: center; */
   background-color: #ffef00;
   object-fit: fill;
   font-family: "Molengo", sans-serif;
@@ -62,7 +62,7 @@
   border: 2px solid #2dc248;
   color: #2dc248;
   height: 50px;
-  width: 145px;
+  width: 120px;
   text-align: center;
   background-color: #ffef00;
   object-fit: fill;
@@ -80,7 +80,7 @@
   color: #ffef00;
   border: 2px solid #ffef00;
 }
-#profilePosts, #likedPosts{
+#profileposts, #likedposts{
   font-size:2.5em;
 }
 .hidden{
