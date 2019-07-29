@@ -45,6 +45,7 @@ hr {
   align-items:center;
 }
 
+
 .topnav div{
   display: flex;
   align-items:stretch;
@@ -121,6 +122,12 @@ hr {
   background-color: #2dc248;
   color: #ffef00;
   border: 2px solid #ffef00;
+}
+.liked{
+  background-color: #2dc248;
+  color: #ffef00;
+  border: 2px solid #ffef00;
+
 }
 #logoBox{
   padding: 0;

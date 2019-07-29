@@ -1,3 +1,8 @@
+LikeBtn{ js,
+        stopRefresh
+        }
+profile toggle options
+
 Top is higher priority
 DONE:
 Finish Mocks of pages - DONE
