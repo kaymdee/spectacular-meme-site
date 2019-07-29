@@ -105,11 +105,9 @@ hr {
 
 .likeBtn{
   /* position: static; */
-  display: flex; */
-  justify-content: center; */
-  /* align-items: center; */ */
-  margin-left: 35%;
-  margin-right: 35%;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
   transition: 0.3s ease all;
   border-radius: 1px solid white;
   /*padding: 10px 30px;*/
