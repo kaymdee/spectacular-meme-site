@@ -20,16 +20,14 @@
 }
 
 #yourPost{
-  display: flex;
-  flex-direction: column;
   transition: 0.3s ease all;
   border-radius: 1px solid white;
   /*padding: 10px 30px;*/
   border: 2px solid #2dc248;
   color: #2dc248;
   height: 50px;
-  width: 145px;
-  text-align: center;
+  width: 120px;
+  /* text-align: center; */
   background-color: #ffef00;
   object-fit: fill;
   font-family: "Molengo", sans-serif;
@@ -53,7 +51,7 @@
   border: 2px solid #2dc248;
   color: #2dc248;
   height: 50px;
-  width: 145px;
+  width: 120px;
   text-align: center;
   background-color: #ffef00;
   object-fit: fill;
