@@ -71,7 +71,9 @@
   color: #ffef00;
   border: 2px solid #ffef00;
 }
-
+#profilePosts, #likedPosts{
+  font-size:2.5em;
+}
 /*
 #sticky
 {
